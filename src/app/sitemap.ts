@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { blogPosts } from "@/lib/blog";
 import {
   aircraft,
   airports,
@@ -19,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/how-it-works",
     "/ways-to-fly",
+    "/blog",
     "/empty-legs",
     "/safety",
     "/about",
@@ -74,6 +76,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED,
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+    ...blogPosts.map((p) => ({
+      url: `${site.url}/blog/${p.slug}`,
+      lastModified: new Date(p.updated),
+      changeFrequency: "weekly" as const,
+      priority: p.wave === "pillar" ? 0.95 : 0.85,
     })),
     ...limoCities.map((c) => ({
       url: `${site.url}/limo/${c.slug}`,

@@ -29,6 +29,10 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // Local QA often opens http://127.0.0.1:3000; allow HMR/hydration there.
   allowedDevOrigins: ["127.0.0.1", "localhost"],
+  images: {
+    // UHD cinematic plates need high quality encodes (Jesko-class hero)
+    qualities: [75, 90, 92, 95],
+  },
   turbopack: {
     rules: {
       "*.css": {

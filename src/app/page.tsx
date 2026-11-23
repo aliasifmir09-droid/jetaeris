@@ -1,77 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CinematicFlightHero } from "@/components/CinematicFlightHero";
 import { CtaBand } from "@/components/CtaBand";
-import { HeroQuoteStrip } from "@/components/HeroQuoteStrip";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { aircraft, guides, limoCities, routes } from "@/lib/content";
+import { blogPillars, blogPosts } from "@/lib/blog";
+import { aircraft, limoCities, routes } from "@/lib/content";
 import { faqItems } from "@/lib/faq";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
 export default function HomePage() {
   const railItems = routes.slice(0, 12).map((r) => `${r.from} → ${r.to}`);
-  const rail = [...railItems, ...railItems];
 
   return (
     <>
-      <section className="relative isolate min-h-[100svh] overflow-hidden bg-[var(--section-dark)] text-white">
-        <Image
-          src="/media/hero-jet.jpg"
-          alt="Private jet on the tarmac at dusk"
-          fill
-          priority
-          className="hero-media object-cover"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "var(--hero-veil)" }}
-          aria-hidden
-        />
-        <div className="atmosphere-dark opacity-80" aria-hidden />
+      {/* Scene 1 — cinematic hero + quote widget */}
+      <CinematicFlightHero rail={railItems} />
 
-        <div className="container relative flex min-h-[100svh] flex-col justify-end pb-10 pt-28 md:pb-16 md:pt-32">
-          <p className="display reveal text-[clamp(2.8rem,8vw,6.2rem)] text-white">
-            {site.name}
-          </p>
-          <h1 className="serif reveal reveal-delay-1 mt-4 max-w-3xl text-[clamp(1.45rem,3vw,2.2rem)] text-white/90">
-            {site.tagline}.
-          </h1>
-          <p className="reveal reveal-delay-2 mt-3 max-w-2xl text-[0.95rem] font-semibold tracking-[0.04em] text-[var(--accent-soft)] uppercase">
-            Bookings open {site.bookingOpensLabel}
-          </p>
-          <p className="reveal reveal-delay-2 mt-4 max-w-xl text-[1.02rem] leading-8 text-white/70">
-            On-demand USA charter and empty legs through vetted Part 135
-            carriers. Request a quote now—JetAeris starts taking confirmed
-            bookings from {site.bookingOpensLabel}. Optional FBO ground
-            transfer.
-          </p>
-
-          <div className="reveal reveal-delay-3 mt-8 max-w-5xl">
-            <HeroQuoteStrip />
-          </div>
-
-          <div className="reveal reveal-delay-3 mt-5 flex flex-wrap gap-3">
-            <Link href="/empty-legs" className="btn btn-ghost">
-              Live empty legs
-            </Link>
-            <Link href="/how-it-works" className="btn btn-ghost">
-              How we arrange flights
-            </Link>
-          </div>
-        </div>
-
-        <div className="relative border-t border-white/10 bg-black/30 py-4 backdrop-blur-sm">
-          <div className="route-rail">
-            <div className="route-rail-track">
-              {rail.map((item, i) => (
-                <span key={`${item}-${i}`}>{item}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--line)] bg-white/40 py-8">
+      {/* Scene 2 — operational proof strip */}
+      <ScrollReveal
+        as="section"
+        stagger
+        className="border-b border-[var(--line)] bg-white/40 py-8"
+      >
         <div className="container grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["Response", site.responsePromise],
@@ -82,7 +33,7 @@ export default function HomePage() {
             ],
             ["Desk", site.deskHours],
           ].map(([label, body]) => (
-            <div key={label}>
+            <div key={label} data-reveal>
               <p className="text-[0.68rem] tracking-[0.18em] text-accent uppercase">
                 {label}
               </p>
@@ -90,9 +41,10 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className="border-b border-[var(--line)] py-20 md:py-28">
+      {/* Scene 3 — broker process */}
+      <ScrollReveal as="section" className="border-b border-[var(--line)] py-20 md:py-28">
         <div className="container">
           <SectionHeading
             eyebrow="How we operate"
@@ -131,9 +83,14 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className="border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper-deep)_40%,transparent)] py-20 md:py-28">
+      {/* Scene 4 — ways to fly */}
+      <ScrollReveal
+        as="section"
+        stagger
+        className="border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper-deep)_40%,transparent)] py-20 md:py-28"
+      >
         <div className="container">
           <SectionHeading
             eyebrow="Ways to fly"
@@ -150,6 +107,7 @@ export default function HomePage() {
               <Link
                 key={title}
                 href={href}
+                data-reveal
                 className="border border-[var(--line)] bg-white/60 px-5 py-6 transition-colors hover:border-[var(--line-strong)]"
               >
                 <h3 className="font-[family-name:var(--font-display)] text-lg text-ink">
@@ -166,7 +124,7 @@ export default function HomePage() {
             All ways to fly
           </Link>
         </div>
-      </section>
+      </ScrollReveal>
 
       <section className="relative overflow-hidden bg-[var(--section-dark)] py-20 text-white md:py-28">
         <div className="atmosphere-dark" aria-hidden />
@@ -314,23 +272,23 @@ export default function HomePage() {
       <section className="py-20 md:py-28">
         <div className="container">
           <SectionHeading
-            eyebrow="Guides"
-            title="Answers that earn trust—and rankings."
-            body="Cost, empty legs, Part 135 vs commercial, baggage, pets, and booking timing—reviewed by the aviation desk."
+            eyebrow="Information campaign"
+            title="Massive useful content—built to rank and convert."
+            body={`${blogPosts.length} articles across cost, corridors, cities, empty legs, aircraft, and safety. Search answers first, then a clear quote path—the same playbook Petshiwu used for scale.`}
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {guides.slice(0, 6).map((guide) => (
+            {blogPillars.slice(0, 6).map((post) => (
               <Link
-                key={guide.slug}
-                href={`/guides/${guide.slug}`}
+                key={post.slug}
+                href={`/blog/${post.slug}`}
                 className="border border-[var(--line)] bg-white/40 p-8 transition-colors hover:border-[var(--line-strong)]"
               >
-                <p className="eyebrow">Guide</p>
+                <p className="eyebrow">{post.category}</p>
                 <h3 className="serif mt-4 text-2xl text-ink md:text-3xl">
-                  {guide.title}
+                  {post.title}
                 </h3>
                 <p className="mt-4 text-sm leading-7 text-muted">
-                  {guide.description}
+                  {post.description}
                 </p>
               </Link>
             ))}
@@ -339,17 +297,17 @@ export default function HomePage() {
             {aircraft.map((a) => (
               <Link
                 key={a.slug}
-                href={`/aircraft/${a.slug}`}
+                href={`/blog/aircraft-${a.slug}`}
                 className="border border-[var(--line)] px-3 py-2 hover:border-[var(--line-strong)]"
               >
                 {a.name}
               </Link>
             ))}
             <Link
-              href="/guides"
+              href="/blog"
               className="border border-[var(--line)] px-3 py-2 hover:border-[var(--line-strong)]"
             >
-              All guides →
+              Full information hub →
             </Link>
           </div>
         </div>
