@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { blogByCategory, blogPillars, blogPosts } from "@/lib/blog";
+import { blogByCategory, blogPillars, blogPosts, topCityTopicCount } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { topCitiesSeo } from "@/lib/top-cities-seo";
+import { topicsForCitySlug } from "@/lib/top-city-topics";
 
 export const metadata: Metadata = {
   title: "Private aviation blog & information hub",
@@ -54,6 +56,36 @@ export default function BlogIndexPage() {
                 {categories.length}
               </p>
             </div>
+          </div>
+
+          <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">
+            USA top 5 city hubs · {topCityTopicCount} deep topics
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
+            New York, Los Angeles, Miami, Chicago, and Dallas—50+ high-intent
+            keyword guides per market (cost, FBOs, corridors, seasons, FAQs).
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {topCitiesSeo.map((city) => {
+              const count = topicsForCitySlug(city.slug).length;
+              return (
+                <Link
+                  key={city.slug}
+                  href={`/charter/${city.slug}`}
+                  className="border border-[var(--line)] bg-white/50 p-5 transition-colors hover:border-[var(--line-strong)]"
+                >
+                  <p className="text-xs tracking-[0.14em] text-accent uppercase">
+                    {count} topics
+                  </p>
+                  <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl text-ink">
+                    {city.name}
+                  </h3>
+                  <p className="mt-2 text-xs leading-5 text-muted">
+                    {city.rankLabel}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
 
           <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">

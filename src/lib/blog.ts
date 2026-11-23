@@ -1,29 +1,15 @@
 import { aircraft, cities, routes, type Aircraft, type City, type Route } from "@/lib/content";
+import type { BlogPost } from "@/lib/blog-types";
 import { site } from "@/lib/site";
+import { isTopCity, TOP_CITY_SLUGS } from "@/lib/top-cities-seo";
+import { generateTopCityTopicPosts } from "@/lib/top-city-topics";
 
-export type BlogSection = {
-  heading: string;
-  body: string;
-  bullets?: string[];
-};
+export type { BlogPost, BlogSection } from "@/lib/blog-types";
 
-export type BlogPost = {
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  tags: string[];
-  published: string;
-  updated: string;
-  /** Minutes — for reader expectation, not schema requirement */
-  readMinutes: number;
-  relatedHref?: string;
-  relatedLabel?: string;
-  sections: BlogSection[];
-  faqs: { q: string; a: string }[];
-  /** Campaign wave marker for indexing / filters */
-  wave?: "pillar" | "route" | "city" | "aircraft";
-};
+const topCityDeepPosts = generateTopCityTopicPosts();
+const topCityHubSlugs = new Set(
+  TOP_CITY_SLUGS.map((s) => `private-jet-charter-${s}`),
+);
 
 const pillarPosts: BlogPost[] = [
   {
@@ -530,13 +516,20 @@ function aircraftPost(item: Aircraft): BlogPost {
   };
 }
 
-/** Full SEO information campaign: pillars + route costs + city hubs + aircraft. */
+/** Full SEO information campaign: pillars + top-5 city deep topics (50+/city) + other cities + routes + aircraft. */
 export const blogPosts: BlogPost[] = [
   ...pillarPosts,
+  ...topCityDeepPosts,
   ...routes.map(routeCostPost),
-  ...cities.map(cityCharterPost),
+  ...cities
+    .filter((c) => !isTopCity(c.slug))
+    .map(cityCharterPost)
+    .filter((p) => !topCityHubSlugs.has(p.slug)),
   ...aircraft.map(aircraftPost),
 ];
+
+/** Count of deep SEO topics across NY / LA / Miami / Chicago / Dallas. */
+export const topCityTopicCount = topCityDeepPosts.length;
 
 export const blogPillars = blogPosts.filter((p) => p.wave === "pillar");
 
