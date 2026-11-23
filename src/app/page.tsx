@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { SectionHeading } from "@/components/SectionHeading";
 import { aircraft, guides, limoCities, routes } from "@/lib/content";
+import { faqItems } from "@/lib/faq";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
 export default function HomePage() {
@@ -266,6 +267,27 @@ export default function HomePage() {
               All guides →
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[var(--line)] py-20 md:py-28">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Q&A"
+            title="Questions travelers ask before they request a flight."
+            body="Expanded answers live on our FAQ—structured for people and for rich results in search."
+          />
+          <div className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {faqItems.slice(0, 6).map((item) => (
+              <div key={item.q} className="grid gap-3 py-7 md:grid-cols-[1fr_1.2fr]">
+                <h3 className="text-lg font-semibold text-ink">{item.q}</h3>
+                <p className="text-[1.02rem] leading-7 text-muted">{item.a}</p>
+              </div>
+            ))}
+          </div>
+          <Link href="/faq" className="btn btn-line mt-10">
+            Full FAQ / Q&A
+          </Link>
         </div>
       </section>
 

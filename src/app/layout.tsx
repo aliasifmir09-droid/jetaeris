@@ -32,11 +32,19 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  keywords: [
+    "private jet charter",
+    "empty legs",
+    "FBO limo",
+    "USA private aviation",
+    "Jet Aeris Inc",
+    "Queens NY private jet",
+  ],
   openGraph: {
     type: "website",
     locale: site.locale,
     url: site.url,
-    siteName: site.name,
+    siteName: site.legalName,
     title: `${site.name} · Private Jet Charter USA`,
     description: site.description,
   },
@@ -55,14 +63,46 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  const jsonLd = {
+  const orgLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: site.name,
+    name: site.legalName,
+    alternateName: site.name,
     url: site.url,
     email: site.email,
+    telephone: site.phoneDisplay,
     description: site.description,
     areaServed: "US",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.line1,
+      addressLocality: site.address.city,
+      addressRegion: site.address.region,
+      addressCountry: site.address.country,
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        email: site.email,
+        telephone: site.phoneDisplay,
+        areaServed: "US",
+        availableLanguage: ["English"],
+      },
+    ],
+  };
+
+  const websiteLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url,
+    publisher: { "@type": "Organization", name: site.legalName },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${site.url}/routes?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
@@ -73,7 +113,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="site-shell antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
         />
         <Header />
         <main className="site-main">{children}</main>

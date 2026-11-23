@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "/",
     "/quote",
+    "/contact",
     "/how-it-works",
     "/empty-legs",
     "/safety",
@@ -24,15 +25,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/guides",
     "/limo",
     "/airports",
+    "/legal",
     "/privacy",
     "/terms",
+    "/cookies",
+    "/cancellation-policy",
+    "/broker-disclosure",
+    "/accessibility",
+    "/do-not-sell",
   ];
 
   return [
     ...staticPaths.map((path) => ({
       url: `${site.url}${path === "/" ? "" : path}`,
       changeFrequency: "weekly" as const,
-      priority: path === "/" ? 1 : 0.8,
+      priority:
+        path === "/"
+          ? 1
+          : path === "/faq" || path === "/contact"
+            ? 0.95
+            : 0.8,
     })),
     ...cities.map((c) => ({
       url: `${site.url}/charter/${c.slug}`,

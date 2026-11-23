@@ -678,6 +678,126 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "private-jet-etiquette",
+    title: "Private jet etiquette: what first-time charter passengers should know",
+    description:
+      "FBO arrival times, baggage, pets, catering, and cabin manners for first-time USA private jet travelers.",
+    sections: [
+      {
+        heading: "Arrive on FBO time—not airline time",
+        body: "Private aviation usually means arriving about 15–20 minutes before departure at the FBO, not two hours early at a commercial terminal.",
+      },
+      {
+        heading: "Declare special items early",
+        body: "Pets, golf clubs, skis, and medical equipment should be noted when you request a quote so aircraft and operator policies match.",
+      },
+      {
+        heading: "The crew sets the tone",
+        body: "Follow crew safety briefings. Catering, ground cars, and last-minute passenger changes are easiest when shared before wheels-up.",
+      },
+    ],
+  },
+  {
+    slug: "what-is-an-fbo",
+    title: "What is an FBO in private aviation?",
+    description:
+      "A plain-English guide to Fixed Base Operators—how FBOs differ from airline terminals and why they matter for charter and limo timing.",
+    sections: [
+      {
+        heading: "Private aviation’s front door",
+        body: "An FBO is the private terminal where you clear security lightly, meet the crew, and walk to the aircraft without boarding-group theater.",
+      },
+      {
+        heading: "Why FBO choice matters",
+        body: "The right FBO can cut 30–60 minutes off a city drive versus the main commercial airport—especially in New York, Los Angeles, and Miami.",
+      },
+      {
+        heading: "Limo meet points",
+        body: "Tell your driver the FBO name, not only the airport code. JetAeris can coordinate that meet with your flight ETA.",
+      },
+    ],
+  },
+  {
+    slug: "private-jet-with-pets",
+    title: "Flying private with pets in the USA",
+    description:
+      "How pet policies work on private jets—what to tell the desk, cabin vs crate expectations, and ground transfer tips.",
+    sections: [
+      {
+        heading: "Always declare pets on the request",
+        body: "Breed, weight, and temperament help us match operators and aircraft. Last-minute pet surprises can block a departure.",
+      },
+      {
+        heading: "Cabin vs cargo mindset",
+        body: "Many private cabins allow pets in-cabin with the passenger. Rules still vary by operator—confirmation documents control.",
+      },
+      {
+        heading: "Ground transfers",
+        body: "Choose an SUV or sprinter if you need space for carriers. Note pet needs when you add FBO limo on your quote.",
+      },
+    ],
+  },
+  {
+    slug: "last-minute-private-jet",
+    title: "Last-minute private jet charter: what is realistic?",
+    description:
+      "Same-day and next-day private jet options in the USA—when empty legs help, and when you should expect peak pricing.",
+    sections: [
+      {
+        heading: "Availability beats wishful pricing",
+        body: "Last-minute trips are about which aircraft are free and where they sit. Flexible airports improve odds.",
+      },
+      {
+        heading: "Empty legs can help—sometimes",
+        body: "If a positioning flight already matches your city pair, speed and price can both improve. If not, expect retail charter economics.",
+      },
+      {
+        heading: "Call the desk with hard constraints",
+        body: "Latest acceptable departure, must-have airport, and passenger count let us filter fast.",
+      },
+    ],
+  },
+  {
+    slug: "private-jet-for-business-travel",
+    title: "Private jet for business travel: when teams should charter",
+    description:
+      "How executive teams use private jets for multi-city days, client entertainment, and schedule control in the United States.",
+    sections: [
+      {
+        heading: "Protect the calendar",
+        body: "Charter shines when commercial connections risk a missed board meeting or force an overnight.",
+      },
+      {
+        heading: "Cabin as a workroom",
+        body: "Super-midsize and heavy cabins support small working groups with bags and materials between cities.",
+      },
+      {
+        heading: "Bundle ground",
+        body: "Coordinate sprinters at both FBOs so the team moves as one unit from office to aircraft door.",
+      },
+    ],
+  },
+  {
+    slug: "queens-ny-private-aviation",
+    title: "Private aviation access from Queens, NY",
+    description:
+      "How travelers based in Queens, New York reach Teterboro, Westchester, JFK, and Newark for private jet charter with Jet Aeris Inc.",
+    sections: [
+      {
+        heading: "Queens as a launch point",
+        body: "Jet Aeris Inc is based in Queens, NY. Clients across the boroughs often fly via TEB, HPN, JFK, or EWR depending on direction and customs needs.",
+      },
+      {
+        heading: "Ground first",
+        body: "Share your Queens pickup address. We match FBO + limo so the drive is part of the plan—not an afterthought.",
+      },
+      {
+        heading: "Popular corridors",
+        body: "Miami, South Florida, Chicago, and West Coast business trips are frequent requests from the New York metro.",
+      },
+    ],
+  },
   ...routes.map(guideFromRoute),
 ];
 

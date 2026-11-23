@@ -2,15 +2,26 @@ import { aircraft, cities, routes } from "@/lib/content";
 
 export const site = {
   name: "JetAeris",
+  legalName: "Jet Aeris Inc",
   domain: "jetaeris.com",
   url: "https://www.jetaeris.com",
   tagline: "Private aviation for the United States",
   description:
-    "JetAeris arranges on-demand private jet charter and empty-leg flights across the United States. Discreet concierge quoting, vetted operators, response measured in minutes.",
+    "Jet Aeris Inc (JetAeris) arranges on-demand private jet charter, empty-leg flights, and FBO limo coordination across the United States.",
   phoneDisplay: "+1 (800) 555-0188",
   phoneHref: "tel:+18005550188",
   email: "concierge@jetaeris.com",
+  legalEmail: "legal@jetaeris.com",
+  privacyEmail: "privacy@jetaeris.com",
   locale: "en_US",
+  address: {
+    line1: "87-81",
+    city: "Queens",
+    region: "NY",
+    postalCode: "",
+    country: "US",
+    display: "87-81, Queens, NY",
+  },
 } as const;
 
 export const nav = [
@@ -20,7 +31,18 @@ export const nav = [
   { href: "/empty-legs", label: "Empty legs" },
   { href: "/aircraft", label: "Aircraft" },
   { href: "/guides", label: "Guides" },
-  { href: "/airports", label: "Airports" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
+export const legalLinks = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
+  { href: "/cookies", label: "Cookie Policy" },
+  { href: "/cancellation-policy", label: "Cancellation Policy" },
+  { href: "/broker-disclosure", label: "Broker Disclosure" },
+  { href: "/accessibility", label: "Accessibility" },
+  { href: "/do-not-sell", label: "Do Not Sell / Share" },
+  { href: "/legal", label: "Legal Center" },
 ] as const;
 
 export const featuredRoutes = routes.slice(0, 6).map((r) => ({

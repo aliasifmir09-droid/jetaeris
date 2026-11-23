@@ -2,73 +2,83 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
+import { faqCategories, faqItems } from "@/lib/faq";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "FAQ",
-  description:
-    "Frequently asked questions about JetAeris USA private jet charter, empty legs, pricing, safety, and booking.",
+  title: "FAQ & Q&A · Private jet charter",
+  description: `Frequently asked questions about ${site.legalName} private jet charter, empty legs, limo transfers, pricing, safety, and booking.`,
   alternates: { canonical: "/faq" },
 };
-
-const faqs = [
-  {
-    q: "Is JetAeris an airline?",
-    a: "No. JetAeris is a private aviation concierge and charter brokerage experience. Flights are operated by certificated Part 135 air carriers.",
-  },
-  {
-    q: "How fast will I get options?",
-    a: "During desk hours we typically respond in minutes with curated aircraft options. Complex itineraries or peak dates may take longer.",
-  },
-  {
-    q: "What do I need to request a quote?",
-    a: "Departure, arrival, date, passenger count, and your contact details. Notes about aircraft preference or flexibility help.",
-  },
-  {
-    q: "Are empty legs guaranteed?",
-    a: "No. Empty legs can change as operators adjust schedules. We confirm live availability before you commit.",
-  },
-  {
-    q: "How is pricing determined?",
-    a: "By aircraft category, routing, positioning, dates, and airport fees. We provide transparent assumptions with each option.",
-  },
-  {
-    q: "Can you arrange round trips and multi-city?",
-    a: "Yes. Include return or additional cities in your notes or speak with the desk after the first options arrive.",
-  },
-];
 
 export default function FaqPage() {
   return (
     <>
       <PageHero
-        eyebrow="FAQ"
-        title="Straight answers before you request a flight."
-        body="Safety, pricing, empty legs, and how the desk works—without the brochure voice."
+        eyebrow="Q&A"
+        title="Answers that help travelers—and search engines—understand JetAeris."
+        body="Straight questions on booking, cost, empty legs, aircraft, limo, safety, and company details for Jet Aeris Inc."
+        primaryHref="/quote"
+        secondaryHref="/contact"
+        secondaryLabel="Contact us"
       />
+
       <section className="pb-16 md:pb-24">
-        <div className="container-narrow divide-y divide-[var(--line)] border-y border-[var(--line)]">
-          {faqs.map((item) => (
-            <div key={item.q} className="py-8">
-              <h2 className="text-xl font-semibold text-ink">{item.q}</h2>
-              <p className="mt-3 text-[1.05rem] leading-8 text-muted">
-                {item.a}
-              </p>
-            </div>
+        <div className="container flex flex-wrap gap-2 pb-10">
+          {faqCategories.map((cat) => (
+            <a
+              key={cat}
+              href={`#${cat.toLowerCase().replace(/\s+/g, "-")}`}
+              className="border border-[var(--line)] px-3 py-2 text-xs tracking-[0.12em] uppercase hover:border-[var(--line-strong)]"
+            >
+              {cat}
+            </a>
           ))}
         </div>
-        <div className="container-narrow mt-10">
+
+        <div className="container space-y-16">
+          {faqCategories.map((cat) => {
+            const items = faqItems.filter((i) => i.category === cat);
+            return (
+              <div key={cat} id={cat.toLowerCase().replace(/\s+/g, "-")}>
+                <h2 className="serif text-3xl text-ink">{cat}</h2>
+                <div className="mt-6 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+                  {items.map((item) => (
+                    <div key={item.q} className="py-7">
+                      <h3 className="text-lg font-semibold text-ink md:text-xl">
+                        {item.q}
+                      </h3>
+                      <p className="mt-3 max-w-3xl text-[1.05rem] leading-8 text-muted">
+                        {item.a}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="container mt-12 flex flex-wrap gap-3">
           <Link href="/quote" className="btn btn-primary">
             Request a flight
           </Link>
+          <Link href="/guides" className="btn btn-line">
+            Read guides
+          </Link>
+          <Link href="/legal" className="btn btn-line">
+            Legal center
+          </Link>
         </div>
       </section>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: faqs.map((item) => ({
+            mainEntity: faqItems.map((item) => ({
               "@type": "Question",
               name: item.q,
               acceptedAnswer: { "@type": "Answer", text: item.a },
