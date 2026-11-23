@@ -42,12 +42,12 @@ export function Header() {
           {site.name}
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-5 xl:gap-7 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-[0.78rem] font-semibold tracking-[0.14em] uppercase transition-opacity hover:opacity-70 ${
+              className={`text-[0.72rem] font-semibold tracking-[0.12em] uppercase transition-opacity hover:opacity-70 ${
                 lightChrome ? "text-white/88" : "text-[var(--ink-soft)]"
               }`}
             >

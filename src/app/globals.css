@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #eef1f4;
-  --paper-deep: #e2e7ed;
-  --ink: #0b1220;
-  --ink-soft: #243044;
-  --muted: #5c6b7a;
-  --line: rgba(11, 18, 32, 0.12);
-  --line-strong: rgba(11, 18, 32, 0.22);
-  --accent: #8f7d5c;
-  --accent-soft: #c4b49a;
+  --paper: #f2f0eb;
+  --paper-deep: #e7e2d8;
+  --ink: #10151c;
+  --ink-soft: #2a3340;
+  --muted: #66707c;
+  --line: rgba(16, 21, 28, 0.1);
+  --line-strong: rgba(16, 21, 28, 0.2);
+  --accent: #9a7b4f;
+  --accent-soft: #d2b48c;
+  --section-dark: #0e141c;
   --hero-veil: linear-gradient(
-    105deg,
-    rgba(11, 18, 32, 0.72) 0%,
-    rgba(11, 18, 32, 0.35) 48%,
-    rgba(11, 18, 32, 0.18) 100%
+    115deg,
+    rgba(14, 20, 28, 0.82) 0%,
+    rgba(14, 20, 28, 0.45) 42%,
+    rgba(14, 20, 28, 0.22) 100%
   );
-  --section-dark: #0b1220;
 }
 
 @theme inline {
@@ -43,14 +43,17 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(154, 123, 79, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(90, 120, 150, 0.1), transparent 50%),
+    var(--paper);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, white);
+  background: color-mix(in srgb, var(--accent) 40%, white);
   color: var(--ink);
 }
 
@@ -87,7 +90,7 @@ img {
 .eyebrow {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 650;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -95,16 +98,16 @@ img {
 
 .display {
   font-family: var(--font-display), Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
 }
 
 .serif {
   font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  font-weight: 450;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
 }
 
 .lede {
@@ -118,19 +121,20 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  min-height: 3.1rem;
-  padding: 0.85rem 1.55rem;
+  min-height: 3.15rem;
+  padding: 0.85rem 1.6rem;
   border: 1px solid transparent;
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 650;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transition:
     background-color 220ms ease,
     color 220ms ease,
     border-color 220ms ease,
-    transform 220ms ease;
+    transform 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .btn:hover {
@@ -139,17 +143,18 @@ img {
 
 .btn-primary {
   background: var(--ink);
-  color: #f5f7fa;
+  color: #f7f4ef;
 }
 
 .btn-primary:hover {
-  background: #162033;
+  background: #1a222d;
 }
 
 .btn-light {
-  background: #f5f7fa;
+  background: #f7f4ef;
   color: var(--ink);
-  border-color: #f5f7fa;
+  border-color: #f7f4ef;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 .btn-light:hover {
@@ -184,7 +189,7 @@ img {
 
 .field label {
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 650;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -197,7 +202,7 @@ img {
   min-height: 3.1rem;
   padding: 0.85rem 1rem;
   border: 1px solid var(--line-strong);
-  background: color-mix(in srgb, white 72%, var(--paper));
+  background: color-mix(in srgb, white 78%, var(--paper));
   color: var(--ink);
   font: inherit;
   font-size: 1rem;
@@ -215,6 +220,66 @@ img {
 .field textarea:focus {
   border-color: var(--ink);
   background: white;
+}
+
+.atmosphere,
+.atmosphere-dark {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.atmosphere {
+  background:
+    radial-gradient(700px 320px at 15% 20%, rgba(154, 123, 79, 0.16), transparent 60%),
+    radial-gradient(600px 280px at 90% 10%, rgba(120, 150, 180, 0.12), transparent 55%);
+}
+
+.atmosphere-dark {
+  background:
+    radial-gradient(800px 360px at 20% 0%, rgba(154, 123, 79, 0.18), transparent 55%),
+    radial-gradient(700px 300px at 100% 40%, rgba(70, 110, 160, 0.16), transparent 50%);
+}
+
+.page-hero-wash {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--paper-deep) 70%, white), var(--paper));
+}
+
+.route-rail {
+  display: flex;
+  gap: 2.5rem;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.route-rail-track {
+  display: flex;
+  gap: 2.5rem;
+  min-width: max-content;
+  animation: marquee 38s linear infinite;
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, white 70%, transparent);
+}
+
+.panel {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, white 62%, var(--paper));
+  backdrop-filter: blur(6px);
+}
+
+.stat-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .stat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .reveal {
@@ -244,15 +309,24 @@ img {
 
 @keyframes drift {
   from {
-    transform: scale(1.08) translate3d(0, 0, 0);
+    transform: scale(1.06) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.14) translate3d(-1.2%, -0.6%, 0);
+    transform: scale(1.12) translate3d(-1.1%, -0.5%, 0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
 .hero-media {
-  animation: drift 18s ease-out forwards;
+  animation: drift 20s ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -264,7 +338,8 @@ img {
   .reveal-delay-1,
   .reveal-delay-2,
   .reveal-delay-3,
-  .hero-media {
+  .hero-media,
+  .route-rail-track {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

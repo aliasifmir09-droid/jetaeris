@@ -4,7 +4,7 @@ import { nav, site } from "@/lib/site";
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-[var(--line)] bg-[var(--section-dark)] text-white">
-      <div className="container grid gap-12 py-16 md:grid-cols-[1.3fr_1fr_1fr]">
+      <div className="container grid gap-12 py-16 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
           <p className="font-[family-name:var(--font-display)] text-3xl tracking-[-0.04em]">
             {site.name}
@@ -26,8 +26,42 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <Link href="/quote" className="hover:text-white">
-                Request a flight
+              <Link href="/faq" className="hover:text-white">
+                FAQ
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-white">
+                About
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="eyebrow text-[var(--accent-soft)]">SEO hubs</p>
+          <ul className="mt-5 space-y-3 text-sm text-white/75">
+            <li>
+              <Link href="/charter/new-york" className="hover:text-white">
+                New York charter
+              </Link>
+            </li>
+            <li>
+              <Link href="/charter/miami" className="hover:text-white">
+                Miami charter
+              </Link>
+            </li>
+            <li>
+              <Link href="/routes/new-york-miami" className="hover:text-white">
+                NY → Miami
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/guides/how-much-does-a-private-jet-cost"
+                className="hover:text-white"
+              >
+                Charter cost guide
               </Link>
             </li>
           </ul>

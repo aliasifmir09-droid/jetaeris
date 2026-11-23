@@ -1,0 +1,99 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { CtaBand } from "@/components/CtaBand";
+import { PageHero } from "@/components/PageHero";
+import { getRoute, routes } from "@/lib/content";
+import { site } from "@/lib/site";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  return routes.map((r) => ({ slug: r.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const route = getRoute(slug);
+  if (!route) return {};
+  return {
+    title: `Private jet ${route.from} to ${route.to}`,
+    description: `Charter a private jet from ${route.from} to ${route.to}. ${route.airports}. ${route.blockTime}. ${site.name} concierge quoting.`,
+    alternates: { canonical: `/routes/${route.slug}` },
+  };
+}
+
+export default async function RoutePage({ params }: Props) {
+  const { slug } = await params;
+  const route = getRoute(slug);
+  if (!route) notFound();
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Route"
+        title={`Private jet from ${route.from} to ${route.to}`}
+        body={route.summary}
+        secondaryHref={`/charter/${route.fromSlug}`}
+        secondaryLabel={`${route.from} charter`}
+      />
+
+      <section className="pb-16 md:pb-24">
+        <div className="container grid gap-8 border-t border-[var(--line)] pt-12 md:grid-cols-3">
+          {[
+            ["Airports", route.airports],
+            ["Typical block", route.blockTime],
+            ["Aircraft fit", route.bestFit],
+          ].map(([k, v]) => (
+            <div key={k} className="panel p-6">
+              <p className="text-xs tracking-[0.16em] text-accent uppercase">
+                {k}
+              </p>
+              <p className="mt-3 text-lg text-ink-soft">{v}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="container mt-16">
+          <h2 className="serif text-3xl text-ink md:text-4xl">
+            What travelers ask
+          </h2>
+          <div className="mt-8 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {route.faqs.map((item) => (
+              <div key={item.q} className="py-8">
+                <h3 className="text-xl font-semibold text-ink">{item.q}</h3>
+                <p className="mt-3 max-w-3xl text-[1.05rem] leading-8 text-muted">
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/quote" className="btn btn-primary">
+              Request this route
+            </Link>
+            <Link href={`/charter/${route.toSlug}`} className="btn btn-line">
+              {route.to} city guide
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: route.faqs.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }),
+        }}
+      />
+      <CtaBand title={`${route.from} → ${route.to}`} />
+    </>
+  );
+}

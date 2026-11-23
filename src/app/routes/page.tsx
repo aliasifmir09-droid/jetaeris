@@ -1,30 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SectionHeading } from "@/components/SectionHeading";
-import { featuredRoutes } from "@/lib/site";
+import { CtaBand } from "@/components/CtaBand";
+import { PageHero } from "@/components/PageHero";
+import { routes } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Routes",
+  title: "USA private jet routes",
   description:
-    "Featured USA private jet routes arranged by JetAeris—New York, Miami, Los Angeles, Las Vegas, and expanding city pairs.",
+    "Featured USA private jet routes with JetAeris—New York–Miami, LA–Vegas, coast-to-coast, Aspen, and more.",
   alternates: { canonical: "/routes" },
 };
 
-export default function RoutesPage() {
+export default function RoutesIndexPage() {
   return (
-    <div className="bg-paper pt-28 pb-20 md:pt-36 md:pb-28">
-      <div className="container">
-        <SectionHeading
-          eyebrow="USA routes"
-          title="City pairs that convert—built for search and for sales."
-          body="Big brands under-invest in specific route pages. We treat each corridor as a product: airports, timing, aircraft fit, and a direct quote path."
-        />
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {featuredRoutes.map((route) => (
+    <>
+      <PageHero
+        eyebrow="Routes"
+        title="City pairs built to rank—and to book."
+        body="Each route page covers airports, block time, aircraft fit, and FAQs. Request a live quote in one step."
+        secondaryHref="/charter"
+        secondaryLabel="Browse cities"
+      />
+      <section className="pb-20 md:pb-28">
+        <div className="container grid gap-5 md:grid-cols-2">
+          {routes.map((route) => (
             <Link
-              key={route.href}
-              href={route.href}
-              className="border border-[var(--line)] bg-[color-mix(in_srgb,white_55%,var(--paper))] p-8 transition-colors hover:border-[var(--line-strong)]"
+              key={route.slug}
+              href={`/routes/${route.slug}`}
+              className="panel p-8 transition-transform hover:-translate-y-0.5"
             >
               <p className="text-xs tracking-[0.16em] text-accent uppercase">
                 {route.airports}
@@ -32,11 +35,17 @@ export default function RoutesPage() {
               <h2 className="serif mt-4 text-3xl text-ink">
                 {route.from} → {route.to}
               </h2>
-              <p className="mt-3 text-sm text-muted">{route.time}</p>
+              <p className="mt-3 text-sm text-muted">
+                {route.blockTime} · {route.bestFit}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-ink-soft">
+                {route.summary}
+              </p>
             </Link>
           ))}
         </div>
-      </div>
-    </div>
+      </section>
+      <CtaBand />
+    </>
   );
 }

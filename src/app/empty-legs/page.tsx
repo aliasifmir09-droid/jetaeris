@@ -1,30 +1,34 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SectionHeading } from "@/components/SectionHeading";
+import { CtaBand } from "@/components/CtaBand";
+import { PageHero } from "@/components/PageHero";
 import { emptyLegs } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Empty legs",
+  title: "Empty legs USA",
   description:
-    "USA private jet empty legs arranged by JetAeris—one-way positioning flights at reduced rates, subject to confirmation.",
+    "USA private jet empty legs with JetAeris—one-way positioning flights at reduced rates, subject to confirmation.",
   alternates: { canonical: "/empty-legs" },
 };
 
 export default function EmptyLegsPage() {
   return (
-    <div className="bg-paper pt-28 pb-20 md:pt-36 md:pb-28">
-      <div className="container">
-        <SectionHeading
-          eyebrow="Empty legs"
-          title="One-way positioning. Serious savings when timing aligns."
-          body="Empty legs are aircraft already moving. They move fast and change often. These sample routes illustrate the experience—request a hold and we confirm live availability with the operator."
-        />
+    <>
+      <PageHero
+        dark
+        eyebrow="Empty legs"
+        title="One-way positioning. Serious savings when timing aligns."
+        body="Empty legs are aircraft already moving. They change quickly. Request a hold and we confirm live availability with the operator."
+        secondaryHref="/guides/empty-leg-flights-explained"
+        secondaryLabel="How empty legs work"
+      />
 
-        <div className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+      <section className="py-16 md:py-24">
+        <div className="container divide-y divide-[var(--line)] border-y border-[var(--line)]">
           {emptyLegs.map((leg) => (
             <article
               key={leg.id}
-              className="grid gap-4 py-8 md:grid-cols-[1.2fr_0.8fr_auto] md:items-end"
+              className="grid gap-4 py-8 md:grid-cols-[1.3fr_0.8fr_auto] md:items-end"
             >
               <div>
                 <h2 className="serif text-3xl text-ink md:text-4xl">
@@ -47,18 +51,15 @@ export default function EmptyLegsPage() {
             </article>
           ))}
         </div>
-
-        <div className="mt-14 max-w-2xl">
+        <div className="container mt-12 max-w-2xl">
           <p className="text-[1.05rem] leading-8 text-muted">
-            Want alerts when a corridor opens? Send a quote with your preferred
-            city pairs and note “empty leg watch.” That list—not a flashy app—is
-            how agile desks beat slow brands on retention.
+            Want corridor alerts? Submit a quote with your city pairs and note
+            “empty leg watch.” That list is how agile desks beat slow brands on
+            retention.
           </p>
-          <Link href="/quote" className="btn btn-primary mt-8">
-            Set a watch
-          </Link>
         </div>
-      </div>
-    </div>
+      </section>
+      <CtaBand title="Set an empty-leg watch" />
+    </>
   );
 }
