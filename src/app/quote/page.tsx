@@ -39,7 +39,20 @@ export default function QuotePage() {
           </p>
         </div>
         <div className="panel p-6 md:p-10">
-          <Suspense fallback={<p className="text-sm text-muted">Loading form…</p>}>
+          <Suspense
+            fallback={
+              <div className="space-y-4" aria-busy="true" aria-live="polite">
+                <p className="text-sm font-semibold text-ink">
+                  Preparing your quote form…
+                </p>
+                <p className="text-sm text-muted">
+                  Trip · Details · Contact · Review. Your request receives a
+                  confirmation ID when submitted.
+                </p>
+                <div className="h-40 animate-pulse border border-[var(--line)] bg-white/40" />
+              </div>
+            }
+          >
             <QuoteForm />
           </Suspense>
         </div>

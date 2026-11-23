@@ -264,7 +264,7 @@ export default function HomePage() {
               All limo cities
             </Link>
             <Link href="/quote?limo=1" className="btn btn-ghost">
-              Book flight + limo
+              Request flight + limo
             </Link>
           </div>
         </div>

@@ -25,12 +25,14 @@ export default function EmptyLegsPage() {
   return (
     <>
       <PageHero
-        dark
         eyebrow="Empty legs"
         title="One-way positioning. Serious savings when timing aligns."
         body="Empty legs are aircraft already moving. Status changes quickly. Every listing below shows availability state and is subject to operator confirmation—we never invent live inventory."
+        primaryLabel="Request a quote"
         secondaryHref="/guides/empty-leg-flights-explained"
         secondaryLabel="How empty legs work"
+        imageSrc="/media/hero-jet.jpg"
+        imageAlt="Private jet positioning flight"
       />
 
       <section className="border-b border-[var(--line)] bg-white/40 py-5">

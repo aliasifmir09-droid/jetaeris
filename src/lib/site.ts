@@ -6,8 +6,10 @@ export const site = {
   domain: "jetaeris.com",
   url: "https://www.jetaeris.com",
   tagline: "Private charter, precisely arranged",
+  /** Honest product promise — broker-led inquiry, not instant marketplace booking. */
+  productPromise: "Request a private charter quote",
   description:
-    "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers.",
+    "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
   // Do not use fictional 555 numbers. Leave blank until a real monitored line is provisioned.
   phoneDisplay: "",
   phoneHref: "",
@@ -16,7 +18,7 @@ export const site = {
   privacyEmail: "privacy@jetaeris.com",
   locale: "en_US",
   responsePromise:
-    "Typical first response under 15 minutes during desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued and answered at the next open window.",
+    "24/7 inquiry intake online and by email. Typical first response under 15 minutes during desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued; target first response at the next open desk window.",
   deskHours: "Desk hours: Mon–Sun, 8:00–22:00 Eastern",
   address: {
     line1: "87-81",
@@ -24,7 +26,12 @@ export const site = {
     region: "NY",
     postalCode: "",
     country: "US",
+    /** Short display for compact UI */
     display: "87-81, Queens, NY",
+    kind: "Registered office",
+    /** Honest labeling until full street/ZIP are authorized for public use */
+    publicNote:
+      "Registered office locality: 87-81, Queens, NY, United States. Full street name, suite, and ZIP are confirmed on contracting documents and available on request for verification. Do not treat this listing as a walk-in customer facility.",
   },
   role:
     "Air charter broker / arranging agent — not a direct air carrier unless an itinerary expressly states otherwise.",
@@ -32,6 +39,7 @@ export const site = {
     name: "JetAeris Aviation Desk",
     role: "Editorial review · operations desk",
   },
+  priceGuidanceUpdated: "November 23, 2026",
 } as const;
 
 export const nav = [

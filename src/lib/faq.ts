@@ -3,8 +3,8 @@ export type FaqItem = { q: string; a: string; category: string };
 export const faqItems: FaqItem[] = [
   {
     category: "Booking",
-    q: "How do I book a private jet with JetAeris?",
-    a: "Submit departure, arrival, date, and passenger count on our quote form. Jet Aeris Inc returns curated aircraft options, then you confirm in writing with the operating carrier’s terms.",
+    q: "How do I request a private jet with JetAeris?",
+    a: "Submit departure, arrival, date, and passenger count on our staged quote form. Jet Aeris Inc returns curated aircraft options. A trip is confirmed only in writing with the operating carrier’s terms—JetAeris is a quote-and-concierge brokerage, not an instant-booking marketplace.",
   },
   {
     category: "Booking",
@@ -94,7 +94,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Safety",
     q: "Where is Jet Aeris Inc located?",
-    a: "Jet Aeris Inc is based at 87-81, Queens, NY, United States.",
+    a: "Jet Aeris Inc lists a registered office locality at 87-81, Queens, NY, United States. Full street, suite, and ZIP are confirmed on contracting documents and available on request for verification.",
   },
   {
     category: "Airports",

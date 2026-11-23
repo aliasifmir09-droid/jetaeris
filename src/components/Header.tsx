@@ -63,7 +63,7 @@ export function Header() {
               lightChrome ? "btn-light" : "btn-primary"
             }`}
           >
-            Request a flight
+            Request a quote
           </Link>
           <button
             type="button"
@@ -98,7 +98,7 @@ export function Header() {
               </Link>
             ))}
             <Link href="/quote" className="btn btn-primary mt-2 w-full">
-              Request a flight
+              Request a quote
             </Link>
           </div>
         </div>

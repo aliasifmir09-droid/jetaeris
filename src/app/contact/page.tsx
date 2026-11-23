@@ -33,7 +33,7 @@ export default function ContactPage() {
             </div>
             <div>
               <dt className="tracking-[0.14em] text-accent uppercase">
-                Address
+                {site.address.kind}
               </dt>
               <dd className="mt-2 text-[1.05rem] leading-7 text-ink">
                 {site.address.line1}
@@ -41,6 +41,10 @@ export default function ContactPage() {
                 {site.address.city}, {site.address.region}
                 <br />
                 United States
+              </dd>
+              <dd className="mt-2 text-sm leading-6 text-muted">
+                Full street, suite, and ZIP confirmed on contracting documents
+                and available on request for verification.
               </dd>
             </div>
             <div>
@@ -122,7 +126,16 @@ export default function ContactPage() {
           </p>
           <div className="mt-6">
             <Suspense
-              fallback={<p className="text-sm text-muted">Loading form…</p>}
+              fallback={
+                <div className="space-y-3" aria-busy="true" aria-live="polite">
+                  <p className="text-sm font-semibold text-ink">
+                    Preparing your quote form…
+                  </p>
+                  <p className="text-sm text-muted">
+                    Staged request with privacy consent and confirmation ID.
+                  </p>
+                </div>
+              }
             >
               <QuoteForm />
             </Suspense>

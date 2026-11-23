@@ -15,9 +15,15 @@ export function Footer() {
             quoting for on-demand charter, empty legs, and FBO limo.
           </p>
           <p className="mt-5 text-sm leading-7 text-white/50">
+            {site.address.kind}
+            <br />
             {site.address.display}
             <br />
             United States
+          </p>
+          <p className="mt-3 max-w-sm text-xs leading-5 text-white/35">
+            Full street, suite, and ZIP confirmed on contracting documents.
+            Quote-and-concierge brokerage—not instant booking.
           </p>
         </div>
 

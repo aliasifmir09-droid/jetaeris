@@ -32,9 +32,12 @@ export default async function AircraftPage({ params }: Props) {
       <PageHero
         eyebrow="Aircraft class"
         title={item.name}
-        body={item.summary}
+        body={`${item.summary} Imagery and examples are representative until a specific tail is assigned by the operating carrier.`}
+        primaryLabel="Request a quote"
         secondaryHref="/aircraft"
         secondaryLabel="All classes"
+        imageSrc="/media/cabin.jpg"
+        imageAlt={`${item.name} cabin — representative class imagery`}
       />
       <section className="pb-16 md:pb-24">
         <div className="container grid gap-8 md:grid-cols-3">

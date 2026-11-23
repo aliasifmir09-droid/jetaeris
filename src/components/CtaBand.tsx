@@ -22,7 +22,7 @@ export function CtaBand({
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Link href="/quote" className="btn btn-light">
-            Request a flight
+            Request a quote
           </Link>
           <Link href="/empty-legs" className="btn btn-ghost">
             Empty legs
