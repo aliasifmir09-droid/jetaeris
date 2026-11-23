@@ -24,6 +24,12 @@ export default function QuotePage() {
             Trip basics, passenger details, preferences, then contact and review.
             You receive a request ID and a clear response promise.
           </p>
+          <p className="mt-4 max-w-md text-sm font-semibold text-accent">
+            Bookings open {site.bookingOpensLabel}
+          </p>
+          <p className="mt-1 max-w-md text-sm leading-6 text-muted">
+            {site.bookingOpensTagline}
+          </p>
           <ul className="mt-10 space-y-4 text-sm leading-6 text-ink-soft">
             <li>One-way, round-trip, or multi-city</li>
             <li>Aircraft preference, empty-leg interest, catering, Wi-Fi</li>

@@ -36,9 +36,14 @@ export default function HomePage() {
           <h1 className="serif reveal reveal-delay-1 mt-4 max-w-3xl text-[clamp(1.45rem,3vw,2.2rem)] text-white/90">
             {site.tagline}.
           </h1>
+          <p className="reveal reveal-delay-2 mt-3 max-w-2xl text-[0.95rem] font-semibold tracking-[0.04em] text-[var(--accent-soft)] uppercase">
+            Bookings open {site.bookingOpensLabel}
+          </p>
           <p className="reveal reveal-delay-2 mt-4 max-w-xl text-[1.02rem] leading-8 text-white/70">
             On-demand USA charter and empty legs through vetted Part 135
-            carriers. Itinerary-first quoting. Optional FBO ground transfer.
+            carriers. Request a quote now—JetAeris starts taking confirmed
+            bookings from {site.bookingOpensLabel}. Optional FBO ground
+            transfer.
           </p>
 
           <div className="reveal reveal-delay-3 mt-8 max-w-5xl">

@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { site } from "@/lib/site";
 
 export function HeroQuoteStrip() {
   const router = useRouter();
@@ -90,6 +91,9 @@ export function HeroQuoteStrip() {
       <button type="submit" className="btn btn-light h-[46px] w-full md:w-auto">
         Request a quote
       </button>
+      <p className="md:col-span-full text-xs leading-5 text-white/55">
+        Quotes open now · Confirmed bookings begin {site.bookingOpensLabel}
+      </p>
     </form>
   );
 }

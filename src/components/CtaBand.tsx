@@ -17,6 +17,12 @@ export function CtaBand({
         <p className="mx-auto mt-5 max-w-2xl text-[1.05rem] leading-8 text-white/68">
           {body}
         </p>
+        <p className="mt-4 text-sm font-semibold tracking-[0.06em] text-[var(--accent-soft)] uppercase">
+          Bookings open {site.bookingOpensLabel}
+        </p>
+        <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-white/50">
+          {site.bookingOpensTagline}
+        </p>
         <p className="mt-3 text-xs tracking-[0.12em] text-white/45 uppercase">
           {site.deskHours}
         </p>

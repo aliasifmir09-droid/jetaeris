@@ -14,6 +14,12 @@ export function Footer() {
             {site.tagline}. Arranged through vetted Part 135 partners. Concierge
             quoting for on-demand charter, empty legs, and FBO limo.
           </p>
+          <p className="mt-3 max-w-sm text-sm font-medium leading-6 text-[var(--accent-soft)]">
+            Bookings open {site.bookingOpensLabel}
+          </p>
+          <p className="mt-1 max-w-sm text-xs leading-5 text-white/45">
+            {site.bookingOpensTagline}
+          </p>
           <p className="mt-5 text-sm leading-7 text-white/50">
             {site.address.kind}
             <br />

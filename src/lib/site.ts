@@ -6,10 +6,15 @@ export const site = {
   domain: "jetaeris.com",
   url: "https://www.jetaeris.com",
   tagline: "Private charter, precisely arranged",
+  /** Public launch of confirmed booking workflow — quoting remains available now. */
+  bookingOpensDate: "2027-04-01",
+  bookingOpensLabel: "1 April 2027",
+  bookingOpensTagline:
+    "JetAeris will start taking bookings from 1 April 2027. Request a quote today—confirmations open on that date.",
   /** Honest product promise — broker-led inquiry, not instant marketplace booking. */
   productPromise: "Request a private charter quote",
   description:
-    "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
+    "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. Quotes are open now; confirmed bookings begin 1 April 2027. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
   // Do not use fictional 555 numbers. Leave blank until a real monitored line is provisioned.
   phoneDisplay: "",
   phoneHref: "",

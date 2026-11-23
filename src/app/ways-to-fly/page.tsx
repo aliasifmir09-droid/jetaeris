@@ -48,7 +48,7 @@ export default function WaysToFlyPage() {
       <PageHero
         eyebrow="Ways to fly"
         title="Clear products. Honest next steps."
-        body="JetAeris is a USA air charter brokerage and arranging agent. Choose the path that matches how you travel—each one ends in a human-reviewed quote, not a pretend instant booking."
+        body={`JetAeris is a USA air charter brokerage and arranging agent. Quotes are open now; confirmed bookings begin ${site.bookingOpensLabel}. Choose the path that matches how you travel—each one ends in a human-reviewed quote, not a pretend instant booking.`}
         primaryHref="/quote"
         primaryLabel="Request a quote"
         secondaryHref="/how-it-works"
