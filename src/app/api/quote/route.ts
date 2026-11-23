@@ -10,6 +10,8 @@ type QuoteBody = {
   email?: string;
   phone?: string;
   notes?: string;
+  limo?: boolean;
+  limoCity?: string;
 };
 
 function clean(value: unknown, max = 200) {
@@ -35,6 +37,8 @@ export async function POST(request: Request) {
     email: clean(body.email, 160),
     phone: clean(body.phone, 40),
     notes: clean(body.notes, 2000),
+    limo: Boolean(body.limo),
+    limoCity: clean(body.limoCity, 80),
   };
 
   if (
@@ -73,6 +77,7 @@ export async function POST(request: Request) {
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
     `Phone: ${payload.phone}`,
+    `Limo transfer: ${payload.limo ? "YES" : "no"}${payload.limoCity ? ` (${payload.limoCity})` : ""}`,
     ``,
     `Notes: ${payload.notes || "—"}`,
   ].join("\n");

@@ -1,5 +1,12 @@
 import type { MetadataRoute } from "next";
-import { aircraft, cities, guides, routes } from "@/lib/content";
+import {
+  aircraft,
+  airports,
+  cities,
+  guides,
+  limoCities,
+  routes,
+} from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -15,11 +22,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/charter",
     "/aircraft",
     "/guides",
+    "/limo",
+    "/airports",
     "/privacy",
     "/terms",
   ];
 
-  const entries: MetadataRoute.Sitemap = [
+  return [
     ...staticPaths.map((path) => ({
       url: `${site.url}${path === "/" ? "" : path}`,
       changeFrequency: "weekly" as const,
@@ -45,7 +54,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
+    ...limoCities.map((c) => ({
+      url: `${site.url}/limo/${c.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    })),
+    ...airports.map((a) => ({
+      url: `${site.url}/airports/${a.code.toLowerCase()}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    })),
   ];
-
-  return entries;
 }

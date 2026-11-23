@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!route) return {};
   return {
     title: `Private jet ${route.from} to ${route.to}`,
-    description: `Charter a private jet from ${route.from} to ${route.to}. ${route.airports}. ${route.blockTime}. ${site.name} concierge quoting.`,
+    description: `Charter a private jet from ${route.from} to ${route.to}. ${route.airports}. ${route.blockTime}. Limo optional. ${site.name}.`,
     alternates: { canonical: `/routes/${route.slug}` },
   };
 }
@@ -34,8 +34,8 @@ export default async function RoutePage({ params }: Props) {
         eyebrow="Route"
         title={`Private jet from ${route.from} to ${route.to}`}
         body={route.summary}
-        secondaryHref={`/charter/${route.fromSlug}`}
-        secondaryLabel={`${route.from} charter`}
+        secondaryHref={`/limo/${route.toSlug}`}
+        secondaryLabel={`${route.to} limo`}
       />
 
       <section className="pb-16 md:pb-24">
@@ -51,6 +51,15 @@ export default async function RoutePage({ params }: Props) {
               </p>
               <p className="mt-3 text-lg text-ink-soft">{v}</p>
             </div>
+          ))}
+        </div>
+
+        <div className="container mt-16 max-w-3xl space-y-5">
+          <h2 className="serif text-3xl text-ink">Trip detail</h2>
+          {route.details.map((p) => (
+            <p key={p} className="text-[1.05rem] leading-8 text-ink-soft">
+              {p}
+            </p>
           ))}
         </div>
 
@@ -71,6 +80,12 @@ export default async function RoutePage({ params }: Props) {
           <div className="mt-10 flex flex-wrap gap-3">
             <Link href="/quote" className="btn btn-primary">
               Request this route
+            </Link>
+            <Link
+              href={`/guides/private-jet-cost-${route.slug}`}
+              className="btn btn-line"
+            >
+              Cost guide
             </Link>
             <Link href={`/charter/${route.toSlug}`} className="btn btn-line">
               {route.to} city guide

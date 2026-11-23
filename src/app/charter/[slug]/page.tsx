@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!city) return {};
   return {
     title: `Private jet charter ${city.name}`,
-    description: `Private jet charter in ${city.name}, ${city.state}. Airports ${city.airports.join(", ")}. On-demand and empty-leg options with ${site.name}.`,
+    description: `Private jet charter in ${city.name}, ${city.state}. Airports ${city.airports.join(", ")}. On-demand, empty legs, and FBO limo with ${site.name}.`,
     alternates: { canonical: `/charter/${city.slug}` },
   };
 }
@@ -39,33 +39,42 @@ export default async function CityPage({ params }: Props) {
         eyebrow={`Charter · ${city.state}`}
         title={`Private jet charter in ${city.name}`}
         body={city.blurb}
-        secondaryHref="/empty-legs"
-        secondaryLabel="Empty legs"
+        secondaryHref={city.limo ? `/limo/${city.slug}` : "/empty-legs"}
+        secondaryLabel={city.limo ? `${city.name} limo` : "Empty legs"}
       />
 
       <section className="pb-16 md:pb-24">
         <div className="container grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <h2 className="serif text-3xl text-ink">Airports & FBOs</h2>
+            <h2 className="serif text-3xl text-ink">Local detail</h2>
+            <div className="mt-6 space-y-5">
+              {city.details.map((p) => (
+                <p key={p} className="text-[1.05rem] leading-8 text-ink-soft">
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            <h2 className="serif mt-12 text-3xl text-ink">Airports & FBOs</h2>
             <ul className="mt-6 space-y-3 text-[1.05rem] text-ink-soft">
               {city.airports.map((code) => (
                 <li key={code} className="border-b border-[var(--line)] pb-3">
-                  {code}
+                  <Link
+                    href={`/airports/${code.toLowerCase()}`}
+                    className="hover:text-accent"
+                  >
+                    {code}
+                  </Link>
                 </li>
               ))}
             </ul>
-            <p className="mt-8 text-[1.05rem] leading-8 text-muted">
-              {site.name} arranges on-demand charter and empty legs through
-              preferred Part 135 partners. Share your trip details and we return
-              aircraft options with clear assumptions.
-            </p>
           </div>
 
           <aside className="panel h-fit p-8">
             <p className="eyebrow">Related routes</p>
             <ul className="mt-5 space-y-4">
               {related.length ? (
-                related.map((r) => (
+                related.slice(0, 8).map((r) => (
                   <li key={r.slug}>
                     <Link
                       href={`/routes/${r.slug}`}
@@ -85,6 +94,14 @@ export default async function CityPage({ params }: Props) {
             <Link href="/quote" className="btn btn-primary mt-8 w-full">
               Request from {city.name}
             </Link>
+            {city.limo ? (
+              <Link
+                href={`/limo/${city.slug}`}
+                className="btn btn-line mt-3 w-full"
+              >
+                FBO limo in {city.name}
+              </Link>
+            ) : null}
           </aside>
         </div>
 

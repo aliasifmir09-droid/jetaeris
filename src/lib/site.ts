@@ -14,13 +14,13 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/empty-legs", label: "Empty legs" },
   { href: "/routes", label: "Routes" },
   { href: "/charter", label: "Cities" },
+  { href: "/limo", label: "Limo" },
+  { href: "/empty-legs", label: "Empty legs" },
   { href: "/aircraft", label: "Aircraft" },
   { href: "/guides", label: "Guides" },
-  { href: "/safety", label: "Safety" },
+  { href: "/airports", label: "Airports" },
 ] as const;
 
 export const featuredRoutes = routes.slice(0, 6).map((r) => ({

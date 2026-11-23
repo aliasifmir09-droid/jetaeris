@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { SectionHeading } from "@/components/SectionHeading";
-import { aircraft, guides, routes } from "@/lib/content";
+import { aircraft, guides, limoCities, routes } from "@/lib/content";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
 export default function HomePage() {
@@ -186,15 +186,54 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden bg-[var(--section-dark)] py-20 text-white md:py-28">
+        <div className="atmosphere-dark" aria-hidden />
+        <div className="container relative">
+          <SectionHeading
+            light
+            eyebrow="Limo & ground"
+            title="FBO limousine service in America’s top cities."
+            body="Book the jet and the car together. Sedans, SUVs, sprinters, and stretch limos timed to wheels-down—not a random airport curb."
+          />
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {limoCities.slice(0, 8).map((city) => (
+              <Link
+                key={city.slug}
+                href={`/limo/${city.slug}`}
+                className="border border-white/15 px-5 py-6 transition-colors hover:bg-white/[0.04]"
+              >
+                <p className="text-xs tracking-[0.16em] text-[var(--accent-soft)] uppercase">
+                  {city.state}
+                </p>
+                <h3 className="mt-3 font-[family-name:var(--font-display)] text-xl">
+                  {city.name}
+                </h3>
+                <p className="mt-2 text-sm text-white/55">
+                  {city.fbOs.slice(0, 3).join(" · ")}
+                </p>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/limo" className="btn btn-light">
+              All limo cities
+            </Link>
+            <Link href="/quote?limo=1" className="btn btn-ghost">
+              Book flight + limo
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 md:py-28">
         <div className="container">
           <SectionHeading
             eyebrow="Guides"
             title="SEO pages that answer money questions."
-            body="Cost, empty legs, and how-to charter—written to rank and to convert into a quote."
+            body="Cost guides for major corridors, empty legs, limo transfers, and how-to charter—written to rank and convert."
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {guides.map((guide) => (
+            {guides.slice(0, 6).map((guide) => (
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
@@ -220,6 +259,12 @@ export default function HomePage() {
                 {a.name}
               </Link>
             ))}
+            <Link
+              href="/guides"
+              className="border border-[var(--line)] px-3 py-2 hover:border-[var(--line-strong)]"
+            >
+              All guides →
+            </Link>
           </div>
         </div>
       </section>

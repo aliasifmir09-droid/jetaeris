@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { QuoteForm } from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Request a flight",
   description:
-    "Request a USA private jet charter quote from JetAeris. Share trip details and receive vetted options from our concierge desk.",
+    "Request a USA private jet charter quote from JetAeris—optional FBO limo transfer included.",
   alternates: { canonical: "/quote" },
 };
 
@@ -15,20 +16,22 @@ export default function QuotePage() {
         <div>
           <p className="eyebrow">Flight request</p>
           <h1 className="serif mt-4 text-[clamp(2.6rem,5vw,4.2rem)] text-ink">
-            Describe the trip. We return aircraft options.
+            Describe the trip. Add limo if you want door-to-door.
           </h1>
           <p className="lede mt-5 max-w-md">
-            Route, date, passengers—then a human response. No membership hard
-            sell.
+            Route, date, passengers—then a human response. Check the limo box
+            for FBO black-car or stretch service in top USA cities.
           </p>
           <ul className="mt-10 space-y-4 text-sm leading-6 text-ink-soft">
             <li>One-way, round-trip, or multi-city</li>
+            <li>Optional limo / SUV / sprinter at either FBO</li>
             <li>Empty-leg interest welcome—note time flexibility</li>
-            <li>Flights arranged with preferred Part 135 partners</li>
           </ul>
         </div>
         <div className="panel p-6 md:p-10">
-          <QuoteForm />
+          <Suspense fallback={<p className="text-sm text-muted">Loading form…</p>}>
+            <QuoteForm />
+          </Suspense>
         </div>
       </div>
     </div>

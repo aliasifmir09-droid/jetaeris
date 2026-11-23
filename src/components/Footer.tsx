@@ -42,8 +42,13 @@ export function Footer() {
           <p className="eyebrow text-[var(--accent-soft)]">SEO hubs</p>
           <ul className="mt-5 space-y-3 text-sm text-white/75">
             <li>
-              <Link href="/charter/new-york" className="hover:text-white">
-                New York charter
+              <Link href="/limo" className="hover:text-white">
+                Limo service
+              </Link>
+            </li>
+            <li>
+              <Link href="/limo/new-york" className="hover:text-white">
+                New York limo
               </Link>
             </li>
             <li>
@@ -57,11 +62,8 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link
-                href="/guides/how-much-does-a-private-jet-cost"
-                className="hover:text-white"
-              >
-                Charter cost guide
+              <Link href="/airports" className="hover:text-white">
+                Airports / FBOs
               </Link>
             </li>
           </ul>
