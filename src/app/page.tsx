@@ -3,17 +3,12 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
 import { aircraftClasses, featuredRoutes, site } from "@/lib/site";
 
-const heroImage =
-  "https://images.unsplash.com/photo-1540962351504-eee142fea5fc?auto=format&fit=crop&w=2400&q=80";
-const cabinImage =
-  "https://images.unsplash.com/photo-1474302770737-173a5371cec3?auto=format&fit=crop&w=1800&q=80";
-
 export default function HomePage() {
   return (
     <>
       <section className="relative isolate min-h-[100svh] overflow-hidden bg-ink text-white">
         <Image
-          src={heroImage}
+          src="/media/hero-jet.jpg"
           alt="Private jet on the tarmac at dusk"
           fill
           priority
@@ -27,18 +22,18 @@ export default function HomePage() {
         />
 
         <div className="container relative flex min-h-[100svh] flex-col justify-end pb-16 pt-32 md:pb-24">
-          <p className="eyebrow reveal text-[var(--accent-soft)]">{site.name}</p>
-          <h1 className="display reveal reveal-delay-1 mt-5 max-w-4xl text-[clamp(3.4rem,9vw,7.2rem)] text-white">
-            Private flight,
-            <br />
-            without the noise.
+          <p className="display reveal text-[clamp(2.8rem,7vw,5.5rem)] text-white">
+            {site.name}
+          </p>
+          <h1 className="serif reveal reveal-delay-1 mt-4 max-w-3xl text-[clamp(1.7rem,3.6vw,2.6rem)] text-white/92">
+            Private flight, without the noise.
           </h1>
-          <p className="reveal reveal-delay-2 mt-6 max-w-xl text-[1.08rem] leading-8 text-white/78">
+          <p className="reveal reveal-delay-2 mt-5 max-w-xl text-[1.08rem] leading-8 text-white/78">
             On-demand charter and empty legs across the United States—arranged
             with the calm precision of a private concierge desk.
           </p>
           <div className="reveal reveal-delay-3 mt-10 flex flex-wrap gap-3">
-            <Link href="/quote" className="btn btn-primary bg-white text-ink hover:bg-white/90">
+            <Link href="/quote" className="btn btn-light">
               Request a flight
             </Link>
             <Link href="/empty-legs" className="btn btn-ghost">
@@ -114,7 +109,7 @@ export default function HomePage() {
         <div className="container grid items-center gap-12 lg:grid-cols-2">
           <div className="relative aspect-[4/5] overflow-hidden bg-paper-deep">
             <Image
-              src={cabinImage}
+              src="/media/cabin.jpg"
               alt="Private jet cabin interior"
               fill
               className="object-cover"

@@ -146,6 +146,16 @@ img {
   background: #162033;
 }
 
+.btn-light {
+  background: #f5f7fa;
+  color: var(--ink);
+  border-color: #f5f7fa;
+}
+
+.btn-light:hover {
+  background: #ffffff;
+}
+
 .btn-ghost {
   background: transparent;
   border-color: color-mix(in srgb, white 42%, transparent);

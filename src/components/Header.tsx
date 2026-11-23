@@ -22,21 +22,21 @@ export function Header() {
     setOpen(false);
   }, [pathname]);
 
-  const solid = !isHome || scrolled || open;
+  const lightChrome = isHome && !scrolled && !open;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid
-          ? "border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper)_92%,white)] backdrop-blur-md"
-          : "bg-transparent"
+        lightChrome
+          ? "border-b border-white/10 bg-[rgba(11,18,32,0.35)] backdrop-blur-md"
+          : "border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper)_94%,white)] backdrop-blur-md"
       }`}
     >
       <div className="container flex h-[4.5rem] items-center justify-between gap-6">
         <Link
           href="/"
           className={`font-[family-name:var(--font-display)] text-[1.55rem] tracking-[-0.04em] ${
-            solid ? "text-ink" : "text-white"
+            lightChrome ? "text-white" : "text-[var(--ink)]"
           }`}
         >
           {site.name}
@@ -48,7 +48,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={`text-[0.78rem] font-semibold tracking-[0.14em] uppercase transition-opacity hover:opacity-70 ${
-                solid ? "text-ink-soft" : "text-white/88"
+                lightChrome ? "text-white/88" : "text-[var(--ink-soft)]"
               }`}
             >
               {item.label}
@@ -60,7 +60,7 @@ export function Header() {
           <Link
             href="/quote"
             className={`btn hidden sm:inline-flex ${
-              solid ? "btn-primary" : "btn-ghost"
+              lightChrome ? "btn-light" : "btn-primary"
             }`}
           >
             Request a flight
@@ -70,9 +70,9 @@ export function Header() {
             aria-expanded={open}
             aria-label="Toggle menu"
             className={`inline-flex h-11 w-11 items-center justify-center border lg:hidden ${
-              solid
-                ? "border-[var(--line-strong)] text-ink"
-                : "border-white/35 text-white"
+              lightChrome
+                ? "border-white/35 text-white"
+                : "border-[var(--line-strong)] text-[var(--ink)]"
             }`}
             onClick={() => setOpen((v) => !v)}
           >

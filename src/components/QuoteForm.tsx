@@ -174,8 +174,10 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
       {message ? (
         <p
           role="status"
-          className={`text-sm leading-6 ${
-            status === "success" ? "text-ink" : "text-red-700"
+          className={`border px-4 py-3 text-sm leading-6 ${
+            status === "success"
+              ? "border-[var(--line-strong)] bg-white text-ink"
+              : "border-red-200 bg-red-50 text-red-800"
           }`}
         >
           {message}
