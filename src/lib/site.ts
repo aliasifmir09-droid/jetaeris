@@ -18,8 +18,10 @@ export const site = {
   privacyEmail: "privacy@jetaeris.com",
   locale: "en_US",
   responsePromise:
-    "24/7 inquiry intake online and by email. Typical first response under 15 minutes during desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued; target first response at the next open desk window.",
-  deskHours: "Desk hours: Mon–Sun, 8:00–22:00 Eastern",
+    "Inquiry intake available 24/7 online and by email. Typical response under 15 minutes during staffed desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued for the next open desk window—we do not claim 24/7 live human response.",
+  deskHours: "Staffed desk: Mon–Sun, 8:00–22:00 Eastern",
+  footerHours:
+    "Inquiry intake 24/7 · Typical response under 15 minutes during staffed desk hours",
   address: {
     line1: "87-81",
     city: "Queens",

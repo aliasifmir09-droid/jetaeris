@@ -105,7 +105,12 @@ export function Footer() {
               </>
             ) : null}
             <br />
-            <span className="text-white/40">{site.deskHours}</span>
+            <span className="mt-2 block text-xs normal-case tracking-normal text-white/40">
+              {site.footerHours}
+            </span>
+            <span className="mt-1 block text-xs normal-case tracking-normal text-white/35">
+              {site.deskHours}
+            </span>
           </p>
         </div>
       </div>
