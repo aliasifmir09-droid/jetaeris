@@ -14,10 +14,22 @@ export function Footer() {
             {site.tagline}. Arranged through vetted Part 135 partners. Concierge
             quoting for on-demand charter, empty legs, and FBO limo.
           </p>
+          <p className="mt-3 max-w-sm text-sm font-medium leading-6 text-[var(--accent-soft)]">
+            Bookings open {site.bookingOpensLabel}
+          </p>
+          <p className="mt-1 max-w-sm text-xs leading-5 text-white/45">
+            {site.bookingOpensTagline}
+          </p>
           <p className="mt-5 text-sm leading-7 text-white/50">
+            {site.address.kind}
+            <br />
             {site.address.display}
             <br />
             United States
+          </p>
+          <p className="mt-3 max-w-sm text-xs leading-5 text-white/35">
+            Full street, suite, and ZIP confirmed on contracting documents.
+            Quote-and-concierge brokerage—not instant booking.
           </p>
         </div>
 
@@ -90,10 +102,21 @@ export function Footer() {
             <a href={`mailto:${site.email}`} className="hover:text-white">
               {site.email}
             </a>
+            {site.phoneDisplay && site.phoneHref ? (
+              <>
+                <br />
+                <a href={site.phoneHref} className="hover:text-white">
+                  {site.phoneDisplay}
+                </a>
+              </>
+            ) : null}
             <br />
-            <a href={site.phoneHref} className="hover:text-white">
-              {site.phoneDisplay}
-            </a>
+            <span className="mt-2 block text-xs normal-case tracking-normal text-white/40">
+              {site.footerHours}
+            </span>
+            <span className="mt-1 block text-xs normal-case tracking-normal text-white/35">
+              {site.deskHours}
+            </span>
           </p>
         </div>
       </div>

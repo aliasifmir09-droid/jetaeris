@@ -70,7 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     alternateName: site.name,
     url: site.url,
     email: site.email,
-    telephone: site.phoneDisplay,
+    ...(site.phoneDisplay ? { telephone: site.phoneDisplay } : {}),
     description: site.description,
     areaServed: "US",
     address: {
@@ -85,9 +85,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         "@type": "ContactPoint",
         contactType: "customer service",
         email: site.email,
-        telephone: site.phoneDisplay,
+        ...(site.phoneDisplay ? { telephone: site.phoneDisplay } : {}),
         areaServed: "US",
         availableLanguage: ["English"],
+        hoursAvailable: "Mo-Su 08:00-22:00",
       },
     ],
   };
@@ -105,6 +106,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     },
   };
 
+  const serviceLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "USA private jet charter brokerage",
+    serviceType: "Air charter brokerage",
+    provider: { "@type": "Organization", name: site.legalName },
+    areaServed: "US",
+    description: site.description,
+    url: site.url,
+  };
+
   return (
     <html
       lang="en"
@@ -118,6 +130,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
         />
         <Header />
         <main className="site-main">{children}</main>

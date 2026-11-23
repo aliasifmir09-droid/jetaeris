@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Jet Aeris Inc",
-  description: `About ${site.legalName} (JetAeris)—USA private jet charter desk based in Queens, NY for on-demand flights, empty legs, and FBO limo.`,
+  description: `About ${site.legalName} (JetAeris)—USA private jet charter brokerage based in Queens, NY. Quote-and-concierge desk for on-demand flights, empty legs, and FBO limo.`,
   alternates: { canonical: "/about" },
 };
 
@@ -16,34 +16,44 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title={`${site.legalName} — the company behind JetAeris.`}
-        body="A modern USA private aviation desk: on-demand charter, empty legs, and coordinated FBO ground transfers—built for speed, discretion, and clarity."
+        body="A USA air charter brokerage and concierge desk: request a quote for on-demand charter, empty legs, and coordinated FBO ground transfers. We do not claim instant marketplace booking or owned fleet inventory."
         primaryHref="/contact"
         primaryLabel="Contact us"
         secondaryHref="/broker-disclosure"
         secondaryLabel="Broker disclosure"
+        imageSrc="/media/cabin.jpg"
+        imageAlt="Private jet cabin arranged through JetAeris partners"
       />
       <section className="pb-16 md:pb-24">
         <div className="container grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-6 text-[1.08rem] leading-8 text-ink-soft">
             <p>
               JetAeris is the consumer brand of <strong>{site.legalName}</strong>
-              , based at <strong>{site.address.display}</strong>. We help
-              travelers request private jet options and optional limousine
-              transfers without marketplace clutter or membership hard sells.
+              . {site.address.publicNote}
             </p>
             <p>
-              We studied how flagship aviation brands lead with confidence and
-              how strong brokers start with the itinerary. Our product is
-              simple: you request a flight, we return vetted options, you
-              confirm, you fly.
+              Our product promise is honest:{" "}
+              <strong>{site.productPromise}</strong>. You describe the trip; we
+              return curated Part 135 options; you confirm in writing with the
+              operating carrier’s terms before payment.
+            </p>
+            <p>
+              We are early-stage as a public brand. We do not invent fleet
+              ownership, flight counts, testimonials, or safety logos. As real
+              operating history, partnerships, and client stories are cleared for
+              publication, they will appear here—not before.
             </p>
             <p>
               Flights are arranged with preferred Part 135 partners. The
               operating carrier is disclosed on your itinerary. See our{" "}
               <Link href="/broker-disclosure" className="underline underline-offset-4">
                 Broker Disclosure
-              </Link>{" "}
-              and{" "}
+              </Link>
+              ,{" "}
+              <Link href="/safety" className="underline underline-offset-4">
+                Safety & how we operate
+              </Link>
+              , and{" "}
               <Link href="/legal" className="underline underline-offset-4">
                 Legal Center
               </Link>
@@ -58,8 +68,12 @@ export default function AboutPage() {
                 <dd className="mt-1 text-ink">{site.legalName}</dd>
               </div>
               <div>
-                <dt className="text-muted">Address</dt>
+                <dt className="text-muted">{site.address.kind}</dt>
                 <dd className="mt-1 text-ink">{site.address.display}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">Role</dt>
+                <dd className="mt-1 text-ink">{site.role}</dd>
               </div>
               <div>
                 <dt className="text-muted">Email</dt>
@@ -69,13 +83,27 @@ export default function AboutPage() {
                   </a>
                 </dd>
               </div>
+              {site.phoneDisplay && site.phoneHref ? (
+                <div>
+                  <dt className="text-muted">Phone</dt>
+                  <dd className="mt-1">
+                    <a href={site.phoneHref} className="underline">
+                      {site.phoneDisplay}
+                    </a>
+                  </dd>
+                </div>
+              ) : (
+                <div>
+                  <dt className="text-muted">Phone</dt>
+                  <dd className="mt-1 text-muted">
+                    Monitored U.S. line publishing when provisioned—email for
+                    immediate requests.
+                  </dd>
+                </div>
+              )}
               <div>
-                <dt className="text-muted">Phone</dt>
-                <dd className="mt-1">
-                  <a href={site.phoneHref} className="underline">
-                    {site.phoneDisplay}
-                  </a>
-                </dd>
+                <dt className="text-muted">Desk</dt>
+                <dd className="mt-1 text-ink">{site.deskHours}</dd>
               </div>
             </dl>
           </aside>

@@ -222,6 +222,52 @@ img {
   background: white;
 }
 
+.field-dark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-dark label {
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.field-dark input,
+.field-dark select {
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font: inherit;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.field-dark select option {
+  color: #10151c;
+  background: #fff;
+}
+
+.field-dark input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.field-dark input:focus,
+.field-dark select:focus {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-quote-strip {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
 .atmosphere,
 .atmosphere-dark {
   pointer-events: none;
