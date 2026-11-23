@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Figtree, Newsreader, Syne } from "next/font/google";
+import { AnimatedJet } from "@/components/AnimatedJet";
+import { StickyQuoteBar } from "@/components/StickyQuoteBar";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { MotionRoot } from "@/components/motion/MotionRoot";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -135,9 +138,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
         />
-        <Header />
-        <main className="site-main">{children}</main>
-        <Footer />
+        <MotionRoot>
+          <Header />
+          <main className="site-main">{children}</main>
+          <Footer />
+          <StickyQuoteBar />
+          <AnimatedJet />
+        </MotionRoot>
       </body>
     </html>
   );
