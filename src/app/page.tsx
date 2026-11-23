@@ -3,7 +3,8 @@ import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { HeroQuoteStrip } from "@/components/HeroQuoteStrip";
 import { SectionHeading } from "@/components/SectionHeading";
-import { aircraft, guides, limoCities, routes } from "@/lib/content";
+import { blogPillars, blogPosts } from "@/lib/blog";
+import { aircraft, limoCities, routes } from "@/lib/content";
 import { faqItems } from "@/lib/faq";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
@@ -314,23 +315,23 @@ export default function HomePage() {
       <section className="py-20 md:py-28">
         <div className="container">
           <SectionHeading
-            eyebrow="Guides"
-            title="Answers that earn trust—and rankings."
-            body="Cost, empty legs, Part 135 vs commercial, baggage, pets, and booking timing—reviewed by the aviation desk."
+            eyebrow="Information campaign"
+            title="Massive useful content—built to rank and convert."
+            body={`${blogPosts.length} articles across cost, corridors, cities, empty legs, aircraft, and safety. Search answers first, then a clear quote path—the same playbook Petshiwu used for scale.`}
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {guides.slice(0, 6).map((guide) => (
+            {blogPillars.slice(0, 6).map((post) => (
               <Link
-                key={guide.slug}
-                href={`/guides/${guide.slug}`}
+                key={post.slug}
+                href={`/blog/${post.slug}`}
                 className="border border-[var(--line)] bg-white/40 p-8 transition-colors hover:border-[var(--line-strong)]"
               >
-                <p className="eyebrow">Guide</p>
+                <p className="eyebrow">{post.category}</p>
                 <h3 className="serif mt-4 text-2xl text-ink md:text-3xl">
-                  {guide.title}
+                  {post.title}
                 </h3>
                 <p className="mt-4 text-sm leading-7 text-muted">
-                  {guide.description}
+                  {post.description}
                 </p>
               </Link>
             ))}
@@ -339,17 +340,17 @@ export default function HomePage() {
             {aircraft.map((a) => (
               <Link
                 key={a.slug}
-                href={`/aircraft/${a.slug}`}
+                href={`/blog/aircraft-${a.slug}`}
                 className="border border-[var(--line)] px-3 py-2 hover:border-[var(--line-strong)]"
               >
                 {a.name}
               </Link>
             ))}
             <Link
-              href="/guides"
+              href="/blog"
               className="border border-[var(--line)] px-3 py-2 hover:border-[var(--line-strong)]"
             >
-              All guides →
+              Full information hub →
             </Link>
           </div>
         </div>

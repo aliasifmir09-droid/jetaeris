@@ -52,6 +52,7 @@ export const site = {
 export const nav = [
   { href: "/ways-to-fly", label: "Ways to fly" },
   { href: "/routes", label: "Routes" },
+  { href: "/blog", label: "Blog" },
   { href: "/charter", label: "Cities" },
   { href: "/empty-legs", label: "Empty legs" },
   { href: "/aircraft", label: "Aircraft" },
