@@ -3,7 +3,7 @@ import { aircraft, cities, routes } from "@/lib/content";
 export const site = {
   name: "JetAeris",
   domain: "jetaeris.com",
-  url: "https://jetaeris.com",
+  url: "https://www.jetaeris.com",
   tagline: "Private aviation for the United States",
   description:
     "JetAeris arranges on-demand private jet charter and empty-leg flights across the United States. Discreet concierge quoting, vetted operators, response measured in minutes.",
