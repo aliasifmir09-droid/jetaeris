@@ -375,7 +375,33 @@ img {
   animation: drift 20s ease-out forwards;
 }
 
-/* —— Cinematic homepage (Jesko-inspired UHD plates) —— */
+/* —— Jesko scroll story —— */
+.jesko-globe {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(212, 175, 122, 0.35), transparent 42%),
+    radial-gradient(circle at 70% 60%, rgba(90, 140, 180, 0.25), transparent 50%),
+    radial-gradient(circle at 50% 50%, #1a222c 0%, #0a0a0a 70%);
+  box-shadow:
+    inset 0 0 60px rgba(212, 175, 122, 0.12),
+    0 0 80px rgba(212, 175, 122, 0.08);
+  border: 1px solid rgba(212, 175, 122, 0.28);
+}
+
+.jesko-story .btn-ghost {
+  border-color: rgba(244, 239, 230, 0.28);
+  color: #f4efe6;
+}
+
+.jesko-story .btn-ghost:hover {
+  background: rgba(244, 239, 230, 0.08);
+}
+
+.jesko-story .hero-quote-strip {
+  border-color: rgba(212, 175, 122, 0.28);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* —— Cinematic homepage (legacy UHD plates) —— */
 .cinematic-vignette {
   background:
     radial-gradient(ellipse 55% 48% at 50% 48%, transparent 28%, rgba(5, 8, 14, 0.72) 100%),
@@ -591,4 +617,63 @@ img {
   .btn:hover {
     transform: none;
   }
+}
+
+/* —— Site preloader —— */
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  gap: 1.5rem;
+  background: #0a0a0a;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.site-preloader--out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.site-preloader-mark {
+  text-align: center;
+  color: #f4efe6;
+}
+
+.site-preloader-mark p {
+  margin-top: 0.75rem;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+}
+
+.site-preloader-bar {
+  width: min(180px, 40vw);
+  height: 1px;
+  overflow: hidden;
+  background: rgba(244, 239, 230, 0.15);
+}
+
+.site-preloader-bar span {
+  display: block;
+  height: 100%;
+  width: 40%;
+  background: #d4af7a;
+  animation: preloader-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes preloader-slide {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(320%);
+  }
+}
+
+.flight-scene {
+  width: 100%;
+  height: 100%;
 }
