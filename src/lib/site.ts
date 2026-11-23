@@ -43,6 +43,7 @@ export const site = {
 } as const;
 
 export const nav = [
+  { href: "/ways-to-fly", label: "Ways to fly" },
   { href: "/routes", label: "Routes" },
   { href: "/charter", label: "Cities" },
   { href: "/empty-legs", label: "Empty legs" },

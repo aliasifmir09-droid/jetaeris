@@ -48,6 +48,7 @@ export function QuoteForm() {
     const date = searchParams.get("date") || "";
     const passengers = searchParams.get("passengers") || "";
     const timePref = searchParams.get("timePref") || "";
+    const tripType = searchParams.get("tripType") || "";
     const limo = searchParams.get("limo") === "1";
     const interest = searchParams.get("interest") || "";
     setValues((v) => ({
@@ -57,12 +58,20 @@ export function QuoteForm() {
       date: date || v.date,
       passengers: passengers || v.passengers,
       timePref: timePref || v.timePref,
+      tripType:
+        tripType ||
+        (interest === "empty-leg" ? "empty-leg" : v.tripType),
       limo: limo || v.limo,
-      emptyLegInterest: interest === "empty-leg" || v.emptyLegInterest,
+      emptyLegInterest:
+        interest === "empty-leg" ||
+        tripType === "empty-leg" ||
+        v.emptyLegInterest,
       notes:
         v.notes ||
         [
-          interest === "empty-leg" ? "Empty leg interest" : "",
+          interest === "empty-leg" || tripType === "empty-leg"
+            ? "Empty leg interest"
+            : "",
           timePref ? `Departure window: ${timePref}` : "",
           limo ? "Include FBO limo / black-car transfer" : "",
         ]

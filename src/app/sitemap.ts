@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/quote",
     "/contact",
     "/how-it-works",
+    "/ways-to-fly",
     "/empty-legs",
     "/safety",
     "/about",

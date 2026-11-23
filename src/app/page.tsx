@@ -128,6 +128,41 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper-deep)_40%,transparent)] py-20 md:py-28">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Ways to fly"
+            title="Four clear paths—no membership theater."
+            body="On-demand charter, empty legs, FBO ground, and corporate multi-leg support. Each product says who it serves and what happens next."
+          />
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["On-demand", "Quote for a specific date and cabin", "/quote"],
+              ["Empty legs", "Flexible one-ways on the live board", "/empty-legs"],
+              ["FBO limo", "Ground timed to wheels-down", "/limo"],
+              ["Corporate", "Multi-leg desk coordination", "/contact"],
+            ].map(([title, body, href]) => (
+              <Link
+                key={title}
+                href={href}
+                className="border border-[var(--line)] bg-white/60 px-5 py-6 transition-colors hover:border-[var(--line-strong)]"
+              >
+                <h3 className="font-[family-name:var(--font-display)] text-lg text-ink">
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
+                <p className="mt-5 text-xs tracking-[0.14em] text-accent uppercase">
+                  Learn more →
+                </p>
+              </Link>
+            ))}
+          </div>
+          <Link href="/ways-to-fly" className="btn btn-line mt-10">
+            All ways to fly
+          </Link>
+        </div>
+      </section>
+
       <section className="relative overflow-hidden bg-[var(--section-dark)] py-20 text-white md:py-28">
         <div className="atmosphere-dark" aria-hidden />
         <div className="container relative">

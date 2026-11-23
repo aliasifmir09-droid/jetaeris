@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { getRoute, routes } from "@/lib/content";
+import { getRoute, relatedRoutes, routes } from "@/lib/content";
 import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -30,6 +30,7 @@ export default async function RoutePage({ params }: Props) {
   if (!route) notFound();
 
   const quoteHref = `/quote?from=${encodeURIComponent(route.from)}&to=${encodeURIComponent(route.to)}`;
+  const related = relatedRoutes(route.slug);
 
   return (
     <>
@@ -54,9 +55,10 @@ export default async function RoutePage({ params }: Props) {
             ]}
           />
         </div>
-        <div className="container grid gap-8 border-t border-[var(--line)] pt-12 md:grid-cols-3">
+        <div className="container grid gap-8 border-t border-[var(--line)] pt-12 md:grid-cols-2 lg:grid-cols-4">
           {[
             ["Airports", route.airports],
+            ["Distance", route.distanceNm],
             ["Typical block", route.blockTime],
             ["Aircraft fit", route.bestFit],
           ].map(([k, v]) => (
@@ -70,9 +72,14 @@ export default async function RoutePage({ params }: Props) {
         </div>
 
         <div className="container mt-12 border border-[var(--line)] bg-white/50 p-6 md:p-8">
-          <p className="text-xs tracking-[0.16em] text-accent uppercase">
-            Indicative one-way price ranges · updated {route.priceEstimate.updated}
-          </p>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <p className="text-xs tracking-[0.16em] text-accent uppercase">
+              Indicative one-way price ranges
+            </p>
+            <p className="text-xs text-muted">
+              Verified {route.priceEstimate.updated} · {route.reviewedBy}
+            </p>
+          </div>
           <div className="mt-5 grid gap-6 sm:grid-cols-2">
             <div>
               <p className="text-sm text-muted">Light jet</p>
@@ -92,6 +99,52 @@ export default async function RoutePage({ params }: Props) {
             live inventory or a confirmed fare. Request a quote for your date
             and passenger count.
           </p>
+          <div className="mt-8 border-t border-[var(--line)] pt-6">
+            <h2 className="text-sm font-semibold tracking-[0.08em] text-ink uppercase">
+              What changes the price
+            </h2>
+            <ul className="mt-4 grid gap-2 text-sm leading-7 text-muted md:grid-cols-2">
+              {route.priceFactors.map((factor) => (
+                <li key={factor} className="flex gap-2">
+                  <span className="text-accent" aria-hidden>
+                    ·
+                  </span>
+                  <span>{factor}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="container mt-12 grid gap-8 lg:grid-cols-2">
+          <div className="border border-[var(--line)] p-6 md:p-8">
+            <h2 className="serif text-2xl text-ink">Seasonal & ops notes</h2>
+            <p className="mt-4 text-[1.02rem] leading-8 text-ink-soft">
+              {route.seasonalNotes}
+            </p>
+          </div>
+          <div className="border border-[var(--line)] p-6 md:p-8">
+            <h2 className="serif text-2xl text-ink">Ground transfer</h2>
+            <p className="mt-4 text-[1.02rem] leading-8 text-ink-soft">
+              Add FBO limo or black-car in {route.from} and {route.to} so the
+              curb-to-cabin plan is one itinerary. Sedans, SUVs, sprinters, and
+              stretch options where available.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href={`/limo/${route.fromSlug}`} className="btn btn-line">
+                {route.from} limo
+              </Link>
+              <Link href={`/limo/${route.toSlug}`} className="btn btn-line">
+                {route.to} limo
+              </Link>
+              <Link
+                href={`${quoteHref}&limo=1`}
+                className="btn btn-primary"
+              >
+                Quote with ground
+              </Link>
+            </div>
+          </div>
         </div>
 
         <div className="container mt-16 max-w-3xl space-y-5">
@@ -101,6 +154,10 @@ export default async function RoutePage({ params }: Props) {
               {p}
             </p>
           ))}
+          <p className="text-sm text-muted">
+            Reviewed by {route.reviewedBy} ({route.reviewedRole}). Price
+            guidance last verified {route.priceEstimate.updated}.
+          </p>
         </div>
 
         <div className="container mt-16">
@@ -132,6 +189,33 @@ export default async function RoutePage({ params }: Props) {
             </Link>
           </div>
         </div>
+
+        {related.length > 0 ? (
+          <div className="container mt-20">
+            <h2 className="serif text-3xl text-ink">Related corridors</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
+              Connected city pairs for planning alternatives—each page stands
+              alone with airports, estimates, and a prefilled quote path.
+            </p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {related.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/routes/${r.slug}`}
+                  className="border border-[var(--line)] px-5 py-5 transition-colors hover:border-[var(--line-strong)]"
+                >
+                  <p className="text-xs tracking-[0.14em] text-accent uppercase">
+                    {r.airports}
+                  </p>
+                  <p className="mt-2 font-[family-name:var(--font-display)] text-xl text-ink">
+                    {r.from} → {r.to}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">{r.blockTime}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <script
