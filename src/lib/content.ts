@@ -17,6 +17,8 @@ export type Route = {
   fromSlug: string;
   toSlug: string;
   airports: string;
+  /** Approximate great-circle nautical miles between primary FBOs — planning only. */
+  distanceNm: string;
   blockTime: string;
   bestFit: string;
   /** Date-stamped one-way estimate bands — not a live quote. */
@@ -26,9 +28,14 @@ export type Route = {
     assumptions: string;
     updated: string;
   };
+  /** What typically moves the quote on this corridor. */
+  priceFactors: string[];
+  seasonalNotes: string;
   summary: string;
   faqs: { q: string; a: string }[];
   details: string[];
+  reviewedBy: string;
+  reviewedRole: string;
 };
 
 export type Aircraft = {
@@ -422,6 +429,53 @@ function cityBySlug(slug: string) {
   return cities.find((c) => c.slug === slug);
 }
 
+/** Approximate NM between city hubs — planning figures, not flight-plan distances. */
+const distanceHints: Record<string, string> = {
+  "new-york-miami": "~960 nm",
+  "miami-new-york": "~960 nm",
+  "new-york-los-angeles": "~2,140 nm",
+  "los-angeles-new-york": "~2,140 nm",
+  "new-york-chicago": "~640 nm",
+  "chicago-new-york": "~640 nm",
+  "new-york-boston": "~160 nm",
+  "boston-new-york": "~160 nm",
+  "new-york-washington": "~185 nm",
+  "washington-new-york": "~185 nm",
+  "new-york-aspen": "~1,500 nm",
+  "aspen-new-york": "~1,500 nm",
+  "los-angeles-las-vegas": "~200 nm",
+  "las-vegas-los-angeles": "~200 nm",
+  "miami-atlanta": "~520 nm",
+  "atlanta-miami": "~520 nm",
+  "dallas-aspen": "~600 nm",
+  "aspen-dallas": "~600 nm",
+  "san-francisco-los-angeles": "~300 nm",
+  "los-angeles-san-francisco": "~300 nm",
+  "new-york-san-francisco": "~2,240 nm",
+  "san-francisco-new-york": "~2,240 nm",
+};
+
+function seasonalNotesFor(slug: string) {
+  if (slug.includes("aspen")) {
+    return "Winter ski season and holiday weeks drive demand and weather holds. Summer monsoons and runway density still matter—build buffer into ground plans.";
+  }
+  if (slug.includes("miami") || slug.includes("palm-beach") || slug.includes("naples")) {
+    return "Holiday, Art Basel, and spring-break weeks tighten South Florida FBO slots. Summer thunderstorms can delay afternoon departures.";
+  }
+  if (slug.includes("las-vegas")) {
+    return "Convention and fight weekends compress ramp space. Summer heat can reduce light-jet payload—declare bags and pets early.";
+  }
+  if (
+    slug.includes("los-angeles-new-york") ||
+    slug.includes("new-york-los-angeles") ||
+    slug.includes("san-francisco-new-york") ||
+    slug.includes("new-york-san-francisco")
+  ) {
+    return "Coast-to-coast winds and winter storms change block time and fuel stops. Peak Monday/Thursday corporate flow affects aircraft availability.";
+  }
+  return "Weekday corporate peaks and holiday weekends move both price and FBO congestion. Share flexible departure windows when possible.";
+}
+
 function priceBandsFor(slug: string, blockTime: string) {
   const coast =
     slug.includes("los-angeles-new-york") ||
@@ -472,6 +526,7 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
         ? "Mountain-capable midsize / super-midsize"
         : "Light to midsize jet for most parties";
   const priceEstimate = priceBandsFor(slug, blockTime);
+  const distanceNm = distanceHints[slug] ?? "See quote for planned routing";
 
   return {
     slug,
@@ -480,9 +535,18 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
     fromSlug,
     toSlug,
     airports,
+    distanceNm,
     blockTime,
     bestFit,
     priceEstimate,
+    priceFactors: [
+      "Aircraft category and cabin size for your passenger/bag load",
+      "One-way positioning vs round-trip (empty return legs raise one-way cost)",
+      "Peak dates, holidays, and minimum daily utilization",
+      "Airport / FBO fees, overnight, de-icing, and weather holds",
+      "Catering, pets, ground transfer, and last-minute changes",
+    ],
+    seasonalNotes: seasonalNotesFor(slug),
     summary: `Private jet charter from ${from.name} to ${to.name}—airports, timing, aircraft fit, estimate ranges, and a JetAeris quote request path for USA travelers.`,
     faqs: [
       {
@@ -501,6 +565,10 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
         q: "Can I add a limo from the FBO?",
         a: `Yes. JetAeris can arrange black-car or limo meet-and-greet in ${from.name} and ${to.name} timed to your wheels-down.`,
       },
+      {
+        q: "Is this an instant booking?",
+        a: "No. JetAeris is a concierge-led quote service. You receive curated options, the operating carrier before confirmation, and a clear next step—not fake live inventory.",
+      },
     ],
     details: [
       `This corridor connects ${from.name}, ${from.state} with ${to.name}, ${to.state}—a practical USA pair travelers request frequently.`,
@@ -510,7 +578,25 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
       `Ground transportation can be bundled: limo or sprinter to/from the FBO so the private flight feels continuous.`,
       `Every confirmed itinerary lists the operating carrier. Marketing aircraft examples are representative until a tail is assigned.`,
     ],
+    reviewedBy: "JetAeris Aviation Desk",
+    reviewedRole: "Editorial review · operations desk",
   };
+}
+
+/** Related corridors that share an origin or destination city. */
+export function relatedRoutes(slug: string, limit = 4): Route[] {
+  const current = routes.find((r) => r.slug === slug);
+  if (!current) return [];
+  return routes
+    .filter(
+      (r) =>
+        r.slug !== slug &&
+        (r.fromSlug === current.fromSlug ||
+          r.toSlug === current.toSlug ||
+          r.fromSlug === current.toSlug ||
+          r.toSlug === current.fromSlug),
+    )
+    .slice(0, limit);
 }
 
 export const routes: Route[] = pairSeeds

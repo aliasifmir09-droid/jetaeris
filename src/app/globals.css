@@ -236,7 +236,8 @@ img {
   color: rgba(255, 255, 255, 0.78);
 }
 
-.field-dark input {
+.field-dark input,
+.field-dark select {
   width: 100%;
   min-height: 2.85rem;
   padding: 0.65rem 0.85rem;
@@ -248,11 +249,17 @@ img {
   outline: none;
 }
 
+.field-dark select option {
+  color: #10151c;
+  background: #fff;
+}
+
 .field-dark input::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
 
-.field-dark input:focus {
+.field-dark input:focus,
+.field-dark select:focus {
   border-color: rgba(255, 255, 255, 0.55);
   background: rgba(255, 255, 255, 0.12);
 }

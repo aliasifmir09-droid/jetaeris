@@ -6,10 +6,15 @@ export const site = {
   domain: "jetaeris.com",
   url: "https://www.jetaeris.com",
   tagline: "Private charter, precisely arranged",
+  /** Public launch of confirmed booking workflow — quoting remains available now. */
+  bookingOpensDate: "2027-04-01",
+  bookingOpensLabel: "1 April 2027",
+  bookingOpensTagline:
+    "JetAeris will start taking bookings from 1 April 2027. Request a quote today—confirmations open on that date.",
   /** Honest product promise — broker-led inquiry, not instant marketplace booking. */
   productPromise: "Request a private charter quote",
   description:
-    "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
+    "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. Quotes are open now; confirmed bookings begin 1 April 2027. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
   // Do not use fictional 555 numbers. Leave blank until a real monitored line is provisioned.
   phoneDisplay: "",
   phoneHref: "",
@@ -18,8 +23,10 @@ export const site = {
   privacyEmail: "privacy@jetaeris.com",
   locale: "en_US",
   responsePromise:
-    "24/7 inquiry intake online and by email. Typical first response under 15 minutes during desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued; target first response at the next open desk window.",
-  deskHours: "Desk hours: Mon–Sun, 8:00–22:00 Eastern",
+    "Inquiry intake available 24/7 online and by email. Typical response under 15 minutes during staffed desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued for the next open desk window—we do not claim 24/7 live human response.",
+  deskHours: "Staffed desk: Mon–Sun, 8:00–22:00 Eastern",
+  footerHours:
+    "Inquiry intake 24/7 · Typical response under 15 minutes during staffed desk hours",
   address: {
     line1: "87-81",
     city: "Queens",
@@ -43,6 +50,7 @@ export const site = {
 } as const;
 
 export const nav = [
+  { href: "/ways-to-fly", label: "Ways to fly" },
   { href: "/routes", label: "Routes" },
   { href: "/charter", label: "Cities" },
   { href: "/empty-legs", label: "Empty legs" },
