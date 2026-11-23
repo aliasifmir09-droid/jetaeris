@@ -90,10 +90,16 @@ export function Footer() {
             <a href={`mailto:${site.email}`} className="hover:text-white">
               {site.email}
             </a>
+            {site.phoneDisplay && site.phoneHref ? (
+              <>
+                <br />
+                <a href={site.phoneHref} className="hover:text-white">
+                  {site.phoneDisplay}
+                </a>
+              </>
+            ) : null}
             <br />
-            <a href={site.phoneHref} className="hover:text-white">
-              {site.phoneDisplay}
-            </a>
+            <span className="text-white/40">{site.deskHours}</span>
           </p>
         </div>
       </div>

@@ -69,13 +69,19 @@ export default function AboutPage() {
                   </a>
                 </dd>
               </div>
+              {site.phoneDisplay && site.phoneHref ? (
+                <div>
+                  <dt className="text-muted">Phone</dt>
+                  <dd className="mt-1">
+                    <a href={site.phoneHref} className="underline">
+                      {site.phoneDisplay}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
               <div>
-                <dt className="text-muted">Phone</dt>
-                <dd className="mt-1">
-                  <a href={site.phoneHref} className="underline">
-                    {site.phoneDisplay}
-                  </a>
-                </dd>
+                <dt className="text-muted">Desk</dt>
+                <dd className="mt-1 text-ink">{site.deskHours}</dd>
               </div>
             </dl>
           </aside>

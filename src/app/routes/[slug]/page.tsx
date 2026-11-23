@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
 import { getRoute, routes } from "@/lib/content";
@@ -39,6 +40,14 @@ export default async function RoutePage({ params }: Props) {
       />
 
       <section className="pb-16 md:pb-24">
+        <div className="container pt-4">
+          <Breadcrumbs
+            items={[
+              { name: "Routes", href: "/routes" },
+              { name: `${route.from} → ${route.to}` },
+            ]}
+          />
+        </div>
         <div className="container grid gap-8 border-t border-[var(--line)] pt-12 md:grid-cols-3">
           {[
             ["Airports", route.airports],

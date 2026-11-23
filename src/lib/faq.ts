@@ -9,7 +9,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Booking",
     q: "How fast will I get a quote?",
-    a: "During desk hours we typically respond in minutes. Complex multi-city or peak-date trips may take longer while operators confirm availability.",
+    a: "Typical first response is under 15 minutes during desk hours (Mon–Sun, 8:00–22:00 ET). After-hours requests are queued for the next open window. Complex multi-city or peak-date trips may take longer while operators confirm availability.",
   },
   {
     category: "Booking",

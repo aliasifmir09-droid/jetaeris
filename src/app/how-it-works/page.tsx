@@ -19,7 +19,7 @@ const steps = [
   {
     n: "02",
     title: "Receive curated options",
-    body: "We source among vetted operators and return aircraft, timing, and transparent pricing ranges—usually within minutes during desk hours.",
+    body: "We source among vetted Part 135 operators and return aircraft, timing, and transparent pricing ranges. Typical first response under 15 minutes during desk hours (Mon–Sun, 8:00–22:00 ET).",
   },
   {
     n: "03",

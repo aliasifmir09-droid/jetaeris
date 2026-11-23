@@ -54,15 +54,33 @@ export default function ContactPage() {
                 </a>
               </dd>
             </div>
+            {site.phoneDisplay && site.phoneHref ? (
+              <div>
+                <dt className="tracking-[0.14em] text-accent uppercase">Phone</dt>
+                <dd className="mt-2">
+                  <a
+                    className="text-[1.05rem] text-ink underline underline-offset-4"
+                    href={site.phoneHref}
+                  >
+                    {site.phoneDisplay}
+                  </a>
+                </dd>
+              </div>
+            ) : (
+              <div>
+                <dt className="tracking-[0.14em] text-accent uppercase">Phone</dt>
+                <dd className="mt-2 text-[1.05rem] text-muted">
+                  Monitored U.S. line publishing shortly—email the desk for
+                  immediate trip requests.
+                </dd>
+              </div>
+            )}
             <div>
-              <dt className="tracking-[0.14em] text-accent uppercase">Phone</dt>
-              <dd className="mt-2">
-                <a
-                  className="text-[1.05rem] text-ink underline underline-offset-4"
-                  href={site.phoneHref}
-                >
-                  {site.phoneDisplay}
-                </a>
+              <dt className="tracking-[0.14em] text-accent uppercase">Desk hours</dt>
+              <dd className="mt-2 text-[1.05rem] leading-7 text-ink">
+                {site.deskHours}
+                <br />
+                <span className="text-muted">{site.responsePromise}</span>
               </dd>
             </div>
             <div>
