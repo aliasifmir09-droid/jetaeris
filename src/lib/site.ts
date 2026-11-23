@@ -90,6 +90,8 @@ export type EmptyLeg = {
   from: string;
   to: string;
   date: string;
+  /** ISO date for quote-form prefills */
+  dateIso: string;
   window: string;
   aircraft: string;
   seats: string;
@@ -105,6 +107,7 @@ export const emptyLegs: EmptyLeg[] = [
     from: "Teterboro (TEB)",
     to: "Palm Beach (PBI)",
     date: "Dec 4, 2026",
+    dateIso: "2026-12-04",
     window: "13:00–17:00 ET",
     aircraft: "Citation XLS+ (representative)",
     seats: "Up to 8",
@@ -117,6 +120,7 @@ export const emptyLegs: EmptyLeg[] = [
     from: "Van Nuys (VNY)",
     to: "Las Vegas (LAS)",
     date: "Dec 7, 2026",
+    dateIso: "2026-12-07",
     window: "14:00–19:00 PT",
     aircraft: "Phenom 300 (representative)",
     seats: "Up to 7",
@@ -129,6 +133,7 @@ export const emptyLegs: EmptyLeg[] = [
     from: "Dallas Love (DAL)",
     to: "Aspen (ASE)",
     date: "Dec 12, 2026",
+    dateIso: "2026-12-12",
     window: "09:00–12:00 CT",
     aircraft: "Challenger 350 (representative)",
     seats: "Up to 9",
@@ -141,6 +146,7 @@ export const emptyLegs: EmptyLeg[] = [
     from: "Westchester (HPN)",
     to: "Opa-locka (OPF)",
     date: "Dec 14, 2026",
+    dateIso: "2026-12-14",
     window: "10:00–16:00 ET",
     aircraft: "Citation Latitude (representative)",
     seats: "Up to 8",

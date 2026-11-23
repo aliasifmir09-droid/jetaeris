@@ -72,7 +72,7 @@ export function PageHero({
         {body ? (
           <p
             className={`lede mt-6 max-w-2xl ${
-              withImage || dark ? "text-white/70" : ""
+              withImage || dark ? "!text-white/88" : ""
             }`}
           >
             {body}

@@ -22,21 +22,30 @@ export function Header() {
     setOpen(false);
   }, [pathname]);
 
-  const lightChrome = isHome && !scrolled && !open;
+  // Over dark heroes (home + image PageHeros), keep light chrome until scroll.
+  const overDarkHero =
+    isHome ||
+    pathname.startsWith("/empty-legs") ||
+    pathname.startsWith("/safety") ||
+    pathname.startsWith("/about") ||
+    pathname.startsWith("/routes/") ||
+    pathname.startsWith("/airports/") ||
+    pathname.startsWith("/aircraft/");
+  const lightChrome = overDarkHero && !scrolled && !open;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         lightChrome
-          ? "border-b border-white/10 bg-[rgba(11,18,32,0.35)] backdrop-blur-md"
-          : "border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper)_94%,white)] backdrop-blur-md"
+          ? "border-b border-white/15 bg-[rgba(8,12,20,0.78)] text-white backdrop-blur-md"
+          : "border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper)_94%,white)] text-[var(--ink)] backdrop-blur-md"
       }`}
     >
       <div className="container flex h-[4.5rem] items-center justify-between gap-6">
         <Link
           href="/"
           className={`font-[family-name:var(--font-display)] text-[1.55rem] tracking-[-0.04em] ${
-            lightChrome ? "text-white" : "text-[var(--ink)]"
+            lightChrome ? "!text-white" : "text-[var(--ink)]"
           }`}
         >
           {site.name}
@@ -48,7 +57,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={`text-[0.72rem] font-semibold tracking-[0.12em] uppercase transition-opacity hover:opacity-70 ${
-                lightChrome ? "text-white/88" : "text-[var(--ink-soft)]"
+                lightChrome ? "!text-white/90" : "text-[var(--ink-soft)]"
               }`}
             >
               {item.label}

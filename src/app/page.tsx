@@ -8,7 +8,8 @@ import { faqItems } from "@/lib/faq";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
 export default function HomePage() {
-  const rail = [...routes, ...routes].map((r) => `${r.from} → ${r.to}`);
+  const railItems = routes.slice(0, 12).map((r) => `${r.from} → ${r.to}`);
+  const rail = [...railItems, ...railItems];
 
   return (
     <>

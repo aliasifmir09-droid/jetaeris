@@ -98,7 +98,7 @@ export default function EmptyLegsPage() {
                 </div>
                 {bookable ? (
                   <Link
-                    href={`/quote?interest=empty-leg&from=${encodeURIComponent(leg.from)}&to=${encodeURIComponent(leg.to)}`}
+                    href={`/quote?interest=empty-leg&from=${encodeURIComponent(leg.from)}&to=${encodeURIComponent(leg.to)}&date=${encodeURIComponent(leg.dateIso)}&timePref=${encodeURIComponent(leg.window)}`}
                     className="btn btn-line w-fit"
                   >
                     Request this leg

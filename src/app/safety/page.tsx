@@ -54,6 +54,9 @@ export default function SafetyPage() {
         eyebrow="Safety & operations"
         title="How we operate—and who flies the aircraft."
         body="Discretion without operational seriousness is incomplete. Every claim below is written for travelers who need clear broker disclosures before they commit."
+        primaryLabel="Request a quote"
+        imageSrc="/media/cabin.jpg"
+        imageAlt="Cabin interior — representative until a specific aircraft is assigned"
       />
       <section className="pb-16 md:pb-24">
         <div className="container">
@@ -84,7 +87,7 @@ export default function SafetyPage() {
                   Cancellation policy
                 </Link>
                 <Link href="/quote" className="btn btn-light">
-                  Request a flight
+                  Request a quote
                 </Link>
               </div>
             </aside>

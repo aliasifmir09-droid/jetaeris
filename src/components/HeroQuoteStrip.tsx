@@ -24,6 +24,7 @@ export function HeroQuoteStrip() {
     <form
       onSubmit={onSubmit}
       className="hero-quote-strip grid gap-3 border border-white/15 bg-black/35 p-4 backdrop-blur-md md:grid-cols-[1.1fr_1.1fr_1fr_0.7fr_auto] md:items-end md:p-5"
+      data-hero-quote="true"
     >
       <div className="field-dark">
         <label htmlFor="hero-from">Origin</label>

@@ -5,7 +5,7 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Request a flight",
+  title: "Request a quote",
   description:
     "Staged USA private jet charter quote with JetAeris—trip basics, preferences, contact, and review. Optional FBO limo.",
   alternates: { canonical: "/quote" },
