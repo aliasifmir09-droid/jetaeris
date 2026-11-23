@@ -20,7 +20,7 @@ export default function LimoIndexPage() {
         title="Limo & black-car service timed to your FBO."
         body="The flight is only the middle. JetAeris coordinates executive sedans, SUVs, sprinters, and stretch limos in top USA cities—so wheels-down becomes front-door without the scramble."
         primaryHref="/quote"
-        primaryLabel="Book flight + limo"
+        primaryLabel="Request flight + limo"
         secondaryHref="/guides/private-jet-limo-transfer"
         secondaryLabel="How it works"
       />

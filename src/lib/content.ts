@@ -19,6 +19,13 @@ export type Route = {
   airports: string;
   blockTime: string;
   bestFit: string;
+  /** Date-stamped one-way estimate bands — not a live quote. */
+  priceEstimate: {
+    light: string;
+    midsize: string;
+    assumptions: string;
+    updated: string;
+  };
   summary: string;
   faqs: { q: string; a: string }[];
   details: string[];
@@ -415,6 +422,42 @@ function cityBySlug(slug: string) {
   return cities.find((c) => c.slug === slug);
 }
 
+function priceBandsFor(slug: string, blockTime: string) {
+  const coast =
+    slug.includes("los-angeles-new-york") ||
+    slug.includes("new-york-los-angeles") ||
+    slug.includes("san-francisco-new-york") ||
+    slug.includes("new-york-san-francisco");
+  const short =
+    slug.includes("las-vegas") ||
+    slug.includes("boston-new-york") ||
+    slug.includes("washington-new-york") ||
+    slug.includes("san-diego-las-vegas");
+  const mountain = slug.includes("aspen");
+
+  const light = coast
+    ? "$28,000–$45,000"
+    : short
+      ? "$8,000–$16,000"
+      : mountain
+        ? "$14,000–$28,000"
+        : "$12,000–$24,000";
+  const midsize = coast
+    ? "$45,000–$75,000"
+    : short
+      ? "$14,000–$26,000"
+      : mountain
+        ? "$22,000–$42,000"
+        : "$18,000–$36,000";
+
+  return {
+    light,
+    midsize,
+    assumptions: `One-way estimate for ~2–6 passengers, ${blockTime.toLowerCase()} block, weekday/off-peak. Excludes peak-date premiums, heavy positioning, de-icing, international fees, catering upgrades, and ground transfers. Actual quotes vary; amounts are not live inventory prices.`,
+    updated: "November 23, 2026",
+  };
+}
+
 function buildRoute(fromSlug: string, toSlug: string): Route | null {
   const from = cityBySlug(fromSlug);
   const to = cityBySlug(toSlug);
@@ -428,6 +471,7 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
       : slug.includes("aspen")
         ? "Mountain-capable midsize / super-midsize"
         : "Light to midsize jet for most parties";
+  const priceEstimate = priceBandsFor(slug, blockTime);
 
   return {
     slug,
@@ -438,11 +482,16 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
     airports,
     blockTime,
     bestFit,
-    summary: `Private jet charter from ${from.name} to ${to.name}—airports, timing, aircraft fit, and a direct JetAeris quote path for USA travelers.`,
+    priceEstimate,
+    summary: `Private jet charter from ${from.name} to ${to.name}—airports, timing, aircraft fit, estimate ranges, and a JetAeris quote request path for USA travelers.`,
     faqs: [
       {
         q: `How long is a private jet from ${from.name} to ${to.name}?`,
         a: `Block time is typically ${blockTime.toLowerCase()}. Door-to-door time depends on FBO choice and ground transfers.`,
+      },
+      {
+        q: `How much does a private jet from ${from.name} to ${to.name} cost?`,
+        a: `Indicative one-way ranges (updated ${priceEstimate.updated}): light jet about ${priceEstimate.light}; midsize about ${priceEstimate.midsize}. ${priceEstimate.assumptions}`,
       },
       {
         q: `Which airports are used for ${from.name}–${to.name}?`,
@@ -454,7 +503,7 @@ function buildRoute(fromSlug: string, toSlug: string): Route | null {
       },
     ],
     details: [
-      `This corridor connects ${from.name}, ${from.state} with ${to.name}, ${to.state}—one of the practical USA pairs travelers actually book.`,
+      `This corridor connects ${from.name}, ${from.state} with ${to.name}, ${to.state}—a practical USA pair travelers request frequently.`,
       `Aircraft selection starts with passenger count, bags, pets, and whether you need nonstop range for weather or routing.`,
       `Peak dates, one-way positioning, and airport fees can move price more than the headline hourly rate.`,
       `Empty-leg potential exists when operators already need to reposition between these regions—note flexibility on your request.`,
@@ -801,20 +850,77 @@ export const guides: Guide[] = [
   ...routes.map(guideFromRoute),
 ];
 
+/** Verified common names for private-aviation marketing — expand carefully. */
+const airportNames: Record<string, string> = {
+  TEB: "Teterboro Airport",
+  HPN: "Westchester County Airport",
+  JFK: "John F. Kennedy International Airport",
+  EWR: "Newark Liberty International Airport",
+  OPF: "Miami-Opa Locka Executive Airport",
+  MIA: "Miami International Airport",
+  FLL: "Fort Lauderdale-Hollywood International Airport",
+  PBI: "Palm Beach International Airport",
+  VNY: "Van Nuys Airport",
+  LAX: "Los Angeles International Airport",
+  BUR: "Hollywood Burbank Airport",
+  SNA: "John Wayne Airport",
+  LAS: "Harry Reid International Airport",
+  VGT: "North Las Vegas Airport",
+  MDW: "Chicago Midway International Airport",
+  PWK: "Chicago Executive Airport",
+  ORD: "O'Hare International Airport",
+  DAL: "Dallas Love Field",
+  ADS: "Addison Airport",
+  ASE: "Aspen/Pitkin County Airport",
+  DEN: "Denver International Airport",
+  APA: "Centennial Airport",
+  BOS: "Boston Logan International Airport",
+  BED: "Hanscom Field",
+  IAD: "Washington Dulles International Airport",
+  DCA: "Ronald Reagan Washington National Airport",
+  ATL: "Hartsfield-Jackson Atlanta International Airport",
+  PDK: "Dekalb-Peachtree Airport",
+  HOU: "William P. Hobby Airport",
+  IAH: "George Bush Intercontinental Airport",
+  SFO: "San Francisco International Airport",
+  SQL: "San Carlos Airport",
+  SEA: "Seattle-Tacoma International Airport",
+  BFI: "Boeing Field",
+  PHX: "Phoenix Sky Harbor International Airport",
+  SDL: "Scottsdale Airport",
+  AUS: "Austin-Bergstrom International Airport",
+  BNA: "Nashville International Airport",
+  CLT: "Charlotte Douglas International Airport",
+  MSP: "Minneapolis–Saint Paul International Airport",
+  DTW: "Detroit Metropolitan Wayne County Airport",
+  SLC: "Salt Lake City International Airport",
+  SAN: "San Diego International Airport",
+  MYF: "Montgomery-Gibbs Executive Airport",
+  TPA: "Tampa International Airport",
+  MCO: "Orlando International Airport",
+  SFB: "Orlando Sanford International Airport",
+};
+
 export const airports: Airport[] = cities.flatMap((city) =>
-  city.airports.map((code) => ({
-    code,
-    name: `${code} Airport`,
-    citySlug: city.slug,
-    cityName: city.name,
-    note: `Private aviation gateway serving ${city.name}, ${city.state}.`,
-    details: [
-      `${code} is commonly used for private jet access to ${city.name}. Exact FBO options depend on the operating carrier and aircraft.`,
-      `JetAeris coordinates flight arrangements and can add limo or black-car transfer timed to your ${code} arrival or departure.`,
-      `Drive times to ${city.neighborhoods.slice(0, 3).join(", ")} vary by traffic—share your ground address so we pick the smarter airport when alternatives exist.`,
-      `For international arrivals, customs and landing rights must be confirmed on the itinerary—never assumed from a marketing page.`,
-    ],
-  })),
+  city.airports.map((code) => {
+    const fullName = airportNames[code] ?? `${code} Airport`;
+    const alts = city.airports.filter((c) => c !== code).slice(0, 3);
+    return {
+      code,
+      name: fullName,
+      citySlug: city.slug,
+      cityName: city.name,
+      note: `${fullName} (${code}) is a private-aviation access point for ${city.name}, ${city.state}. JetAeris arranges Part 135 charter and optional FBO limo—not airport ownership or FBO operations.`,
+      details: [
+        `${fullName} (${code}) is commonly requested for private jet access to ${city.name}. Exact FBO choice, ramp fees, and operating hours depend on the operating carrier, aircraft, and day of travel—verify on the itinerary.`,
+        `Nearby private alternatives for ${city.name} often include ${alts.join(", ") || "other regional fields"}. Share your ground address so the desk can recommend the smarter airport for drive time and runway fit.`,
+        `Typical ground corridors from ${code} include ${city.neighborhoods.slice(0, 3).join(", ")}. Traffic and event days can change door-to-door timing more than block time.`,
+        `JetAeris can coordinate the flight request and add limo or black-car transfer timed to your ${code} arrival or departure.`,
+        `For international arrivals, customs, landing rights, and handler arrangements must be confirmed on the itinerary—never assumed from a marketing page.`,
+        `Facts on this page are reviewed for general private-aviation use. Hours, FBOs, and runway constraints change—treat operational details as subject to confirmation.`,
+      ],
+    };
+  }),
 );
 
 export const limoCities: LimoCity[] = cities

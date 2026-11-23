@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -9,6 +10,9 @@ type Props = {
   secondaryHref?: string;
   secondaryLabel?: string;
   dark?: boolean;
+  /** Optional edge-to-edge hero image for deep pages */
+  imageSrc?: string;
+  imageAlt?: string;
 };
 
 export function PageHero({
@@ -16,21 +20,49 @@ export function PageHero({
   title,
   body,
   primaryHref = "/quote",
-  primaryLabel = "Request a flight",
+  primaryLabel = "Request a quote",
   secondaryHref,
   secondaryLabel,
   dark = false,
+  imageSrc,
+  imageAlt = "",
 }: Props) {
+  const withImage = Boolean(imageSrc);
+
   return (
     <section
       className={`relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24 ${
-        dark ? "bg-[var(--section-dark)] text-white" : "page-hero-wash text-ink"
+        withImage || dark
+          ? "bg-[var(--section-dark)] text-white"
+          : "page-hero-wash text-ink"
       }`}
     >
-      <div className="atmosphere" aria-hidden />
+      {imageSrc ? (
+        <>
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            priority
+            className="object-cover opacity-45"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "var(--hero-veil)" }}
+            aria-hidden
+          />
+        </>
+      ) : (
+        <div className="atmosphere" aria-hidden />
+      )}
       <div className="container relative">
         {eyebrow ? (
-          <p className={`eyebrow ${dark ? "text-[var(--accent-soft)]" : ""}`}>
+          <p
+            className={`eyebrow ${
+              withImage || dark ? "text-[var(--accent-soft)]" : ""
+            }`}
+          >
             {eyebrow}
           </p>
         ) : null}
@@ -39,7 +71,9 @@ export function PageHero({
         </h1>
         {body ? (
           <p
-            className={`lede mt-6 max-w-2xl ${dark ? "text-white/70" : ""}`}
+            className={`lede mt-6 max-w-2xl ${
+              withImage || dark ? "!text-white/88" : ""
+            }`}
           >
             {body}
           </p>
@@ -47,14 +81,14 @@ export function PageHero({
         <div className="mt-10 flex flex-wrap gap-3">
           <Link
             href={primaryHref}
-            className={`btn ${dark ? "btn-light" : "btn-primary"}`}
+            className={`btn ${withImage || dark ? "btn-light" : "btn-primary"}`}
           >
             {primaryLabel}
           </Link>
           {secondaryHref && secondaryLabel ? (
             <Link
               href={secondaryHref}
-              className={`btn ${dark ? "btn-ghost" : "btn-line"}`}
+              className={`btn ${withImage || dark ? "btn-ghost" : "btn-line"}`}
             >
               {secondaryLabel}
             </Link>

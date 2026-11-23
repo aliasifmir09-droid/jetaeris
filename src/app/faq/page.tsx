@@ -61,7 +61,7 @@ export default function FaqPage() {
 
         <div className="container mt-12 flex flex-wrap gap-3">
           <Link href="/quote" className="btn btn-primary">
-            Request a flight
+            Request a quote
           </Link>
           <Link href="/guides" className="btn btn-line">
             Read guides

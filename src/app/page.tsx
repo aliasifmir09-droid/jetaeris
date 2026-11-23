@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
+import { HeroQuoteStrip } from "@/components/HeroQuoteStrip";
 import { SectionHeading } from "@/components/SectionHeading";
 import { aircraft, guides, limoCities, routes } from "@/lib/content";
 import { faqItems } from "@/lib/faq";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
 export default function HomePage() {
-  const rail = [...routes, ...routes].map((r) => `${r.from} → ${r.to}`);
+  const railItems = routes.slice(0, 12).map((r) => `${r.from} → ${r.to}`);
+  const rail = [...railItems, ...railItems];
 
   return (
     <>
@@ -27,28 +29,33 @@ export default function HomePage() {
         />
         <div className="atmosphere-dark opacity-80" aria-hidden />
 
-        <div className="container relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20">
-          <p className="display reveal text-[clamp(3.2rem,10vw,7.5rem)] text-white">
+        <div className="container relative flex min-h-[100svh] flex-col justify-end pb-10 pt-28 md:pb-16 md:pt-32">
+          <p className="display reveal text-[clamp(2.8rem,8vw,6.2rem)] text-white">
             {site.name}
           </p>
-          <h1 className="serif reveal reveal-delay-1 mt-5 max-w-3xl text-[clamp(1.55rem,3.2vw,2.35rem)] text-white/90">
-            Private flight for the United States—arranged like a flagship desk.
+          <h1 className="serif reveal reveal-delay-1 mt-4 max-w-3xl text-[clamp(1.45rem,3vw,2.2rem)] text-white/90">
+            {site.tagline}.
           </h1>
-          <p className="reveal reveal-delay-2 mt-5 max-w-xl text-[1.05rem] leading-8 text-white/72">
-            On-demand charter and empty legs. Trip-first quoting. Vetted Part 135
-            partners. Response measured in minutes—not membership theater.
+          <p className="reveal reveal-delay-2 mt-4 max-w-xl text-[1.02rem] leading-8 text-white/70">
+            On-demand USA charter and empty legs through vetted Part 135
+            carriers. Itinerary-first quoting. Optional FBO ground transfer.
           </p>
-          <div className="reveal reveal-delay-3 mt-10 flex flex-wrap gap-3">
-            <Link href="/quote" className="btn btn-light">
-              Request a flight
-            </Link>
+
+          <div className="reveal reveal-delay-3 mt-8 max-w-5xl">
+            <HeroQuoteStrip />
+          </div>
+
+          <div className="reveal reveal-delay-3 mt-5 flex flex-wrap gap-3">
             <Link href="/empty-legs" className="btn btn-ghost">
-              View empty legs
+              Live empty legs
+            </Link>
+            <Link href="/how-it-works" className="btn btn-ghost">
+              How we arrange flights
             </Link>
           </div>
         </div>
 
-        <div className="relative border-t border-white/10 bg-black/25 py-4 backdrop-blur-sm">
+        <div className="relative border-t border-white/10 bg-black/30 py-4 backdrop-blur-sm">
           <div className="route-rail">
             <div className="route-rail-track">
               {rail.map((item, i) => (
@@ -59,26 +66,64 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-[var(--line)] bg-white/40 py-8">
+        <div className="container grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Response", site.responsePromise],
+            ["Role", site.role],
+            [
+              "Safety review",
+              "Part 135 certificate status checked before options are presented.",
+            ],
+            ["Desk", site.deskHours],
+          ].map(([label, body]) => (
+            <div key={label}>
+              <p className="text-[0.68rem] tracking-[0.18em] text-accent uppercase">
+                {label}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-ink-soft">{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="border-b border-[var(--line)] py-20 md:py-28">
-        <div className="container grid items-end gap-12 lg:grid-cols-[1.25fr_0.75fr]">
+        <div className="container">
           <SectionHeading
-            eyebrow="Why JetAeris"
-            title="Quiet luxury. Serious operations. No broker clutter."
-            body="We studied how NetJets leads with confidence, how VistaJet separates the trip from the relationship, and how top brokers start with itinerary fields. JetAeris is that synthesis for USA travelers."
+            eyebrow="How we operate"
+            title="Broker transparency before you pay."
+            body={`${site.legalName} is an air charter broker and arranging agent. Flights are operated by licensed Part 135 direct air carriers. The operating carrier is identified before payment or confirmation.`}
           />
-          <div className="stat-grid">
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
             {[
-              ["15 min", "Typical first response in desk hours"],
-              ["USA", "City pairs, FBOs, and empty-leg watches"],
-              ["Vetted", "Part 135 partners · safety-first"],
-            ].map(([k, v]) => (
-              <div key={k} className="panel p-5">
-                <p className="font-[family-name:var(--font-display)] text-2xl text-ink">
-                  {k}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-muted">{v}</p>
+              [
+                "01 · Request",
+                "Share origin, destination, date, and passengers. We return curated options—not fake live inventory.",
+              ],
+              [
+                "02 · Compare",
+                "Aircraft class, timing, price range, and operator confirmation status—clearly labeled.",
+              ],
+              [
+                "03 · Confirm",
+                "You see the operating carrier, cancellation terms, and itinerary before funds are committed.",
+              ],
+            ].map(([title, body]) => (
+              <div key={title} className="border-t border-[var(--line)] pt-6">
+                <h3 className="font-[family-name:var(--font-display)] text-lg text-ink">
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted">{body}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/safety" className="btn btn-line">
+              Safety & carrier verification
+            </Link>
+            <Link href="/broker-disclosure" className="btn btn-line">
+              Broker disclosure
+            </Link>
           </div>
         </div>
       </section>
@@ -88,9 +133,9 @@ export default function HomePage() {
         <div className="container relative">
           <SectionHeading
             light
-            eyebrow="Featured routes"
-            title="Own the corridor—not a vague homepage claim."
-            body="Big brands under-invest in route pages. Each corridor below is a product: airports, timing, aircraft fit, and a direct quote path."
+            eyebrow="Featured corridors"
+            title="Route pages built like products."
+            body="Airports, block time, aircraft fit, and a direct quote path—not a generic luxury landing page."
           />
           <div className="mt-14 grid gap-0 border-t border-white/12 md:grid-cols-2">
             {routes.slice(0, 6).map((route) => (
@@ -123,30 +168,29 @@ export default function HomePage() {
       <section className="py-20 md:py-28">
         <div className="container">
           <SectionHeading
-            eyebrow="Cities"
-            title="Charter where American private aviation actually flies."
-            body="Dedicated city pages for SEO and for sales—airports, corridors, and a clear request path."
+            eyebrow="Fleet by mission"
+            title="The right cabin for the trip."
+            body="Short regional hops, coast-to-coast business travel, and group charters—class first, then a confirmed tail."
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredCities.map((city) => (
-              <Link
-                key={city.href}
-                href={city.href}
-                className="panel group p-6 transition-transform hover:-translate-y-0.5"
+          <ul className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {aircraftClasses.map((item) => (
+              <li
+                key={item.name}
+                className="grid gap-2 py-5 md:grid-cols-[160px_1fr_auto] md:items-center"
               >
-                <h3 className="font-[family-name:var(--font-display)] text-xl text-ink">
-                  {city.name}
-                </h3>
-                <p className="mt-3 text-sm text-muted">{city.airports}</p>
-                <p className="mt-6 text-xs tracking-[0.14em] text-accent uppercase">
-                  View city →
+                <p className="font-semibold text-ink">{item.name}</p>
+                <p className="text-sm text-muted">
+                  {item.seats} seats · {item.bestFor}
                 </p>
-              </Link>
+                <Link
+                  href={item.href}
+                  className="text-xs tracking-[0.14em] text-accent uppercase"
+                >
+                  Details
+                </Link>
+              </li>
             ))}
-          </div>
-          <Link href="/charter" className="btn btn-line mt-10">
-            All cities
-          </Link>
+          </ul>
         </div>
       </section>
 
@@ -163,26 +207,27 @@ export default function HomePage() {
           </div>
           <div>
             <SectionHeading
-              eyebrow="Aircraft"
-              title="The right cabin for the trip—confirmed before you fly."
-              body="Ordinary sites drown you in specs. We present classes the way flagship brands do: purpose first, then the conversation."
+              eyebrow="Cities & FBOs"
+              title="Charter where American private aviation actually flies."
+              body="City hubs link airports, corridors, aircraft classes, and limo service—built for search and for sales."
             />
-            <ul className="mt-10 divide-y divide-[var(--line)] border-y border-[var(--line)]">
-              {aircraftClasses.map((item) => (
-                <li key={item.name} className="grid gap-2 py-5 md:grid-cols-[150px_1fr_auto] md:items-center">
-                  <p className="font-semibold text-ink">{item.name}</p>
-                  <p className="text-sm text-muted">
-                    {item.seats} seats · {item.bestFor}
-                  </p>
-                  <Link
-                    href={item.href}
-                    className="text-xs tracking-[0.14em] text-accent uppercase"
-                  >
-                    Details
-                  </Link>
-                </li>
+            <div className="mt-10 grid gap-3 sm:grid-cols-2">
+              {featuredCities.map((city) => (
+                <Link
+                  key={city.href}
+                  href={city.href}
+                  className="border border-[var(--line)] bg-white/50 px-4 py-4 transition-colors hover:border-[var(--line-strong)]"
+                >
+                  <h3 className="font-[family-name:var(--font-display)] text-lg text-ink">
+                    {city.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-muted">{city.airports}</p>
+                </Link>
               ))}
-            </ul>
+            </div>
+            <Link href="/charter" className="btn btn-line mt-8">
+              All cities
+            </Link>
           </div>
         </div>
       </section>
@@ -193,8 +238,8 @@ export default function HomePage() {
           <SectionHeading
             light
             eyebrow="Limo & ground"
-            title="FBO limousine service in America’s top cities."
-            body="Book the jet and the car together. Sedans, SUVs, sprinters, and stretch limos timed to wheels-down—not a random airport curb."
+            title="FBO limousine service timed to wheels-down."
+            body="Sedans, SUVs, sprinters, and stretch limos in major U.S. cities—booked with the jet when you want one arrival."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {limoCities.slice(0, 8).map((city) => (
@@ -220,7 +265,7 @@ export default function HomePage() {
               All limo cities
             </Link>
             <Link href="/quote?limo=1" className="btn btn-ghost">
-              Book flight + limo
+              Request flight + limo
             </Link>
           </div>
         </div>
@@ -230,15 +275,15 @@ export default function HomePage() {
         <div className="container">
           <SectionHeading
             eyebrow="Guides"
-            title="SEO pages that answer money questions."
-            body="Cost guides for major corridors, empty legs, limo transfers, and how-to charter—written to rank and convert."
+            title="Answers that earn trust—and rankings."
+            body="Cost, empty legs, Part 135 vs commercial, baggage, pets, and booking timing—reviewed by the aviation desk."
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {guides.slice(0, 6).map((guide) => (
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="panel p-8 transition-transform hover:-translate-y-0.5"
+                className="border border-[var(--line)] bg-white/40 p-8 transition-colors hover:border-[var(--line-strong)]"
               >
                 <p className="eyebrow">Guide</p>
                 <h3 className="serif mt-4 text-2xl text-ink md:text-3xl">
@@ -275,11 +320,14 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Q&A"
             title="Questions travelers ask before they request a flight."
-            body="Expanded answers live on our FAQ—structured for people and for rich results in search."
+            body="Expanded answers live on our FAQ—structured for people and for search."
           />
           <div className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {faqItems.slice(0, 6).map((item) => (
-              <div key={item.q} className="grid gap-3 py-7 md:grid-cols-[1fr_1.2fr]">
+              <div
+                key={item.q}
+                className="grid gap-3 py-7 md:grid-cols-[1fr_1.2fr]"
+              >
                 <h3 className="text-lg font-semibold text-ink">{item.q}</h3>
                 <p className="text-[1.02rem] leading-7 text-muted">{item.a}</p>
               </div>
