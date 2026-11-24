@@ -4,14 +4,14 @@ import {
   aircraft,
   airports,
   cities,
-  guides,
   limoCities,
   routes,
 } from "@/lib/content";
+import { GUIDE_CATEGORIES, guides } from "@/lib/guides-catalog";
 import { site } from "@/lib/site";
 
 /** Real content refresh stamp for lastmod — update when major content ships. */
-const CONTENT_UPDATED = new Date("2026-11-23T19:00:00.000Z");
+const CONTENT_UPDATED = new Date("2026-11-24T04:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
@@ -70,6 +70,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED,
       changeFrequency: "monthly" as const,
       priority: 0.85,
+    })),
+    ...GUIDE_CATEGORIES.map((c) => ({
+      url: `${site.url}/guides/topics/${c.id}`,
+      lastModified: CONTENT_UPDATED,
+      changeFrequency: "weekly" as const,
+      priority: 0.88,
     })),
     ...guides.map((g) => ({
       url: `${site.url}/guides/${g.slug}`,

@@ -53,7 +53,20 @@ export type Guide = {
   slug: string;
   title: string;
   description: string;
-  sections: { heading: string; body: string }[];
+  sections: { heading: string; body: string; bullets?: string[] }[];
+  /** Browseable topic for hub pages + internal linking (Google site structure). */
+  category?:
+    | "cost"
+    | "how-to"
+    | "empty-legs"
+    | "airports"
+    | "aircraft"
+    | "routes"
+    | "traveler"
+    | "safety";
+  faqs?: { q: string; a: string }[];
+  related?: { href: string; label: string }[];
+  updated?: string;
 };
 
 export type Airport = {
