@@ -376,6 +376,15 @@ img {
 }
 
 /* —— Jesko scroll story —— */
+.jesko-hero .btn-ghost {
+  border-color: rgba(244, 239, 230, 0.35);
+  color: #f4efe6;
+}
+
+.jesko-hero .btn-ghost:hover {
+  background: rgba(244, 239, 230, 0.1);
+}
+
 .jesko-globe {
   background:
     radial-gradient(circle at 32% 28%, rgba(212, 175, 122, 0.35), transparent 42%),

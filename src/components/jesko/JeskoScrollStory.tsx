@@ -12,12 +12,8 @@ type Props = {
 };
 
 /**
- * Scroll story matching the Jesko Jets / YouTube reference structure:
- * 1) Cabin window → zoom into clouds
- * 2) Headline clears from blur
- * 3) Black jet rolls up over copy with shadow
- * 4) Fade to seat blueprint
- * 5) Globe / limitless beat → quote
+ * Homepage: conversion hero first (message + CTA visible at load),
+ * then Jesko-style scroll cinema. Animation never hides the core pitch.
  */
 export function JeskoScrollStory({ rail }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -40,42 +36,38 @@ export function JeskoScrollStory({ rail }: Props) {
       if (!root) return;
 
       ctx = gsap.context(() => {
-        // —— Scene 1: window zoom into sky ——
-        const windowScene = root.querySelector<HTMLElement>("[data-scene='window']");
-        const windowFrame = root.querySelector<HTMLElement>("[data-window-frame]");
-        const windowSky = root.querySelector<HTMLElement>("[data-window-sky]");
-        const windowCopy = root.querySelectorAll("[data-window-copy]");
+        // —— Hero: subtle image drift only; copy stays readable ——
+        const heroScene = root.querySelector<HTMLElement>("[data-scene='hero']");
+        const heroSky = root.querySelector<HTMLElement>("[data-hero-sky]");
+        const heroCopy = root.querySelectorAll("[data-hero-copy]");
 
-        if (windowScene && windowFrame && windowSky) {
-          const tl = gsap.timeline({
+        if (heroScene && heroSky) {
+          gsap.set(heroCopy, { autoAlpha: 1, y: 0, clearProps: "filter" });
+          gsap.fromTo(
+            heroSky,
+            { scale: 1.04 },
+            {
+              scale: 1.14,
+              ease: "none",
+              scrollTrigger: {
+                trigger: heroScene,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+          gsap.to(heroCopy, {
+            y: -18,
+            opacity: 0.92,
+            ease: "none",
             scrollTrigger: {
-              trigger: windowScene,
+              trigger: heroScene,
               start: "top top",
-              end: "+=180%",
-              scrub: 1,
-              pin: true,
-              anticipatePin: 1,
+              end: "70% top",
+              scrub: true,
             },
           });
-          tl.fromTo(
-            windowFrame,
-            { scale: 1, borderRadius: "42% / 48%" },
-            { scale: 3.4, borderRadius: "0%", ease: "none" },
-            0,
-          )
-            .fromTo(
-              windowSky,
-              { scale: 1.05 },
-              { scale: 1.25, ease: "none" },
-              0,
-            )
-            .fromTo(
-              windowCopy,
-              { autoAlpha: 0, y: 40, filter: "blur(14px)" },
-              { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.08, ease: "none" },
-              0.25,
-            )
-            .to(windowCopy, { autoAlpha: 0, y: -30, filter: "blur(8px)", ease: "none" }, 0.72);
         }
 
         // —— Scene 2: jet rises over manifesto text ——
@@ -166,51 +158,64 @@ export function JeskoScrollStory({ rail }: Props) {
 
   return (
     <div ref={rootRef} className="jesko-story bg-[#0a0a0a] text-[#f4efe6]">
-      {/* SCENE 1 — cabin window */}
+      {/* HERO — message + CTA visible immediately; cinema continues below */}
       <section
-        data-scene="window"
-        className="relative h-[100svh] overflow-hidden bg-[#0a0a0a]"
+        data-scene="hero"
+        className="jesko-hero relative min-h-[100svh] overflow-hidden bg-[#05080c]"
       >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div
-            data-window-frame
-            className="relative h-[min(72vh,640px)] w-[min(92vw,520px)] overflow-hidden rounded-[42%/48%] border-[10px] border-[#2a241c] shadow-[0_0_0_1px_rgba(212,175,122,0.35),0_40px_100px_rgba(0,0,0,0.65)] will-change-transform"
-          >
-            <div data-window-sky className="absolute inset-0 will-change-transform">
-              <Image
-                src="/media/cabin-window-uhd.jpg"
-                alt=""
-                fill
-                priority
-                quality={95}
-                sizes="100vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.45)_100%)]" />
-          </div>
+        <div data-hero-sky className="absolute inset-0 will-change-transform">
+          <Image
+            src="/media/cabin-window-uhd.jpg"
+            alt="View from a private jet above the clouds at sunset"
+            fill
+            priority
+            quality={95}
+            sizes="100vw"
+            className="object-cover object-[52%_40%]"
+          />
         </div>
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(5,8,12,0.88) 0%, rgba(5,8,12,0.62) 34%, rgba(5,8,12,0.18) 70%, rgba(5,8,12,0.06) 100%), linear-gradient(0deg, rgba(5,8,12,0.78) 0%, rgba(5,8,12,0.2) 42%, transparent 68%)",
+          }}
+        />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black via-black/50 to-transparent pb-16 pt-32">
-          <div className="container">
+        <div className="container relative z-10 flex min-h-[100svh] flex-col justify-end pb-24 pt-36 md:pb-28 md:pt-40">
+          <div className="max-w-2xl">
             <p
-              data-window-copy
-              className="display text-[clamp(2.6rem,7vw,5.5rem)] text-[#f4efe6]"
+              data-hero-copy
+              className="mb-5 text-[0.7rem] tracking-[0.24em] text-[#d4af7a] uppercase"
             >
-              {site.name}
+              Private aviation in the United States
             </p>
-            <p
-              data-window-copy
-              className="serif mt-3 max-w-xl text-[clamp(1.2rem,2.4vw,1.85rem)] text-[#d4af7a]"
+            <h1
+              data-hero-copy
+              className="display text-[clamp(2.4rem,6vw,4.6rem)] leading-[0.95] text-[#f4efe6]"
             >
-              {site.tagline}.
+              Private charter,
+              <br />
+              precisely arranged.
+            </h1>
+            <p
+              data-hero-copy
+              className="mt-6 max-w-xl text-[1.05rem] leading-8 text-white/75 md:text-lg"
+            >
+              Vetted aircraft, clear options, and a responsive aviation desk for
+              travel across the United States.
             </p>
-            <p
-              data-window-copy
-              className="mt-4 max-w-lg text-sm leading-7 text-white/65"
-            >
-              Private aviation arranged with precision—vetted Part 135 carriers,
-              clear options, bookings from {site.bookingOpensLabel}.
+            <div data-hero-copy className="mt-8 flex flex-wrap gap-3">
+              <Link href="/quote" className="btn btn-light">
+                Request a private quote
+              </Link>
+              <Link href="/routes" className="btn btn-ghost">
+                Explore routes
+              </Link>
+            </div>
+            <p data-hero-copy className="mt-5 text-sm text-white/55">
+              Quotes open now · Confirmed bookings begin {site.bookingOpensLabel}
             </p>
           </div>
         </div>
@@ -254,7 +259,6 @@ export function JeskoScrollStory({ rail }: Props) {
             filter: "drop-shadow(0 40px 50px rgba(0,0,0,0.85))",
           }}
         >
-          {/* Cloud-free cutout — full airframe visible */}
           <Image
             src="/media/jet-cutout-uhd.png"
             alt="Private jet"
@@ -357,7 +361,7 @@ export function JeskoScrollStory({ rail }: Props) {
         </div>
       </section>
 
-      {/* SCENE 5 — quote conversion (always visible, not cinema-gated) */}
+      {/* SCENE 5 — quote conversion */}
       <section className="relative bg-[#0a0a0a] py-20 md:py-28">
         <div className="container">
           <p className="text-[0.7rem] tracking-[0.22em] text-[#d4af7a] uppercase">
