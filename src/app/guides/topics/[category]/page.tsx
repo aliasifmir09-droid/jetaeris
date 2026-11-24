@@ -6,7 +6,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
 import {
   GUIDE_CATEGORIES,
-  guidesByCategory,
+  guidesByCategoryIndexable,
   type GuideCategoryId,
 } from "@/lib/guides-catalog";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   const meta = GUIDE_CATEGORIES.find((c) => c.id === category);
   if (!meta) return {};
-  const list = guidesByCategory(category as GuideCategoryId);
+  const list = guidesByCategoryIndexable(category as GuideCategoryId);
   return {
     title: `${meta.label} — private jet guides`,
     description: `${meta.blurb} ${list.length} JetAeris guides in this topic.`,
@@ -32,14 +32,14 @@ export default async function GuideTopicPage({ params }: Props) {
   const { category } = await params;
   const meta = GUIDE_CATEGORIES.find((c) => c.id === category);
   if (!meta) notFound();
-  const list = guidesByCategory(meta.id);
+  const list = guidesByCategoryIndexable(meta.id);
 
   return (
     <>
       <PageHero
         eyebrow="Guide topic"
         title={meta.label}
-        body={`${meta.blurb} ${list.length} pages with unique airports, routes, or aircraft facts—linked for crawlability.`}
+        body={`${meta.blurb} ${list.length} indexable pages with unique airports, routes, or aircraft facts.`}
         secondaryHref="/guides"
         secondaryLabel="All guide topics"
       />

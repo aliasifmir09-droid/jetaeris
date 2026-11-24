@@ -67,6 +67,11 @@ export type Guide = {
   faqs?: { q: string; a: string }[];
   related?: { href: string; label: string }[];
   updated?: string;
+  /**
+   * Scaled / template-generated page. Live for UX, but quality-first SEO
+   * noindexes these until each page is uniquely researched.
+   */
+  scaled?: boolean;
 };
 
 export type Airport = {
@@ -684,6 +689,8 @@ function guideFromRoute(route: Route): Guide {
     slug: `private-jet-cost-${route.slug}`,
     title: `Private jet cost: ${route.from} to ${route.to}`,
     description: `What drives private jet pricing from ${route.from} to ${route.to}, which aircraft fit, and how empty legs or limo transfers change the trip.`,
+    /** Duplicate of /routes/[slug] economics — keep for UX, do not index. */
+    scaled: true,
     sections: [
       {
         heading: "Pricing is trip-specific",

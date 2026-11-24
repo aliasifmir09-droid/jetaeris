@@ -1,5 +1,6 @@
 import { aircraft, cities, routes, type Aircraft, type City, type Route } from "@/lib/content";
 import type { BlogPost } from "@/lib/blog-types";
+import { isIndexableBlogPost } from "@/lib/seo-index";
 import { site } from "@/lib/site";
 import { isTopCity, TOP_CITY_SLUGS } from "@/lib/top-cities-seo";
 import { generateTopCityTopicPosts } from "@/lib/top-city-topics";
@@ -533,6 +534,9 @@ export const topCityTopicCount = topCityDeepPosts.length;
 
 export const blogPillars = blogPosts.filter((p) => p.wave === "pillar");
 
+/** Posts Google should index in the quality-first phase. */
+export const indexableBlogPosts = blogPosts.filter(isIndexableBlogPost);
+
 export function getBlogPost(slug: string) {
   return blogPosts.find((p) => p.slug === slug);
 }
@@ -540,7 +544,8 @@ export function getBlogPost(slug: string) {
 export function relatedBlogPosts(slug: string, limit = 3) {
   const current = getBlogPost(slug);
   if (!current) return blogPillars.slice(0, limit);
-  const scored = blogPosts.filter((p) => p.slug !== slug);
+  // Prefer indexable pages for internal PageRank flow
+  const scored = indexableBlogPosts.filter((p) => p.slug !== slug);
   const sameWave = scored.filter((p) => p.wave === current.wave);
   const sameCategory = scored.filter((p) => p.category === current.category);
   const merged = [...sameCategory, ...sameWave, ...scored];
