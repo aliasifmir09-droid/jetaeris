@@ -135,9 +135,9 @@ export function SearchableList({
           ref={listRef}
           id={listId}
           role="listbox"
-          className={`absolute inset-x-0 ${panelPos} z-[60] max-h-64 overflow-auto border shadow-[0_18px_40px_rgba(0,0,0,0.28)] ${
+          className={`absolute left-0 ${panelPos} z-[60] max-h-64 min-w-full w-max max-w-[min(28rem,90vw)] overflow-auto border shadow-[0_18px_40px_rgba(0,0,0,0.28)] [scrollbar-width:thin] ${
             dark
-              ? "border-white/20 bg-[#0a101c] text-white"
+              ? "border-white/20 bg-[#0a101c] text-white [scrollbar-color:rgba(255,255,255,0.35)_transparent]"
               : "border-[var(--line-strong)] bg-white text-ink"
           }`}
         >
@@ -192,7 +192,7 @@ export function SearchableList({
       ) : null}
       {open && query.trim() && options.length === 0 ? (
         <div
-          className={`absolute inset-x-0 ${panelPos} z-[60] border px-3 py-3 text-sm ${
+          className={`absolute left-0 ${panelPos} z-[60] min-w-full w-max max-w-[min(28rem,90vw)] border px-3 py-3 text-sm ${
             dark
               ? "border-white/20 bg-[#0a101c] text-white/70"
               : "border-[var(--line-strong)] bg-white text-muted"
