@@ -13,6 +13,14 @@ export const site = {
     "JetAeris will start taking bookings from 1 April 2027. Request a quote today—confirmations open on that date.",
   /** Honest product promise — broker-led inquiry, not instant marketplace booking. */
   productPromise: "Request a private charter quote",
+  /** Document title / OG title — keep 50–60 characters for SERP (51). */
+  seoTitle: "JetAeris Private Jet Charter USA | Request a Quote",
+  /**
+   * Meta description for SERP — keep ~120–160 characters.
+   * Longer narrative stays in `description` for Organization schema.
+   */
+  seoDescription:
+    "USA private jet charter by JetAeris—on-demand flights, empty legs, and FBO limo via Part 135 carriers. Request a quote; bookings open 1 April 2027.",
   description:
     "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. Quotes are open now; confirmed bookings begin 1 April 2027. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
   // Do not use fictional 555 numbers. Leave blank until a real monitored line is provisioned.

@@ -99,11 +99,31 @@ export default function HomePage() {
           />
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
-              ["On-demand", "Quote for a specific date and cabin", "/quote"],
-              ["Empty legs", "Flexible one-ways on the live board", "/empty-legs"],
-              ["FBO limo", "Ground timed to wheels-down", "/limo"],
-              ["Corporate", "Multi-leg desk coordination", "/contact"],
-            ].map(([title, body, href]) => (
+              [
+                "On-demand",
+                "Quote for a specific date and cabin",
+                "/quote",
+                "Request an on-demand charter quote",
+              ],
+              [
+                "Empty legs",
+                "Flexible one-ways on the live board",
+                "/empty-legs",
+                "Browse empty leg flights",
+              ],
+              [
+                "FBO limo",
+                "Ground timed to wheels-down",
+                "/limo",
+                "Explore FBO limo service",
+              ],
+              [
+                "Corporate",
+                "Multi-leg desk coordination",
+                "/contact",
+                "Contact for corporate multi-leg support",
+              ],
+            ].map(([title, body, href, cta]) => (
               <Link
                 key={title}
                 href={href}
@@ -115,7 +135,7 @@ export default function HomePage() {
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
                 <p className="mt-5 text-xs tracking-[0.14em] text-accent uppercase">
-                  Learn more →
+                  {cta} →
                 </p>
               </Link>
             ))}
@@ -152,7 +172,7 @@ export default function HomePage() {
                 </h3>
                 <p className="mt-3 text-sm text-white/55">{route.blockTime}</p>
                 <p className="mt-6 text-xs tracking-[0.16em] text-white/70 uppercase transition-transform group-hover:translate-x-1">
-                  Explore route
+                  {`Private jet ${route.from} to ${route.to}`}
                 </p>
               </Link>
             ))}
@@ -184,7 +204,7 @@ export default function HomePage() {
                   href={item.href}
                   className="text-xs tracking-[0.14em] text-accent uppercase"
                 >
-                  Details
+                  {`${item.name} charter details`}
                 </Link>
               </li>
             ))}
