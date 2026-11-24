@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Jesko-style scroll cinema (window → jet → blueprint → globe → quote) */}
+      {/* Conversion hero first, then Jesko scroll cinema */}
       <JeskoScrollStory rail={railItems} />
 
       {/* Scene 2 — operational proof strip */}
