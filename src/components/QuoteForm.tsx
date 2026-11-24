@@ -238,6 +238,20 @@ export function QuoteForm() {
               ))}
             </select>
           </div>
+          <div className="field">
+            <label htmlFor="aircraftPref">Preferred aircraft size</label>
+            <select
+              id="aircraftPref"
+              value={values.aircraftPref}
+              onChange={(e) => update("aircraftPref", e.target.value)}
+            >
+              <option value="">No preference — recommend for me</option>
+              <option value="light">Light jet</option>
+              <option value="midsize">Midsize</option>
+              <option value="super-midsize">Super-midsize</option>
+              <option value="heavy">Heavy jet</option>
+            </select>
+          </div>
         </div>
       ) : null}
 
@@ -261,20 +275,6 @@ export function QuoteForm() {
             >
               <option value="no">No pets</option>
               <option value="yes">Yes — describe in notes</option>
-            </select>
-          </div>
-          <div className="field md:col-span-2">
-            <label htmlFor="aircraftPref">Preferred aircraft size</label>
-            <select
-              id="aircraftPref"
-              value={values.aircraftPref}
-              onChange={(e) => update("aircraftPref", e.target.value)}
-            >
-              <option value="">No preference — recommend for me</option>
-              <option value="light">Light jet</option>
-              <option value="midsize">Midsize</option>
-              <option value="super-midsize">Super-midsize</option>
-              <option value="heavy">Heavy jet</option>
             </select>
           </div>
           <label className="flex items-start gap-3 border border-[var(--line)] px-4 py-3 md:col-span-2">
