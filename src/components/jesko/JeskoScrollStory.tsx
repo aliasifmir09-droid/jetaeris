@@ -4,11 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { HeroQuoteStrip } from "@/components/HeroQuoteStrip";
-import { DesignedSky } from "@/components/jesko/DesignedSky";
+import {
+  CABIN_WINDOW_RADIUS,
+  CabinWindow,
+} from "@/components/jesko/CabinWindow";
 import { prefersReducedMotion } from "@/lib/motion";
 import { site } from "@/lib/site";
 
-// Hero: Jesko window zoom + visible pitch + trip-start quote strip
+// Hero: jet cabin-window zoom + visible pitch + trip-start quote strip
 
 type Props = {
   rail: string[];
@@ -65,7 +68,7 @@ export function JeskoScrollStory({ rail }: Props) {
           });
           tl.fromTo(
             windowFrame,
-            { scale: 1, borderRadius: "42% / 48%" },
+            { scale: 1, borderRadius: CABIN_WINDOW_RADIUS },
             { scale: 3.05, borderRadius: "0%", ease: "none" },
             0,
           )
@@ -181,20 +184,12 @@ export function JeskoScrollStory({ rail }: Props) {
         data-scene="hero"
         className="jesko-hero relative h-[100svh] overflow-hidden bg-[#05080c]"
       >
-        <div className="absolute inset-0 flex items-start justify-center pt-[min(8vh,72px)] md:items-center md:pt-0 md:pb-[28vh]">
-          <div
-            data-window-frame
-            className="relative h-[min(48vh,420px)] w-[min(78vw,400px)] overflow-hidden rounded-[42%/48%] border-[10px] border-[#2a241c] shadow-[0_0_0_1px_rgba(212,175,122,0.35),0_40px_100px_rgba(0,0,0,0.65)] will-change-transform"
-          >
-            <div
-              data-window-sky
-              className="absolute inset-0 will-change-transform"
-              role="img"
-              aria-label="Designed dusk sky through a cabin window"
-            >
-              <DesignedSky />
-            </div>
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(0,0,0,0.35)_100%)]" />
+        {/* Cabin sidewall atmosphere — window sits in the fuselage, not floating */}
+        <div className="cabin-wall pointer-events-none absolute inset-0" aria-hidden />
+
+        <div className="absolute inset-0 flex items-start justify-center pt-[min(7vh,64px)] md:items-center md:pt-0 md:pb-[28vh]">
+          <div className="relative h-[min(52vh,430px)] w-[min(48vw,270px)] max-w-[270px]">
+            <CabinWindow />
           </div>
         </div>
 
