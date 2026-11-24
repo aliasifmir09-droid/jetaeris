@@ -7,13 +7,15 @@ import { HeroQuoteStrip } from "@/components/HeroQuoteStrip";
 import { prefersReducedMotion } from "@/lib/motion";
 import { site } from "@/lib/site";
 
+// Hero: Jesko window zoom + visible pitch + trip-start quote strip
+
 type Props = {
   rail: string[];
 };
 
 /**
- * Homepage: conversion hero first (message + CTA visible at load),
- * then Jesko-style scroll cinema. Animation never hides the core pitch.
+ * Jesko window zoom motion + conversion copy visible at load.
+ * Animation moves the window; words/CTAs are never hidden at the start.
  */
 export function JeskoScrollStory({ rail }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -36,38 +38,53 @@ export function JeskoScrollStory({ rail }: Props) {
       if (!root) return;
 
       ctx = gsap.context(() => {
-        // —— Hero: subtle image drift only; copy stays readable ——
+        // —— Scene 1: cabin window zoom; copy stays visible ——
         const heroScene = root.querySelector<HTMLElement>("[data-scene='hero']");
-        const heroSky = root.querySelector<HTMLElement>("[data-hero-sky]");
+        const windowFrame = root.querySelector<HTMLElement>("[data-window-frame]");
+        const windowSky = root.querySelector<HTMLElement>("[data-window-sky]");
         const heroCopy = root.querySelectorAll("[data-hero-copy]");
 
-        if (heroScene && heroSky) {
-          gsap.set(heroCopy, { autoAlpha: 1, y: 0, clearProps: "filter" });
-          gsap.fromTo(
-            heroSky,
-            { scale: 1.04 },
-            {
-              scale: 1.14,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroScene,
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
-          gsap.to(heroCopy, {
-            y: -18,
-            opacity: 0.92,
-            ease: "none",
+        if (heroScene && windowFrame && windowSky) {
+          gsap.set(heroCopy, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "none",
+            clearProps: "filter",
+          });
+
+          const tl = gsap.timeline({
             scrollTrigger: {
               trigger: heroScene,
               start: "top top",
-              end: "70% top",
-              scrub: true,
+              end: "+=170%",
+              scrub: 0.9,
+              pin: true,
+              anticipatePin: 1,
             },
           });
+          tl.fromTo(
+            windowFrame,
+            { scale: 1, borderRadius: "42% / 48%" },
+            { scale: 3.05, borderRadius: "0%", ease: "none" },
+            0,
+          )
+            .fromTo(
+              windowSky,
+              { scale: 1.04 },
+              { scale: 1.18, ease: "none" },
+              0,
+            )
+            // Words stay readable through most of the zoom; soft exit only late
+            .to(
+              heroCopy,
+              { y: -16, autoAlpha: 0.95, ease: "none" },
+              0.55,
+            )
+            .to(
+              heroCopy,
+              { y: -36, autoAlpha: 0, ease: "none" },
+              0.82,
+            );
         }
 
         // —— Scene 2: jet rises over manifesto text ——
@@ -158,70 +175,75 @@ export function JeskoScrollStory({ rail }: Props) {
 
   return (
     <div ref={rootRef} className="jesko-story bg-[#0a0a0a] text-[#f4efe6]">
-      {/* HERO — message + CTA visible immediately; cinema continues below */}
+      {/* HERO — Jesko window zoom + visible h1 + quote funnel */}
       <section
         data-scene="hero"
-        className="jesko-hero relative min-h-[100svh] overflow-hidden bg-[#05080c]"
+        className="jesko-hero relative h-[100svh] overflow-hidden bg-[#05080c]"
       >
-        <div data-hero-sky className="absolute inset-0 will-change-transform">
-          <Image
-            src="/media/cabin-window-uhd.jpg"
-            alt="View from a private jet above the clouds at sunset"
-            fill
-            priority
-            quality={95}
-            sizes="100vw"
-            className="object-cover object-[52%_40%]"
-          />
-        </div>
-        <div
-          className="pointer-events-none absolute inset-0"
-          aria-hidden
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(5,8,12,0.88) 0%, rgba(5,8,12,0.62) 34%, rgba(5,8,12,0.18) 70%, rgba(5,8,12,0.06) 100%), linear-gradient(0deg, rgba(5,8,12,0.78) 0%, rgba(5,8,12,0.2) 42%, transparent 68%)",
-          }}
-        />
-
-        <div className="container relative z-10 flex min-h-[100svh] flex-col justify-end pb-24 pt-36 md:pb-28 md:pt-40">
-          <div className="max-w-2xl">
-            <p
-              data-hero-copy
-              className="mb-5 text-[0.7rem] tracking-[0.24em] text-[#d4af7a] uppercase"
+        <div className="absolute inset-0 flex items-start justify-center pt-[min(8vh,72px)] md:items-center md:pt-0 md:pb-[28vh]">
+          <div
+            data-window-frame
+            className="relative h-[min(48vh,420px)] w-[min(78vw,400px)] overflow-hidden rounded-[42%/48%] border-[10px] border-[#2a241c] shadow-[0_0_0_1px_rgba(212,175,122,0.35),0_40px_100px_rgba(0,0,0,0.65)] will-change-transform"
+          >
+            <div
+              data-window-sky
+              className="absolute inset-0 will-change-transform"
             >
-              Private aviation in the United States
-            </p>
-            <h1
-              data-hero-copy
-              className="display text-[clamp(2.4rem,6vw,4.6rem)] leading-[0.95] text-[#f4efe6]"
-            >
-              Private jet charter,
-              <br />
-              precisely arranged.
-            </h1>
-            <p
-              data-hero-copy
-              className="mt-6 max-w-xl text-[1.05rem] leading-8 text-white/75 md:text-lg"
-            >
-              Vetted aircraft, clear options, and a responsive aviation desk for
-              travel across the United States.
-            </p>
-            <div data-hero-copy className="mt-8 flex flex-wrap gap-3">
-              <Link href="/quote" className="btn btn-light">
-                Request a private quote
-              </Link>
-              <Link href="/routes" className="btn btn-ghost">
-                Explore routes
-              </Link>
+              <Image
+                src="/media/cabin-window-uhd.jpg"
+                alt="View from a private jet above the clouds at sunset"
+                fill
+                priority
+                quality={95}
+                sizes="(max-width: 480px) 78vw, 400px"
+                className="object-cover object-[52%_40%]"
+              />
             </div>
-            <p data-hero-copy className="mt-5 text-sm text-white/55">
-              Quotes open now · Confirmed bookings begin {site.bookingOpensLabel}
-            </p>
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(0,0,0,0.35)_100%)]" />
           </div>
         </div>
-        <p className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 text-[0.65rem] tracking-[0.28em] text-white/35 uppercase">
-          Scroll
-        </p>
+
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black via-black/80 to-transparent pb-10 pt-28 md:pb-12 md:pt-40">
+          <div className="container pointer-events-auto">
+            <div className="max-w-2xl">
+              <p
+                data-hero-copy
+                className="mb-2 text-[0.68rem] tracking-[0.24em] text-[#d4af7a] uppercase"
+              >
+                Private aviation in the United States
+              </p>
+              <h1
+                data-hero-copy
+                className="display text-[clamp(2rem,4.8vw,3.6rem)] leading-[0.95] text-[#f4efe6]"
+              >
+                Private charter,
+                <br />
+                precisely arranged.
+              </h1>
+              <p
+                data-hero-copy
+                className="mt-3 max-w-xl text-[0.98rem] leading-7 text-white/75"
+              >
+                Vetted aircraft, clear options, and a responsive concierge desk
+                for travel across the United States.
+              </p>
+              <div
+                data-hero-copy
+                className="mt-4 flex flex-wrap items-center gap-3"
+              >
+                <Link href="/routes" className="btn btn-ghost">
+                  Explore routes
+                </Link>
+                <span className="text-sm text-white/45">
+                  Quotes open now · Bookings {site.bookingOpensLabel}
+                </span>
+              </div>
+            </div>
+            <div data-hero-copy className="mt-5 max-w-5xl">
+              <HeroQuoteStrip />
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* SCENE 2 — jet flies over text */}
@@ -282,7 +304,7 @@ export function JeskoScrollStory({ rail }: Props) {
           <div data-blueprint className="absolute inset-0 will-change-transform">
             <Image
               src="/media/seat-blueprint-uhd.jpg"
-              alt="Private jet cabin seat blueprint showing layout for charter planning"
+              alt=""
               fill
               quality={92}
               sizes="100vw"
