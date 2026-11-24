@@ -17,7 +17,7 @@ export function StickyQuoteBar() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-[55] border-t border-[#d4af7a]/25 bg-[#0a1018]/94 px-4 py-3 shadow-[0_-16px_48px_rgba(0,0,0,0.45)] backdrop-blur-md transition-transform duration-400 md:px-6 ${
+      className={`fixed inset-x-0 bottom-0 z-[55] border-t border-[#2563eb]/30 bg-[#05080f]/94 px-4 py-3 shadow-[0_-16px_48px_rgba(0,0,0,0.45)] backdrop-blur-md transition-transform duration-400 md:px-6 ${
         show ? "translate-y-0" : "translate-y-full"
       }`}
       role="region"
@@ -25,7 +25,7 @@ export function StickyQuoteBar() {
     >
       <div className="container flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-[0.68rem] tracking-[0.16em] text-[#d4af7a] uppercase">
+          <p className="text-[0.68rem] tracking-[0.16em] text-[#93c5fd] uppercase">
             Quotes open now · Bookings {site.bookingOpensLabel}
           </p>
           <p className="mt-0.5 text-sm text-[#f4efe6]/85">

@@ -34,10 +34,10 @@ export function SitePreloader() {
             d="M8 22 C28 14, 55 12, 88 15 C100 16, 110 18, 116 20 C108 24, 92 26, 70 27 C40 29, 20 27, 10 24 Z"
             fill="#e8e4dc"
           />
-          <path d="M20 18 L32 22 L24 26 Z" fill="#9a7b4f" />
+          <path d="M20 18 L32 22 L24 26 Z" fill="#2563eb" />
           <path
             d="M30 22 C50 18, 75 17, 100 20"
-            stroke="#9a7b4f"
+            stroke="#2563eb"
             strokeWidth="1.5"
             strokeLinecap="round"
           />

@@ -198,7 +198,7 @@ export function JeskoScrollStory({ rail }: Props) {
             <div className="max-w-2xl">
               <p
                 data-hero-copy
-                className="mb-2 text-[0.68rem] tracking-[0.24em] text-[#d4af7a] uppercase"
+                className="mb-2 text-[0.68rem] tracking-[0.24em] text-[#93c5fd] uppercase"
               >
                 Private aviation in the United States
               </p>
@@ -306,7 +306,7 @@ export function JeskoScrollStory({ rail }: Props) {
         <div className="container relative z-10 flex h-full max-w-xl flex-col justify-center">
           <p
             data-blue-copy
-            className="text-[0.7rem] tracking-[0.22em] text-[#d4af7a] uppercase"
+            className="text-[0.7rem] tracking-[0.22em] text-[#93c5fd] uppercase"
           >
             Cabin by mission
           </p>
@@ -342,7 +342,7 @@ export function JeskoScrollStory({ rail }: Props) {
         </p>
         <div className="container relative z-10 grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-[0.7rem] tracking-[0.22em] text-[#d4af7a] uppercase">
+            <p className="text-[0.7rem] tracking-[0.22em] text-[#93c5fd] uppercase">
               USA corridors
             </p>
             <h2 className="display mt-4 text-[clamp(2rem,4vw,3.2rem)] text-[#f4efe6]">
@@ -367,7 +367,7 @@ export function JeskoScrollStory({ rail }: Props) {
               className="jesko-globe absolute inset-0 rounded-full will-change-transform"
               aria-hidden
             />
-            <div className="absolute inset-[12%] rounded-full border border-[#d4af7a]/25" />
+            <div className="absolute inset-[12%] rounded-full border border-[#2563eb]/35" />
             <div className="absolute inset-[28%] rounded-full border border-white/10" />
           </div>
         </div>
@@ -376,7 +376,7 @@ export function JeskoScrollStory({ rail }: Props) {
       {/* SCENE 5 — quote conversion */}
       <section className="relative bg-[#0a0a0a] py-20 md:py-28">
         <div className="container">
-          <p className="text-[0.7rem] tracking-[0.22em] text-[#d4af7a] uppercase">
+          <p className="text-[0.7rem] tracking-[0.22em] text-[#93c5fd] uppercase">
             Start the trip
           </p>
           <h2 className="display mt-4 max-w-2xl text-[clamp(2rem,4vw,3.2rem)] text-[#f4efe6]">
