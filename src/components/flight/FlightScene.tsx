@@ -214,7 +214,7 @@ function buildJet(THREE: typeof import("three")) {
     roughness: 0.4,
   });
   const goldMat = new THREE.MeshStandardMaterial({
-    color: 0x9a7b4f,
+    color: 0x2563eb,
     metalness: 0.85,
     roughness: 0.25,
   });
