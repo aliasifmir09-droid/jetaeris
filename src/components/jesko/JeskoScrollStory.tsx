@@ -216,7 +216,7 @@ export function JeskoScrollStory({ rail }: Props) {
                 data-hero-copy
                 className="display text-[clamp(2rem,4.8vw,3.6rem)] leading-[0.95] text-[#f4efe6]"
               >
-                Private charter,
+                Private jet charter,
                 <br />
                 precisely arranged.
               </h1>
@@ -304,7 +304,7 @@ export function JeskoScrollStory({ rail }: Props) {
           <div data-blueprint className="absolute inset-0 will-change-transform">
             <Image
               src="/media/seat-blueprint-uhd.jpg"
-              alt=""
+              alt="Private jet cabin seat blueprint showing layout for charter planning"
               fill
               quality={92}
               sizes="100vw"
