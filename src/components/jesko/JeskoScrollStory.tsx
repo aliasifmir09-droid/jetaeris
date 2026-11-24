@@ -47,35 +47,40 @@ export function JeskoScrollStory({ rail }: Props) {
         const windowCopy = root.querySelectorAll("[data-window-copy]");
 
         if (windowScene && windowFrame && windowSky) {
+          // Contained plate at rest (window not oversized), then expand into sky.
+          // Cap scale so 2560px UHD stays sharp — no soft 3× blow-up.
+          gsap.set(windowFrame, { transformOrigin: "50% 45%" });
+          gsap.set(windowSky, { transformOrigin: "58% 42%" });
+
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: windowScene,
               start: "top top",
-              end: "+=180%",
-              scrub: 1,
+              end: "+=155%",
+              scrub: 0.8,
               pin: true,
               anticipatePin: 1,
             },
           });
           tl.fromTo(
             windowFrame,
-            { scale: 1, borderRadius: "42% / 48%" },
-            { scale: 3.4, borderRadius: "0%", ease: "none" },
+            { scale: 1, borderRadius: "16px" },
+            { scale: 2.05, borderRadius: "0px", ease: "none" },
             0,
           )
             .fromTo(
               windowSky,
-              { scale: 1.05 },
-              { scale: 1.25, ease: "none" },
+              { scale: 1 },
+              { scale: 1.08, ease: "none" },
               0,
             )
             .fromTo(
               windowCopy,
-              { autoAlpha: 0, y: 40, filter: "blur(14px)" },
-              { autoAlpha: 1, y: 0, filter: "blur(0px)", stagger: 0.08, ease: "none" },
-              0.25,
+              { autoAlpha: 0, y: 24 },
+              { autoAlpha: 1, y: 0, stagger: 0.05, ease: "none" },
+              0.1,
             )
-            .to(windowCopy, { autoAlpha: 0, y: -30, filter: "blur(8px)", ease: "none" }, 0.72);
+            .to(windowCopy, { autoAlpha: 0, y: -20, ease: "none" }, 0.7);
         }
 
         // —— Scene 2: jet rises over manifesto text ——
@@ -166,55 +171,57 @@ export function JeskoScrollStory({ rail }: Props) {
 
   return (
     <div ref={rootRef} className="jesko-story bg-[#0a0a0a] text-[#f4efe6]">
-      {/* SCENE 1 — cabin window */}
+      {/* SCENE 1 — cabin window: contained sharp plate → expands into sky */}
       <section
         data-scene="window"
-        className="relative h-[100svh] overflow-hidden bg-[#0a0a0a]"
+        className="relative h-[100svh] overflow-hidden bg-[#070707]"
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center px-6 pt-8 pb-24 md:px-14 md:pb-28">
           <div
             data-window-frame
-            className="relative h-[min(72vh,640px)] w-[min(92vw,520px)] overflow-hidden rounded-[42%/48%] border-[10px] border-[#2a241c] shadow-[0_0_0_1px_rgba(212,175,122,0.35),0_40px_100px_rgba(0,0,0,0.65)] will-change-transform"
+            className="relative h-[min(46vh,400px)] w-[min(78vw,680px)] overflow-hidden rounded-[16px] shadow-[0_24px_80px_rgba(0,0,0,0.55)] will-change-transform ring-1 ring-[#d4af7a]/25"
           >
-            <div data-window-sky className="absolute inset-0 will-change-transform">
+            <div
+              data-window-sky
+              className="absolute inset-0 will-change-transform"
+            >
               <Image
                 src="/media/cabin-window-uhd.jpg"
-                alt=""
+                alt="Cabin window looking over sunset clouds"
                 fill
                 priority
                 quality={95}
-                sizes="100vw"
-                className="object-cover"
+                sizes="(max-width: 760px) 78vw, 680px"
+                className="object-cover object-[52%_40%]"
               />
             </div>
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.45)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_55%_40%,transparent_45%,rgba(0,0,0,0.22)_100%)]" />
           </div>
         </div>
-
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black via-black/50 to-transparent pb-16 pt-32">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-[#070707] via-[#070707]/80 to-transparent pb-14 pt-24">
           <div className="container">
             <p
               data-window-copy
-              className="display text-[clamp(2.6rem,7vw,5.5rem)] text-[#f4efe6]"
+              className="display text-[clamp(2rem,4.8vw,3.8rem)] text-[#f4efe6]"
             >
               {site.name}
             </p>
             <p
               data-window-copy
-              className="serif mt-3 max-w-xl text-[clamp(1.2rem,2.4vw,1.85rem)] text-[#d4af7a]"
+              className="serif mt-2 max-w-lg text-[clamp(1.05rem,1.9vw,1.5rem)] text-[#d4af7a]"
             >
               {site.tagline}.
             </p>
             <p
               data-window-copy
-              className="mt-4 max-w-lg text-sm leading-7 text-white/65"
+              className="mt-3 max-w-md text-sm leading-7 text-white/65"
             >
               Private aviation arranged with precision—vetted Part 135 carriers,
               clear options, bookings from {site.bookingOpensLabel}.
             </p>
           </div>
         </div>
-        <p className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 text-[0.65rem] tracking-[0.28em] text-white/35 uppercase">
+        <p className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 text-[0.65rem] tracking-[0.28em] text-white/40 uppercase">
           Scroll
         </p>
       </section>
