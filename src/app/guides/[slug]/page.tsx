@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
 import { getGuide, guides } from "@/lib/guides-catalog";
+import { isIndexableGuide, robotsForIndexable } from "@/lib/seo-index";
 import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: guide.title,
     description: guide.description,
     alternates: { canonical: `/guides/${guide.slug}` },
+    robots: robotsForIndexable(isIndexableGuide(guide)),
     openGraph: {
       title: guide.title,
       description: guide.description,

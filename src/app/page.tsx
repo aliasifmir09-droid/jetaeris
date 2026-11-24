@@ -4,7 +4,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { JeskoScrollStory } from "@/components/jesko/JeskoScrollStory";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { blogPillars, blogPosts } from "@/lib/blog";
+import { blogPillars } from "@/lib/blog";
 import { aircraft, limoCities, routes } from "@/lib/content";
 import { faqItems } from "@/lib/faq";
 import { companyWhyUs } from "@/lib/company";
@@ -328,9 +328,9 @@ export default function HomePage() {
       <section className="py-20 md:py-28">
         <div className="container">
           <SectionHeading
-            eyebrow="Information campaign"
-            title="Massive useful content—built to rank and convert."
-            body={`${blogPosts.length} articles across cost, corridors, cities, empty legs, aircraft, and safety. Search answers first, then a clear quote path—the same playbook Petshiwu used for scale.`}
+            eyebrow="Research desk"
+            title="High-intent answers—not page-count SEO."
+            body="Cost, corridors, empty legs, aircraft, and safety written for travelers who are ready to request a quote. We prioritize unique route economics and city hubs over thin keyword clones."
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {blogPillars.slice(0, 6).map((post) => (

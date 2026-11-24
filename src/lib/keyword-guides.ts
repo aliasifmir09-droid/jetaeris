@@ -1031,7 +1031,7 @@ export function generateKeywordGuides(existingSlugs: Set<string>): Guide[] {
     ...airportGuides(),
     ...aircraftCityGuides(),
     ...nationalGuides(),
-  ]);
+  ]).map((g) => ({ ...g, scaled: true as const }));
   return generated.filter((g) => !existingSlugs.has(g.slug));
 }
 

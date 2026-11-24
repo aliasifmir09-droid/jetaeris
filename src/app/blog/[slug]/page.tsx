@@ -9,6 +9,7 @@ import {
   getBlogPost,
   relatedBlogPosts,
 } from "@/lib/blog";
+import { isIndexableBlogPost, robotsForIndexable } from "@/lib/seo-index";
 import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
+    robots: robotsForIndexable(isIndexableBlogPost(post)),
     openGraph: {
       title: post.title,
       description: post.description,

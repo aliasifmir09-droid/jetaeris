@@ -1,8 +1,8 @@
-import { blogPosts } from "@/lib/blog";
+import { indexableBlogPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 export function GET() {
-  const items = blogPosts
+  const items = indexableBlogPosts
     .map(
       (post) => `
     <item>

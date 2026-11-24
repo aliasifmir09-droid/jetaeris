@@ -3,30 +3,35 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { blogByCategory, blogPillars, blogPosts, topCityTopicCount } from "@/lib/blog";
+import {
+  blogPillars,
+  indexableBlogPosts,
+} from "@/lib/blog";
 import { site } from "@/lib/site";
 import { topCitiesSeo } from "@/lib/top-cities-seo";
-import { topicsForCitySlug } from "@/lib/top-city-topics";
 
 export const metadata: Metadata = {
   title: "Private aviation blog & information hub",
-  description: `JetAeris information campaign—${blogPosts.length}+ USA private jet articles on cost, routes, empty legs, airports, aircraft, and how charter works. Quotes open now; bookings from ${site.bookingOpensLabel}.`,
+  description: `JetAeris private jet guides for USA travelers—cost, routes, empty legs, aircraft, and city hubs. Quotes open now; bookings from ${site.bookingOpensLabel}.`,
   alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndexPage() {
-  const categories = blogByCategory();
+  const pillars = blogPillars;
+  const hubs = indexableBlogPosts.filter((p) => p.wave === "city");
+  const routes = indexableBlogPosts.filter((p) => p.wave === "route");
+  const aircraft = indexableBlogPosts.filter((p) => p.wave === "aircraft");
 
   return (
     <>
       <PageHero
-        eyebrow="Information campaign"
-        title="Useful answers that attract serious travelers."
-        body={`Like a high-volume content desk—but written for private aviation search intent: cost, corridors, empty legs, safety, and cities. ${blogPosts.length} articles live. Quotes open now; confirmed bookings begin ${site.bookingOpensLabel}.`}
+        eyebrow="Research desk"
+        title="Answers built to rank on intent—not page count."
+        body={`Indexable pillars, route economics, city hubs, and aircraft guides for serious USA charter searches. Quotes open now; confirmed bookings begin ${site.bookingOpensLabel}.`}
         primaryHref="/quote"
         primaryLabel="Request a quote"
         secondaryHref="/guides"
-        secondaryLabel="Legacy guides"
+        secondaryLabel="Core guides"
       />
       <section className="pb-16 md:pb-24">
         <div className="container">
@@ -34,10 +39,10 @@ export default function BlogIndexPage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <div className="border border-[var(--line)] p-5">
               <p className="text-xs tracking-[0.16em] text-accent uppercase">
-                Articles
+                Indexable articles
               </p>
               <p className="mt-2 font-[family-name:var(--font-display)] text-3xl text-ink">
-                {blogPosts.length}
+                {indexableBlogPosts.length}
               </p>
             </div>
             <div className="border border-[var(--line)] p-5">
@@ -45,106 +50,109 @@ export default function BlogIndexPage() {
                 Pillars
               </p>
               <p className="mt-2 font-[family-name:var(--font-display)] text-3xl text-ink">
-                {blogPillars.length}
+                {pillars.length}
               </p>
             </div>
             <div className="border border-[var(--line)] p-5">
               <p className="text-xs tracking-[0.16em] text-accent uppercase">
-                Topics
+                Route economics
               </p>
               <p className="mt-2 font-[family-name:var(--font-display)] text-3xl text-ink">
-                {categories.length}
+                {routes.length}
               </p>
             </div>
-          </div>
-
-          <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">
-            USA top 5 city hubs · {topCityTopicCount} deep topics
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-            New York, Los Angeles, Miami, Chicago, and Dallas—50+ high-intent
-            keyword guides per market (cost, FBOs, corridors, seasons, FAQs).
-          </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {topCitiesSeo.map((city) => {
-              const count = topicsForCitySlug(city.slug).length;
-              return (
-                <Link
-                  key={city.slug}
-                  href={`/charter/${city.slug}`}
-                  className="border border-[var(--line)] bg-white/50 p-5 transition-colors hover:border-[var(--line-strong)]"
-                >
-                  <p className="text-xs tracking-[0.14em] text-accent uppercase">
-                    {count} topics
-                  </p>
-                  <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl text-ink">
-                    {city.name}
-                  </h3>
-                  <p className="mt-2 text-xs leading-5 text-muted">
-                    {city.rankLabel}
-                  </p>
-                </Link>
-              );
-            })}
           </div>
 
           <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">
             Pillar guides
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-            Start here for ranking and conversion—deep posts that link into
-            routes, empty legs, and quotes.
+            High-intent national queries—cost, how charter works, empty legs,
+            safety, and planning.
           </p>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {blogPillars.map((post) => (
+            {pillars.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="border border-[var(--line)] bg-white/50 p-7 transition-colors hover:border-[var(--line-strong)]"
+                className="border border-[var(--line)] bg-white/50 p-6 transition-colors hover:border-[var(--line-strong)]"
               >
-                <p className="text-xs tracking-[0.16em] text-accent uppercase">
-                  {post.category} · {post.readMinutes} min
+                <p className="text-xs tracking-[0.14em] text-accent uppercase">
+                  {post.category}
                 </p>
-                <h3 className="serif mt-3 text-2xl text-ink">{post.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-muted">
+                <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl text-ink">
+                  {post.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-muted">
                   {post.description}
                 </p>
               </Link>
             ))}
           </div>
 
-          <h2 className="serif mt-20 text-3xl text-ink md:text-4xl">
-            Full library by topic
+          <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">
+            City hubs
           </h2>
-          <div className="mt-10 space-y-14">
-            {categories.map(([category, posts]) => (
-              <div key={category}>
-                <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--line)] pb-3">
-                  <h3 className="font-[family-name:var(--font-display)] text-xl text-ink">
-                    {category}
-                  </h3>
-                  <p className="text-xs tracking-[0.14em] text-muted uppercase">
-                    {posts.length} articles
-                  </p>
-                </div>
-                <ul className="mt-4 grid gap-2 md:grid-cols-2">
-                  {posts.map((post) => (
-                    <li key={post.slug}>
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="block border-b border-[var(--line)] py-3 text-sm text-ink-soft transition-colors hover:text-ink"
-                      >
-                        {post.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
+            One strong charter page per market—linked to airports, corridors,
+            and the quote form. Deep keyword clones stay off the public index
+            until each page is uniquely researched.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {hubs.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="border border-[var(--line)] bg-white/50 p-5 transition-colors hover:border-[var(--line-strong)]"
+              >
+                <h3 className="font-[family-name:var(--font-display)] text-lg text-ink">
+                  {post.title}
+                </h3>
+                <p className="mt-2 text-sm text-muted">{post.description}</p>
+              </Link>
+            ))}
+          </div>
+
+          <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">
+            Top markets → charter hubs
+          </h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {topCitiesSeo.map((city) => (
+              <Link
+                key={city.slug}
+                href={`/charter/${city.slug}`}
+                className="border border-[var(--line)] bg-white/50 p-5 transition-colors hover:border-[var(--line-strong)]"
+              >
+                <p className="text-xs tracking-[0.14em] text-accent uppercase">
+                  Charter hub
+                </p>
+                <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl text-ink">
+                  {city.name}
+                </h3>
+              </Link>
+            ))}
+          </div>
+
+          <h2 className="serif mt-16 text-3xl text-ink md:text-4xl">
+            Aircraft class guides
+          </h2>
+          <div className="mt-8 flex flex-wrap gap-3 text-sm text-muted">
+            {aircraft.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="border border-[var(--line)] px-3 py-2 hover:border-[var(--line-strong)]"
+              >
+                {post.title.replace(/ charter guide.*/, "")}
+              </Link>
             ))}
           </div>
         </div>
       </section>
-      <CtaBand title="Read the answer. Then request the trip." />
+      <CtaBand
+        title="Ready for options on your dates?"
+        body={site.responsePromise}
+      />
     </>
   );
 }

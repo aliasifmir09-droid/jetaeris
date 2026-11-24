@@ -26,7 +26,8 @@ Email: concierge@jetaeris.com
 - Part 135 certificate review before options are presented
 - Planning cost bands labeled as estimates with update dates
 - Typical first response under 15 minutes during staffed desk hours
-- Crawlable routes, cities, airports, aircraft, guides, and FAQ
+- Crawlable routes, cities, airports, aircraft, core guides, and FAQ
+- Quality-first indexing: money pages and pillars in sitemap; scaled keyword clones are noindex until uniquely researched
 
 ## Primary pages
 

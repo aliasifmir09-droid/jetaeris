@@ -2,25 +2,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { guideCategoryCounts, guides } from "@/lib/guides-catalog";
+import {
+  guideCategoryCounts,
+  indexableGuides,
+} from "@/lib/guides-catalog";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Private jet guides — cost, charter, airports, empty legs",
-  description: `JetAeris private jet guides: ${guides.length}+ USA pages on charter cost, how to book, airports, empty legs, and traveler FAQs. Quotes open now; bookings from ${site.bookingOpensLabel}.`,
+  description: `JetAeris private jet guides: USA charter cost, how to book, airports, empty legs, and traveler FAQs. Quotes open now; bookings from ${site.bookingOpensLabel}.`,
   alternates: { canonical: "/guides" },
 };
 
 export default function GuidesIndexPage() {
   const categories = guideCategoryCounts();
-  const featured = guides.filter((g) => !g.category).slice(0, 12);
+  const featured = indexableGuides.slice(0, 12);
 
   return (
     <>
       <PageHero
         eyebrow="Guides"
         title="Private jet answers people actually search."
-        body={`${guides.length} crawlable guides grounded in real airports, routes, and aircraft classes—not doorway clones. Built for travelers first; structured so Google can understand the hierarchy.`}
+        body={`${indexableGuides.length} indexable guides grounded in real airports, routes, and aircraft classes. Scaled keyword clones are withheld from the index until each page is uniquely researched.`}
         primaryHref="/quote"
         primaryLabel="Request a quote"
       />
@@ -28,8 +31,8 @@ export default function GuidesIndexPage() {
         <div className="container">
           <h2 className="serif text-3xl text-ink">Browse by topic</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-            Category hubs keep pages in a clear internal-link tree (Google’s
-            preferred site structure)—not a flat dump of near-identical URLs.
+            Category hubs keep pages in a clear internal-link tree—not a flat
+            dump of near-identical URLs.
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((cat) => (
@@ -58,12 +61,12 @@ export default function GuidesIndexPage() {
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="panel p-8 transition-transform hover:-translate-y-0.5"
+                className="panel p-6 transition-transform hover:-translate-y-0.5"
               >
-                <h3 className="serif text-2xl text-ink md:text-3xl">
+                <h3 className="font-[family-name:var(--font-display)] text-xl text-ink">
                   {guide.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-muted">
+                <p className="mt-3 text-sm leading-6 text-muted">
                   {guide.description}
                 </p>
               </Link>
@@ -71,7 +74,10 @@ export default function GuidesIndexPage() {
           </div>
         </div>
       </section>
-      <CtaBand />
+      <CtaBand
+        title="Need a number for your dates?"
+        body={site.responsePromise}
+      />
     </>
   );
 }
