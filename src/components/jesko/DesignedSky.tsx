@@ -24,10 +24,11 @@ export function DesignedSky({ className = "" }: { className?: string }) {
           `,
         }}
       />
-      {/* Soft sun disc — geometric, not photographic bloom */}
+      {/* Soft sun disc — true circle (aspect locked), not photographic bloom */}
       <div
-        className="absolute left-[12%] top-[10%] h-[22%] w-[38%] rounded-full"
+        className="absolute left-[14%] top-[9%] w-[42%] max-w-[220px] rounded-full"
         style={{
+          aspectRatio: "1 / 1",
           background:
             "radial-gradient(circle at 45% 45%, #ffe2a8 0%, #f0b060 42%, rgba(240,176,96,0) 72%)",
           opacity: 0.95,
