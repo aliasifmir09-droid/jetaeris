@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { SearchableList } from "@/components/SearchableList";
 import { site } from "@/lib/site";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -170,26 +171,22 @@ export function QuoteForm() {
               <option value="multi-city">Multi-city</option>
             </select>
           </div>
-          <div className="field">
-            <label htmlFor="from">Origin</label>
-            <input
-              id="from"
-              required
-              placeholder="City or airport (e.g. TEB)"
-              value={values.from}
-              onChange={(e) => update("from", e.target.value)}
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="to">Destination</label>
-            <input
-              id="to"
-              required
-              placeholder="City or airport (e.g. OPF)"
-              value={values.to}
-              onChange={(e) => update("to", e.target.value)}
-            />
-          </div>
+          <SearchableList
+            id="from"
+            label="Origin"
+            placeholder="Type city or airport (e.g. TEB)"
+            value={values.from}
+            onChange={(v) => update("from", v)}
+            required
+          />
+          <SearchableList
+            id="to"
+            label="Destination"
+            placeholder="Type city or airport (e.g. OPF)"
+            value={values.to}
+            onChange={(v) => update("to", v)}
+            required
+          />
           <div className="field">
             <label htmlFor="date">Departure date</label>
             <input

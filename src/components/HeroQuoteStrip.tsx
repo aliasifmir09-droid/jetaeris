@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { SearchableList } from "@/components/SearchableList";
 import { site } from "@/lib/site";
 
 export function HeroQuoteStrip() {
@@ -29,28 +30,26 @@ export function HeroQuoteStrip() {
       className="hero-quote-strip grid gap-3 border border-white/15 bg-black/35 p-4 backdrop-blur-md md:grid-cols-[1fr_1fr_0.9fr_0.65fr_0.85fr_auto] md:items-end md:p-5"
       data-hero-quote="true"
     >
-      <div className="field-dark">
-        <label htmlFor="hero-from">Origin</label>
-        <input
-          id="hero-from"
-          name="from"
-          placeholder="Teterboro (TEB)"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-          required
-        />
-      </div>
-      <div className="field-dark">
-        <label htmlFor="hero-to">Destination</label>
-        <input
-          id="hero-to"
-          name="to"
-          placeholder="Miami / OPF / PBI"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
-          required
-        />
-      </div>
+      <SearchableList
+        id="hero-from"
+        name="from"
+        label="Origin"
+        placeholder="Type city or airport"
+        value={from}
+        onChange={setFrom}
+        required
+        variant="dark"
+      />
+      <SearchableList
+        id="hero-to"
+        name="to"
+        label="Destination"
+        placeholder="Type city or airport"
+        value={to}
+        onChange={setTo}
+        required
+        variant="dark"
+      />
       <div className="field-dark">
         <label htmlFor="hero-date">Date</label>
         <input
@@ -91,8 +90,9 @@ export function HeroQuoteStrip() {
       <button type="submit" className="btn btn-light h-[46px] w-full md:w-auto">
         Request a quote
       </button>
-      <p className="md:col-span-full text-xs leading-5 text-white/55">
-        Quotes open now · Confirmed bookings begin {site.bookingOpensLabel}
+      <p className="text-xs leading-5 text-white/55 md:col-span-full">
+        Start typing a city or airport code to open the list · Quotes open now ·
+        Bookings {site.bookingOpensLabel}
       </p>
     </form>
   );
