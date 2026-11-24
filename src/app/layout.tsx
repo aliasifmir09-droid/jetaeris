@@ -30,16 +30,19 @@ const sans = Figtree({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} · Private Jet Charter USA`,
+    default: site.seoTitle,
     template: `%s · ${site.name}`,
   },
-  description: site.description,
+  description: site.seoDescription,
   applicationName: site.name,
   keywords: [
     "private jet charter",
+    "private jet charter USA",
+    "request a private quote",
     "empty legs",
     "FBO limo",
     "USA private aviation",
+    "Part 135",
     "Jet Aeris Inc",
     "Queens NY private jet",
   ],
@@ -48,13 +51,13 @@ export const metadata: Metadata = {
     locale: site.locale,
     url: site.url,
     siteName: site.legalName,
-    title: `${site.name} · Private Jet Charter USA`,
-    description: site.description,
+    title: site.seoTitle,
+    description: site.seoDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} · Private Jet Charter USA`,
-    description: site.description,
+    title: site.seoTitle,
+    description: site.seoDescription,
   },
   robots: {
     index: true,
@@ -88,12 +91,53 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         "@type": "ContactPoint",
         contactType: "customer service",
         email: site.email,
+        url: `${site.url}/contact`,
         ...(site.phoneDisplay ? { telephone: site.phoneDisplay } : {}),
         areaServed: "US",
         availableLanguage: ["English"],
         hoursAvailable: "Mo-Su 08:00-22:00",
       },
     ],
+  };
+
+  /** LocalBusiness for NAP / local SEO tools — phone omitted until a real line exists. */
+  const localBusinessLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${site.url}/#localbusiness`,
+    name: site.legalName,
+    alternateName: site.name,
+    url: site.url,
+    image: `${site.url}/media/cabin-window-uhd.jpg`,
+    email: site.email,
+    ...(site.phoneDisplay ? { telephone: site.phoneDisplay } : {}),
+    description: site.seoDescription,
+    priceRange: "$$$$",
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.line1,
+      addressLocality: site.address.city,
+      addressRegion: site.address.region,
+      addressCountry: site.address.country,
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "08:00",
+      closes: "22:00",
+    },
   };
 
   const websiteLd = {
@@ -129,6 +173,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
         />
         <script
           type="application/ld+json"

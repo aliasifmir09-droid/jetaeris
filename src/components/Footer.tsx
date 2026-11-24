@@ -99,9 +99,9 @@ export function Footer() {
             ))}
           </ul>
           <p className="mt-6 text-sm text-white/55">
-            <a href={`mailto:${site.email}`} className="hover:text-white">
-              {site.email}
-            </a>
+            <Link href="/contact" className="hover:text-white">
+              Contact the concierge desk
+            </Link>
             {site.phoneDisplay && site.phoneHref ? (
               <>
                 <br />

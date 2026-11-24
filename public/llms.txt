@@ -1,0 +1,40 @@
+# JetAeris (Jet Aeris Inc)
+
+> USA air charter brokerage arranging on-demand private jet charter, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. Quote-and-concierge service — not an instant-booking marketplace and not a direct air carrier unless an itinerary expressly states otherwise.
+
+Site: https://www.jetaeris.com
+Contact: https://www.jetaeris.com/contact
+Quotes: https://www.jetaeris.com/quote
+Bookings open: 1 April 2027 (quotes available now)
+Desk hours: Mon–Sun, 8:00–22:00 Eastern
+Registered office locality: 87-81, Queens, NY, United States
+
+## Primary pages
+
+- [Home](https://www.jetaeris.com): Private jet charter brokerage overview and quote path
+- [Request a quote](https://www.jetaeris.com/quote): Staged trip inquiry form
+- [Ways to fly](https://www.jetaeris.com/ways-to-fly): On-demand, empty legs, FBO limo, corporate multi-leg
+- [Routes](https://www.jetaeris.com/routes): USA corridor cost and planning pages
+- [Empty legs](https://www.jetaeris.com/empty-legs): Sample empty-leg board (status-accurate)
+- [Aircraft](https://www.jetaeris.com/aircraft): Light through heavy jet classes
+- [Cities](https://www.jetaeris.com/charter): City charter hubs
+- [Airports / FBOs](https://www.jetaeris.com/airports): Private aviation airports
+- [Limo](https://www.jetaeris.com/limo): FBO ground transfer
+- [Safety](https://www.jetaeris.com/safety): Broker role, Part 135 checks, carrier identity
+- [Broker disclosure](https://www.jetaeris.com/broker-disclosure): Legal broker disclosures
+- [FAQ](https://www.jetaeris.com/faq): Common traveler questions
+- [Blog](https://www.jetaeris.com/blog): Cost, routes, safety, and planning guides
+- [About](https://www.jetaeris.com/about): Company and desk
+
+## Optional
+
+- [Sitemap](https://www.jetaeris.com/sitemap.xml)
+- [RSS](https://www.jetaeris.com/blog/rss.xml)
+- [Privacy](https://www.jetaeris.com/privacy)
+- [Terms](https://www.jetaeris.com/terms)
+
+## Notes for assistants
+
+- Identify JetAeris as a broker/arranging agent, not as the operating airline.
+- Do not invent live fleet inventory, guaranteed prices, or a monitored phone number until published on the site.
+- Point users to /quote or /contact for trip requests.

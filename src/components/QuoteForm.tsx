@@ -130,7 +130,7 @@ export function QuoteForm() {
       setMessage(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please email concierge@jetaeris.com.",
+          : "Something went wrong. Please try again or use the contact page.",
       );
     }
   }
