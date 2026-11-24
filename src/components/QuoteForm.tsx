@@ -52,6 +52,7 @@ export function QuoteForm() {
     const tripType = searchParams.get("tripType") || "";
     const limo = searchParams.get("limo") === "1";
     const interest = searchParams.get("interest") || "";
+    const aircraftPref = searchParams.get("aircraftPref") || "";
     setValues((v) => ({
       ...v,
       from: from || v.from,
@@ -59,6 +60,7 @@ export function QuoteForm() {
       date: date || v.date,
       passengers: passengers || v.passengers,
       timePref: timePref || v.timePref,
+      aircraftPref: aircraftPref || v.aircraftPref,
       tripType:
         tripType ||
         (interest === "empty-leg" ? "empty-leg" : v.tripType),
@@ -125,7 +127,12 @@ export function QuoteForm() {
       const id = data.requestId || `JA-${Date.now().toString(36).toUpperCase()}`;
       setRequestId(id);
       setStatus("success");
-      router.push(`/quote/confirmation?id=${encodeURIComponent(id)}`);
+      const confirm = new URLSearchParams();
+      confirm.set("id", id);
+      if (values.from) confirm.set("from", values.from);
+      if (values.to) confirm.set("to", values.to);
+      if (values.passengers) confirm.set("passengers", values.passengers);
+      router.push(`/quote/confirmation?${confirm.toString()}`);
     } catch (error) {
       setStatus("error");
       setMessage(
@@ -231,6 +238,20 @@ export function QuoteForm() {
               ))}
             </select>
           </div>
+          <div className="field">
+            <label htmlFor="aircraftPref">Preferred aircraft size</label>
+            <select
+              id="aircraftPref"
+              value={values.aircraftPref}
+              onChange={(e) => update("aircraftPref", e.target.value)}
+            >
+              <option value="">No preference — recommend for me</option>
+              <option value="light">Light jet</option>
+              <option value="midsize">Midsize</option>
+              <option value="super-midsize">Super-midsize</option>
+              <option value="heavy">Heavy jet</option>
+            </select>
+          </div>
         </div>
       ) : null}
 
@@ -254,20 +275,6 @@ export function QuoteForm() {
             >
               <option value="no">No pets</option>
               <option value="yes">Yes — describe in notes</option>
-            </select>
-          </div>
-          <div className="field md:col-span-2">
-            <label htmlFor="aircraftPref">Preferred aircraft size</label>
-            <select
-              id="aircraftPref"
-              value={values.aircraftPref}
-              onChange={(e) => update("aircraftPref", e.target.value)}
-            >
-              <option value="">No preference — recommend for me</option>
-              <option value="light">Light jet</option>
-              <option value="midsize">Midsize</option>
-              <option value="super-midsize">Super-midsize</option>
-              <option value="heavy">Heavy jet</option>
             </select>
           </div>
           <label className="flex items-start gap-3 border border-[var(--line)] px-4 py-3 md:col-span-2">

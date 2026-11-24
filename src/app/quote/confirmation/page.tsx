@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { QuoteOptionsPanel } from "@/components/QuoteOptionsPanel";
 import { site } from "@/lib/site";
 import { ConfirmationId } from "./ConfirmationId";
 
@@ -43,6 +44,10 @@ export default function QuoteConfirmationPage() {
             Email {site.email}
           </a>
         </div>
+
+        <Suspense fallback={null}>
+          <QuoteOptionsPanel />
+        </Suspense>
       </div>
     </div>
   );
