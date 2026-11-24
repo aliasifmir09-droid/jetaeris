@@ -188,7 +188,7 @@ export function CinematicFlightHero({ rail }: Props) {
           </div>
 
           {/* Always interactive — never gated by cinema */}
-          <div className="pointer-events-auto relative z-20 mt-8 max-w-5xl">
+          <div className="pointer-events-auto relative z-30 mt-8 max-w-5xl overflow-visible">
             <HeroQuoteStrip />
           </div>
 

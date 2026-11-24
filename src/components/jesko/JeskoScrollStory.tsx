@@ -229,7 +229,7 @@ export function JeskoScrollStory({ rail }: Props) {
                 </span>
               </div>
             </div>
-            <div data-hero-copy className="mt-5 max-w-5xl">
+            <div data-hero-copy className="relative z-30 mt-5 max-w-5xl overflow-visible">
               <HeroQuoteStrip />
             </div>
           </div>
