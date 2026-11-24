@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CinematicFlightHero } from "@/components/CinematicFlightHero";
 import { CtaBand } from "@/components/CtaBand";
+import { JeskoScrollStory } from "@/components/jesko/JeskoScrollStory";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { blogPillars, blogPosts } from "@/lib/blog";
@@ -14,8 +14,8 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Scene 1 — cinematic hero + quote widget */}
-      <CinematicFlightHero rail={railItems} />
+      {/* Jesko-style scroll cinema (window → jet → blueprint → globe → quote) */}
+      <JeskoScrollStory rail={railItems} />
 
       {/* Scene 2 — operational proof strip */}
       <ScrollReveal
