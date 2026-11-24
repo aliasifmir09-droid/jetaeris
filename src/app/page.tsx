@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { blogPillars, blogPosts } from "@/lib/blog";
 import { aircraft, limoCities, routes } from "@/lib/content";
 import { faqItems } from "@/lib/faq";
+import { companyWhyUs } from "@/lib/company";
 import { aircraftClasses, featuredCities, site } from "@/lib/site";
 
 export default function HomePage() {
@@ -80,6 +81,41 @@ export default function HomePage() {
             </Link>
             <Link href="/broker-disclosure" className="btn btn-line">
               Broker disclosure
+            </Link>
+            <Link href="/about" className="btn btn-line">
+              About JetAeris
+            </Link>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      {/* Why JetAeris — crawlable company differentiators */}
+      <ScrollReveal
+        as="section"
+        stagger
+        className="border-b border-[var(--line)] bg-white/40 py-20 md:py-28"
+      >
+        <div className="container">
+          <SectionHeading
+            eyebrow="Why JetAeris"
+            title={companyWhyUs.headline}
+            body={companyWhyUs.lead}
+          />
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {companyWhyUs.items.map((item) => (
+              <div
+                key={item.title}
+                data-reveal
+                className="border-t border-[var(--line)] pt-5"
+              >
+                <h3 className="text-base font-semibold text-ink">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted">{item.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Link href="/about" className="btn btn-primary">
+              Company details
             </Link>
           </div>
         </div>

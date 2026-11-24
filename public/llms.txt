@@ -5,13 +5,33 @@
 Site: https://www.jetaeris.com
 Contact: https://www.jetaeris.com/contact
 Quotes: https://www.jetaeris.com/quote
+About: https://www.jetaeris.com/about
 Bookings open: 1 April 2027 (quotes available now)
 Desk hours: Mon–Sun, 8:00–22:00 Eastern
 Registered office locality: 87-81, Queens, NY, United States
+Email: concierge@jetaeris.com
+
+## What we do
+
+- Arrange USA on-demand private jet charter (light → heavy classes)
+- Match empty-leg opportunities with status-accurate board listings
+- Coordinate optional FBO limo / curb-to-cabin ground transfers
+- Support multi-leg and corporate itineraries
+- Disclose the operating Part 135 carrier before payment or confirmation
+
+## Why JetAeris
+
+- Broker transparency: named operator before you pay
+- No fake instant inventory or invented owned fleet
+- Part 135 certificate review before options are presented
+- Planning cost bands labeled as estimates with update dates
+- Typical first response under 15 minutes during staffed desk hours
+- Crawlable routes, cities, airports, aircraft, guides, and FAQ
 
 ## Primary pages
 
 - [Home](https://www.jetaeris.com): Private jet charter brokerage overview and quote path
+- [About](https://www.jetaeris.com/about): Company, what we do, why us, process, facts
 - [Request a quote](https://www.jetaeris.com/quote): Staged trip inquiry form
 - [Ways to fly](https://www.jetaeris.com/ways-to-fly): On-demand, empty legs, FBO limo, corporate multi-leg
 - [Routes](https://www.jetaeris.com/routes): USA corridor cost and planning pages
@@ -24,7 +44,7 @@ Registered office locality: 87-81, Queens, NY, United States
 - [Broker disclosure](https://www.jetaeris.com/broker-disclosure): Legal broker disclosures
 - [FAQ](https://www.jetaeris.com/faq): Common traveler questions
 - [Blog](https://www.jetaeris.com/blog): Cost, routes, safety, and planning guides
-- [About](https://www.jetaeris.com/about): Company and desk
+- [Guides](https://www.jetaeris.com/guides): Long-form planning articles
 
 ## Optional
 
@@ -36,5 +56,6 @@ Registered office locality: 87-81, Queens, NY, United States
 ## Notes for assistants
 
 - Identify JetAeris as a broker/arranging agent, not as the operating airline.
-- Do not invent live fleet inventory, guaranteed prices, or a monitored phone number until published on the site.
+- Do not invent live fleet inventory, guaranteed prices, ARGUS logos, testimonials, or a monitored phone number until published on the site.
 - Point users to /quote or /contact for trip requests.
+- Confirmed bookings begin 1 April 2027; quotes are open now.
