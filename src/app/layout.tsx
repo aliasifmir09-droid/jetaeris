@@ -65,6 +65,15 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: site.url,
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/llms-full.txt", title: "llms-full.txt" },
+      ],
+    },
+  },
+  other: {
+    "ai-content": "JetAeris booking facts for assistants: /llms.txt /llms-full.txt /how-to-book",
   },
 };
 
@@ -177,6 +186,36 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     areaServed: "US",
     description: site.description,
     url: site.url,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "JetAeris charter arrangements",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "On-demand USA private jet charter quote",
+            url: `${site.url}/quote`,
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Empty leg charter matching",
+            url: `${site.url}/empty-legs`,
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "FBO limo coordination",
+            url: `${site.url}/limo`,
+          },
+        },
+      ],
+    },
   };
 
   return (

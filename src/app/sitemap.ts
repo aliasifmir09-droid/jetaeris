@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "/",
     "/quote",
+    "/how-to-book",
     "/contact",
     "/how-it-works",
     "/ways-to-fly",
@@ -58,7 +59,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         path === "/"
           ? 1
-          : path === "/quote" || path === "/routes" || path === "/faq"
+          : path === "/quote" ||
+              path === "/how-to-book" ||
+              path === "/routes" ||
+              path === "/faq"
             ? 0.95
             : path === "/contact" || path === "/safety"
               ? 0.9
