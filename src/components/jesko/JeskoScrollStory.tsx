@@ -251,11 +251,12 @@ export function JeskoScrollStory({ rail }: Props) {
           data-jet-plate
           className="pointer-events-none absolute inset-x-0 top-[18%] z-20 mx-auto w-[min(110vw,1200px)] will-change-transform"
           style={{
-            filter: "drop-shadow(0 50px 40px rgba(0,0,0,0.75))",
+            filter: "drop-shadow(0 40px 50px rgba(0,0,0,0.85))",
           }}
         >
+          {/* Cloud-free cutout — full airframe visible */}
           <Image
-            src="/media/jet-overhead-uhd.jpg"
+            src="/media/jet-cutout-uhd.png"
             alt="Private jet"
             width={2560}
             height={1440}
@@ -263,6 +264,7 @@ export function JeskoScrollStory({ rail }: Props) {
             sizes="100vw"
             className="h-auto w-full"
             priority
+            unoptimized
           />
         </div>
       </section>
