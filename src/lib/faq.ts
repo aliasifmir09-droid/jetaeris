@@ -126,6 +126,16 @@ export const faqItems: FaqItem[] = [
     q: "Do you serve only the United States?",
     a: "Our focus is USA domestic charter, empty legs, and FBO ground coordination. Ask the desk about cross-border itineraries case by case.",
   },
+  {
+    category: "Company",
+    q: "What does JetAeris do?",
+    a: "JetAeris arranges USA on-demand private jet charter, empty legs, and optional FBO limo through vetted Part 135 direct air carriers. We are a quote-and-concierge brokerage—not an instant-booking marketplace.",
+  },
+  {
+    category: "Company",
+    q: "Why choose JetAeris?",
+    a: "We name the operating Part 135 carrier before you pay, avoid fake live inventory, review certificate status before presenting options, and staff a desk with typical first response under 15 minutes during published hours.",
+  },
 ];
 
 export const faqCategories = [
