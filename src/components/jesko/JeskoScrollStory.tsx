@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { HeroQuoteStrip } from "@/components/HeroQuoteStrip";
+import { DesignedSky } from "@/components/jesko/DesignedSky";
 import { prefersReducedMotion } from "@/lib/motion";
 import { site } from "@/lib/site";
 
@@ -188,16 +189,10 @@ export function JeskoScrollStory({ rail }: Props) {
             <div
               data-window-sky
               className="absolute inset-0 will-change-transform"
+              role="img"
+              aria-label="Designed dusk sky through a cabin window"
             >
-              <Image
-                src="/media/cabin-window-uhd.jpg"
-                alt="View from a private jet above the clouds at sunset"
-                fill
-                priority
-                quality={95}
-                sizes="(max-width: 480px) 78vw, 400px"
-                className="object-cover object-[52%_40%]"
-              />
+              <DesignedSky />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(0,0,0,0.35)_100%)]" />
           </div>
