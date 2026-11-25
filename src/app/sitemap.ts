@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/quote",
     "/how-to-book",
+    "/track",
     "/contact",
     "/how-it-works",
     "/ways-to-fly",

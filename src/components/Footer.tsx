@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { legalLinks, nav, site } from "@/lib/site";
+import { legalLinks, nav, secondaryNav, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -36,23 +36,13 @@ export function Footer() {
         <div>
           <p className="eyebrow text-[var(--accent-soft)]">Navigate</p>
           <ul className="mt-5 space-y-3 text-sm text-white/75">
-            {nav.map((item) => (
+            {[...nav, ...secondaryNav].map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="hover:text-white">
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/faq" className="hover:text-white">
-                FAQ / Q&A
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-white">
-                About
-              </Link>
-            </li>
           </ul>
         </div>
 

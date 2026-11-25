@@ -129,9 +129,11 @@ export function QuoteForm() {
       setStatus("success");
       const confirm = new URLSearchParams();
       confirm.set("id", id);
+      confirm.set("stage", "received");
       if (values.from) confirm.set("from", values.from);
       if (values.to) confirm.set("to", values.to);
       if (values.passengers) confirm.set("passengers", values.passengers);
+      if (values.date) confirm.set("date", values.date);
       router.push(`/quote/confirmation?${confirm.toString()}`);
     } catch (error) {
       setStatus("error");

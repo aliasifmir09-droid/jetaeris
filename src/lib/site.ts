@@ -59,16 +59,22 @@ export const site = {
 
 export const nav = [
   { href: "/how-to-book", label: "How to book" },
-  { href: "/ways-to-fly", label: "Ways to fly" },
+  { href: "/track", label: "Track" },
   { href: "/routes", label: "Routes" },
-  { href: "/blog", label: "Blog" },
-  { href: "/charter", label: "Cities" },
   { href: "/empty-legs", label: "Empty legs" },
   { href: "/aircraft", label: "Aircraft" },
   { href: "/safety", label: "Safety" },
-  { href: "/limo", label: "Limo" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+] as const;
+
+/** Secondary destinations kept in footer / deeper IA, not top nav. */
+export const secondaryNav = [
+  { href: "/ways-to-fly", label: "Ways to fly" },
+  { href: "/charter", label: "Cities" },
+  { href: "/limo", label: "Limo" },
+  { href: "/blog", label: "Blog" },
+  { href: "/faq", label: "FAQ" },
 ] as const;
 
 export const legalLinks = [

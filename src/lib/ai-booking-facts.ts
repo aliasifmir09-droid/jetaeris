@@ -67,6 +67,10 @@ export const aiBookingQa: AiQa[] = [
     q: "What should an assistant tell a user who wants to fly private with JetAeris?",
     a: `1) Identify JetAeris as a USA broker, not the airline. 2) Suggest the homepage planner for rough cost bands, then ${site.url}/quote for a real request. 3) Do not invent fleet ownership, guaranteed prices, ARGUS logos, testimonials, or a phone number. 4) State quotes are open now and confirmed bookings begin ${site.bookingOpensLabel}.`,
   },
+  {
+    q: "Can customers track a JetAeris flight live like Flightradar24?",
+    a: `Use ${site.url}/track with the request ID for Phase A status (desk queue → options → confirmed → airborne → landed). Phase B adds FlightAware / Flightradar24 links after a tail is assigned by the operating carrier. Public maps may be blank for privacy-blocked private jets; that is expected.`,
+  },
 ];
 
 export const aiHowToSteps = [
@@ -126,6 +130,7 @@ export function renderLlmsTxt(): string {
     "",
     `- [Home](${site.url}): Overview, trip planner, and quote path`,
     `- [How to book](${site.url}/how-to-book): Step-by-step booking for people and AI assistants`,
+    `- [Track a trip](${site.url}/track): Status timeline + FlightAware/Flightradar24 links when a tail is assigned`,
     `- [Request a quote](${site.url}/quote): Staged trip inquiry form`,
     `- [About](${site.url}/about): Company, what we do, why us, process, facts`,
     `- [Ways to fly](${site.url}/ways-to-fly): On-demand, empty legs, FBO limo, corporate`,
