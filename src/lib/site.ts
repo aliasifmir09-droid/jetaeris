@@ -70,6 +70,7 @@ export const nav = [
 
 /** Secondary destinations kept in footer / deeper IA, not top nav. */
 export const secondaryNav = [
+  { href: "/what-we-do", label: "What we do" },
   { href: "/ways-to-fly", label: "Ways to fly" },
   { href: "/charter", label: "Cities" },
   { href: "/limo", label: "Limo" },
