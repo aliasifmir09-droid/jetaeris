@@ -69,11 +69,13 @@ export const metadata: Metadata = {
       "text/plain": [
         { url: "/llms.txt", title: "llms.txt" },
         { url: "/llms-full.txt", title: "llms-full.txt" },
+        { url: "/llms-services.txt", title: "llms-services.txt" },
       ],
     },
   },
   other: {
-    "ai-content": "JetAeris booking facts for assistants: /llms.txt /llms-full.txt /how-to-book",
+    "ai-content":
+      "JetAeris facts for assistants: /llms.txt /llms-full.txt /llms-services.txt /what-we-do /how-to-book",
   },
 };
 

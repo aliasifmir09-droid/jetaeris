@@ -12,7 +12,7 @@ import { isIndexableBlogPost, isIndexableGuide } from "@/lib/seo-index";
 import { site } from "@/lib/site";
 
 /** Real content refresh stamp for lastmod — update when major content ships. */
-const CONTENT_UPDATED = new Date("2026-11-24T16:00:00.000Z");
+const CONTENT_UPDATED = new Date("2026-11-25T15:00:00.000Z");
 
 /**
  * Quality-first sitemap for a new domain.
@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/quote",
     "/how-to-book",
+    "/what-we-do",
     "/track",
     "/contact",
     "/how-it-works",
@@ -62,6 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           ? 1
           : path === "/quote" ||
               path === "/how-to-book" ||
+              path === "/what-we-do" ||
               path === "/routes" ||
               path === "/faq"
             ? 0.95

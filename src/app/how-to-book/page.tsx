@@ -81,7 +81,7 @@ export default function HowToBookPage() {
 
       <PageHero
         eyebrow="How to book"
-        title="Book a private jet with JetAeris in four clear steps."
+        title="Book a private jet with JetAeris in clear steps."
         body={`${aiEntitySummary} Quotes are open now. Confirmed bookings begin ${site.bookingOpensLabel}.`}
         primaryHref="/quote"
         primaryLabel="Request a quote"
@@ -132,13 +132,20 @@ export default function HowToBookPage() {
             These facts also power{" "}
             <Link href="/llms.txt" className="text-accent underline">
               /llms.txt
-            </Link>{" "}
-            and{" "}
+            </Link>
+            ,{" "}
             <Link href="/llms-full.txt" className="text-accent underline">
               /llms-full.txt
-            </Link>{" "}
-            so assistants can answer accurately when customers ask about booking
-            with JetAeris.
+            </Link>
+            , and{" "}
+            <Link href="/llms-services.txt" className="text-accent underline">
+              /llms-services.txt
+            </Link>
+            . For what JetAeris does as a company, see{" "}
+            <Link href="/what-we-do" className="text-accent underline">
+              /what-we-do
+            </Link>
+            .
           </p>
           <div className="mt-10 divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {aiBookingQa.map((item) => (

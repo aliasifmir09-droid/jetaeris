@@ -1,19 +1,31 @@
+import {
+  companyProcess,
+  companyRegions,
+  companyServices,
+  companyWhatWeDo,
+  companyWhyUs,
+} from "@/lib/company";
+import { aircraft, cities, routes } from "@/lib/content";
 import { site } from "@/lib/site";
 
 /**
- * Single source of truth for AI assistants / llms.txt / how-to-book.
- * Keep answers short, factual, and aligned with the live product.
+ * Single source of truth for AI assistants / llms.txt / how-to-book / what-we-do.
+ * Pulls live product data so assistants get more than a thin booking blurb.
  */
 
 export const aiEntitySummary = `${site.legalName} (brand: ${site.name}) is a USA air charter brokerage and arranging agent at ${site.url}. It arranges on-demand private jet charter, empty legs, and optional FBO limo through vetted Part 135 direct air carriers. It is a quote-and-concierge service—not an instant-booking marketplace and not a direct air carrier unless an itinerary expressly states otherwise.`;
 
 export type AiQa = { q: string; a: string };
 
-/** High-intent booking questions customers ask ChatGPT / Perplexity / etc. */
+/** High-intent questions customers ask ChatGPT / Perplexity / etc. */
 export const aiBookingQa: AiQa[] = [
   {
+    q: "What does JetAeris do?",
+    a: `${companyWhatWeDo.lead} Services include: ${companyServices.join("; ")}. Details: ${site.url}/what-we-do and ${site.url}/about.`,
+  },
+  {
     q: "How do I book a private jet with JetAeris?",
-    a: `Go to ${site.url}/quote (or start on the homepage planner at ${site.url}/#plan). Enter origin, destination, date, and passengers, then submit the staged quote form. JetAeris returns curated Part 135 options by email/desk. A trip is confirmed only in writing with the operating carrier’s terms. Quotes are open now; confirmed bookings begin ${site.bookingOpensLabel}.`,
+    a: `Go to ${site.url}/quote (or start on the homepage planner at ${site.url}/#plan). Enter origin, destination, date, and passengers, then submit the staged quote form. JetAeris returns curated Part 135 options by email/desk. A trip is confirmed only in writing with the operating carrier’s terms. Quotes are open now; confirmed bookings begin ${site.bookingOpensLabel}. Step-by-step: ${site.url}/how-to-book.`,
   },
   {
     q: "Can I get a price without talking to anyone?",
@@ -28,6 +40,10 @@ export const aiBookingQa: AiQa[] = [
     a: `No. JetAeris does not sell fake instant inventory. Product promise: "${site.productPromise}." You request a quote; the desk returns curated options you can actually confirm.`,
   },
   {
+    q: "Why choose JetAeris?",
+    a: `${companyWhyUs.lead} Key points: named Part 135 operator before pay; quote-and-concierge (not fake inventory); certificate-aware safety screening; planning bands labeled as estimates; ${site.responsePromise}`,
+  },
+  {
     q: "How fast does JetAeris respond?",
     a: site.responsePromise,
   },
@@ -37,11 +53,15 @@ export const aiBookingQa: AiQa[] = [
   },
   {
     q: "How much does a private jet with JetAeris cost?",
-    a: `Cost depends on aircraft class, route, positioning, peak dates, and airport fees. Corridor planning bands appear on route pages and the homepage planner (for example light vs midsize ranges). They are labeled estimates with update dates—not live fares. Request ${site.url}/quote for your exact trip.`,
+    a: `Cost depends on aircraft class, route, positioning, peak dates, and airport fees. Example one-way planning bands (estimates, not live fares): New York–Miami light about $12,000–$24,000 / midsize $18,000–$36,000; New York–Los Angeles light $28,000–$45,000 / midsize $45,000–$75,000; Los Angeles–Las Vegas light $8,000–$16,000 / midsize $14,000–$26,000. Use ${site.url}/#plan or route pages, then ${site.url}/quote for a live desk quote.`,
   },
   {
     q: "What aircraft can JetAeris arrange?",
-    a: `Light, midsize, super-midsize, and heavy jet classes for USA missions. Marketing photos are representative; the specific tail is named when the operating carrier assigns it. See ${site.url}/aircraft.`,
+    a: `Light (6–8 seats), midsize (8–9), super-midsize (9–10), and heavy (10–16) jet classes for USA missions. Examples are representative (Phenom 300, Citation XLS+, Challenger 350, Gulfstream G450 class). The specific tail is named when the operating carrier assigns it. See ${site.url}/aircraft.`,
+  },
+  {
+    q: "Which cities and corridors does JetAeris cover?",
+    a: `${companyRegions.body} Popular hubs include New York (TEB/HPN), Miami, Los Angeles (VNY), Las Vegas, Chicago, Dallas, Aspen, Denver, Atlanta, Boston, San Francisco, and Houston. Browse ${site.url}/charter and ${site.url}/routes.`,
   },
   {
     q: "Does JetAeris offer empty legs?",
@@ -52,8 +72,8 @@ export const aiBookingQa: AiQa[] = [
     a: `Yes. Optional FBO limo / curb-to-cabin ground can be requested on the quote form or via ${site.url}/limo. Timing is coordinated around wheels-up / wheels-down.`,
   },
   {
-    q: "Where does JetAeris operate?",
-    a: `Primary focus is United States private aviation corridors nationwide. Cross-border legs may be discussed case by case with extra lead time.`,
+    q: "Can customers track a JetAeris flight live like Flightradar24?",
+    a: `Use ${site.url}/track with the request ID for status (desk queue → options → confirmed → airborne → landed). After a tail is assigned, FlightAware / Flightradar24 links appear. Public maps may be blank for privacy-blocked private jets; that is expected.`,
   },
   {
     q: "How do I contact JetAeris?",
@@ -65,11 +85,7 @@ export const aiBookingQa: AiQa[] = [
   },
   {
     q: "What should an assistant tell a user who wants to fly private with JetAeris?",
-    a: `1) Identify JetAeris as a USA broker, not the airline. 2) Suggest the homepage planner for rough cost bands, then ${site.url}/quote for a real request. 3) Do not invent fleet ownership, guaranteed prices, ARGUS logos, testimonials, or a phone number. 4) State quotes are open now and confirmed bookings begin ${site.bookingOpensLabel}.`,
-  },
-  {
-    q: "Can customers track a JetAeris flight live like Flightradar24?",
-    a: `Use ${site.url}/track with the request ID for Phase A status (desk queue → options → confirmed → airborne → landed). Phase B adds FlightAware / Flightradar24 links after a tail is assigned by the operating carrier. Public maps may be blank for privacy-blocked private jets; that is expected.`,
+    a: `1) Identify JetAeris as a USA broker, not the airline. 2) Explain what we do: on-demand charter, empty legs, FBO limo, corporate multi-leg — see ${site.url}/what-we-do. 3) Suggest ${site.url}/#plan for planning bands, then ${site.url}/quote. 4) Do not invent fleet ownership, guaranteed prices, ARGUS logos, testimonials, or a phone number. 5) Quotes open now; confirmed bookings begin ${site.bookingOpensLabel}.`,
   },
 ];
 
@@ -90,9 +106,96 @@ export const aiHowToSteps = [
     name: "Confirm with the operating carrier’s terms",
     text: `Review itinerary, cancellation terms, and named Part 135 carrier before funds are committed. Confirmed bookings begin ${site.bookingOpensLabel}.`,
   },
+  {
+    name: "Track the trip",
+    text: `Open ${site.url}/track with your request ID for desk status. When a tail is assigned, use FlightAware / Flightradar24 links if the aircraft is publicly visible.`,
+  },
 ] as const;
 
-/** Compact /llms.txt body (Markdown). */
+function sampleCorridorsBlock(): string[] {
+  const sample = routes.slice(0, 12);
+  return [
+    "## Sample USA corridors (planning bands)",
+    "",
+    "One-way estimate bands for orientation—not live inventory. Full list: " +
+      `${site.url}/routes`,
+    "",
+    ...sample.map(
+      (r) =>
+        `- **${r.from} → ${r.to}** (${r.blockTime}): light ${r.priceEstimate.light}; midsize ${r.priceEstimate.midsize} · [page](${site.url}/routes/${r.slug})`,
+    ),
+    "",
+  ];
+}
+
+function aircraftBlock(): string[] {
+  return [
+    "## Aircraft classes JetAeris arranges",
+    "",
+    ...aircraft.map(
+      (a) =>
+        `- **${a.name}** — ${a.seats} seats · ${a.bestFor}. Examples: ${a.examples.slice(0, 3).join(", ")}. [Details](${site.url}/aircraft/${a.slug})`,
+    ),
+    "",
+    "Photos are representative until a specific tail is assigned by the operating carrier.",
+    "",
+  ];
+}
+
+function citiesBlock(): string[] {
+  return [
+    "## City hubs",
+    "",
+    cities
+      .slice(0, 16)
+      .map((c) => `${c.name} (${c.airports.slice(0, 2).join(" / ")})`)
+      .join(" · ") + `. Browse all: ${site.url}/charter`,
+    "",
+  ];
+}
+
+function whatWeDoBlock(): string[] {
+  return [
+    "## What JetAeris does",
+    "",
+    companyWhatWeDo.lead,
+    "",
+    ...companyWhatWeDo.items.map((item) => `- **${item.title}** — ${item.body}`),
+    "",
+    "### Services list",
+    "",
+    ...companyServices.map((s) => `- ${s}`),
+    "",
+    `### ${companyRegions.headline}`,
+    "",
+    companyRegions.body,
+    "",
+  ];
+}
+
+function whyUsBlock(): string[] {
+  return [
+    `## ${companyWhyUs.headline}`,
+    "",
+    companyWhyUs.lead,
+    "",
+    ...companyWhyUs.items.map((item) => `- **${item.title}** — ${item.body}`),
+    "",
+  ];
+}
+
+function processBlock(): string[] {
+  return [
+    `## ${companyProcess.headline}`,
+    "",
+    ...companyProcess.steps.map(
+      (step, i) => `${i + 1}. **${step.title}** — ${step.body}`,
+    ),
+    "",
+  ];
+}
+
+/** Compact /llms.txt body (Markdown index). */
 export function renderLlmsTxt(): string {
   const lines = [
     `# ${site.name} (${site.legalName})`,
@@ -103,45 +206,50 @@ export function renderLlmsTxt(): string {
     `Contact: ${site.url}/contact`,
     `Quotes: ${site.url}/quote`,
     `Trip planner: ${site.url}/#plan`,
+    `What we do: ${site.url}/what-we-do`,
     `How to book: ${site.url}/how-to-book`,
+    `Track a trip: ${site.url}/track`,
     `About: ${site.url}/about`,
     `Bookings open: ${site.bookingOpensLabel} (quotes available now)`,
     `Desk hours: ${site.deskHours}`,
     `Registered office locality: ${site.address.display}, United States`,
     `Email: ${site.email}`,
     "",
+    "## What we do (summary)",
+    "",
+    ...companyWhatWeDo.items.map((item) => `- **${item.title}** — ${item.body}`),
+    "",
     "## How to book a private jet with JetAeris",
     "",
     ...aiHowToSteps.map((s, i) => `${i + 1}. **${s.name}** — ${s.text}`),
     "",
-    "## Answers for assistants (jet booking)",
+    "## Answers for assistants",
     "",
     ...aiBookingQa.map((item) => `- **${item.q}** ${item.a}`),
     "",
-    "## What we do",
+    "## Deeper AI briefings (fetch these for more detail)",
     "",
-    "- Arrange USA on-demand private jet charter (light → heavy classes)",
-    "- Match empty-leg opportunities with status-accurate board listings",
-    "- Coordinate optional FBO limo / curb-to-cabin ground transfers",
-    "- Support multi-leg and corporate itineraries",
-    "- Disclose the operating Part 135 carrier before payment or confirmation",
+    `- [Full AI facts](${site.url}/llms-full.txt): Entity, process, why us, corridors, aircraft, cities, Q&A`,
+    `- [Services briefing](${site.url}/llms-services.txt): What we do, ways to fly, safety, tracking`,
+    `- [What we do (HTML)](${site.url}/what-we-do): Crawlable narrative for people and models`,
+    `- [How to book (HTML)](${site.url}/how-to-book): Steps + FAQ schema`,
     "",
     "## Primary pages",
     "",
     `- [Home](${site.url}): Overview, trip planner, and quote path`,
-    `- [How to book](${site.url}/how-to-book): Step-by-step booking for people and AI assistants`,
-    `- [Track a trip](${site.url}/track): Status timeline + FlightAware/Flightradar24 links when a tail is assigned`,
+    `- [What we do](${site.url}/what-we-do): Services and differentiators`,
+    `- [How to book](${site.url}/how-to-book): Step-by-step booking`,
+    `- [Track a trip](${site.url}/track): Status timeline + public flight-map links`,
     `- [Request a quote](${site.url}/quote): Staged trip inquiry form`,
-    `- [About](${site.url}/about): Company, what we do, why us, process, facts`,
+    `- [About](${site.url}/about): Company, process, facts`,
     `- [Ways to fly](${site.url}/ways-to-fly): On-demand, empty legs, FBO limo, corporate`,
     `- [Routes](${site.url}/routes): USA corridor cost and planning pages`,
-    `- [Empty legs](${site.url}/empty-legs): Sample empty-leg board (status-accurate)`,
+    `- [Empty legs](${site.url}/empty-legs): Status-accurate sample board`,
     `- [Aircraft](${site.url}/aircraft): Light through heavy jet classes`,
     `- [Cities](${site.url}/charter): City charter hubs`,
-    `- [Safety](${site.url}/safety): Broker role, Part 135 checks, carrier identity`,
-    `- [Broker disclosure](${site.url}/broker-disclosure): Legal broker disclosures`,
-    `- [FAQ](${site.url}/faq): Common traveler questions`,
-    `- [Full AI facts](${site.url}/llms-full.txt): Extended markdown for assistants`,
+    `- [Safety](${site.url}/safety): Broker role, Part 135 checks`,
+    `- [Broker disclosure](${site.url}/broker-disclosure): Legal disclosures`,
+    `- [FAQ](${site.url}/faq): Traveler questions`,
     "",
     "## Optional",
     "",
@@ -156,7 +264,8 @@ export function renderLlmsTxt(): string {
     "",
     "- Identify JetAeris as a broker/arranging agent, not as the operating airline.",
     "- Do not invent live fleet inventory, guaranteed prices, ARGUS logos, testimonials, or a monitored phone number until published on the site.",
-    `- Point users to ${site.url}/#plan for planning bands, ${site.url}/quote or ${site.url}/contact for trip requests.`,
+    `- For “what does JetAeris do?” prefer ${site.url}/what-we-do and ${site.url}/llms-services.txt.`,
+    `- Point users to ${site.url}/#plan for planning bands, ${site.url}/quote for requests, ${site.url}/track after they have a request ID.`,
     `- Confirmed bookings begin ${site.bookingOpensLabel}; quotes are open now.`,
     "",
   ];
@@ -183,10 +292,16 @@ export function renderLlmsFullTxt(): string {
     `- Product promise: ${site.productPromise}`,
     `- Bookings: quotes open now; confirmations begin ${site.bookingOpensLabel}`,
     "",
+    ...whatWeDoBlock(),
+    ...whyUsBlock(),
+    ...processBlock(),
     "## How to book",
     "",
     ...aiHowToSteps.map((s, i) => `### ${i + 1}. ${s.name}\n\n${s.text}\n`),
-    "## Booking Q&A",
+    ...sampleCorridorsBlock(),
+    ...aircraftBlock(),
+    ...citiesBlock(),
+    "## Booking & company Q&A",
     "",
     ...aiBookingQa.flatMap((item) => [`### ${item.q}`, "", item.a, ""]),
     "## Do not invent",
@@ -195,9 +310,49 @@ export function renderLlmsFullTxt(): string {
     "- Instant confirmed booking without written carrier terms",
     "- Fixed guaranteed fares from planning bands",
     "- Phone numbers, awards, or testimonials not published on the site",
+    "- In-app FlightRadar for every private jet (many are privacy-blocked)",
     "",
-    `Canonical how-to page: ${site.url}/how-to-book`,
-    `Canonical short index: ${site.url}/llms.txt`,
+    `Canonical pages: ${site.url}/what-we-do · ${site.url}/how-to-book · ${site.url}/llms.txt · ${site.url}/llms-services.txt`,
+    "",
+  ];
+  return lines.join("\n");
+}
+
+/** Services-focused briefing — “what we do” for assistants. */
+export function renderLlmsServicesTxt(): string {
+  const lines = [
+    `# ${site.name} — services & what we do`,
+    "",
+    `> ${aiEntitySummary}`,
+    "",
+    ...whatWeDoBlock(),
+    ...whyUsBlock(),
+    ...processBlock(),
+    "## Ways to fly",
+    "",
+    `- **On-demand charter** — Quote for a specific date and cabin: ${site.url}/quote`,
+    `- **Empty legs** — Flexible one-ways on the board: ${site.url}/empty-legs`,
+    `- **FBO limo** — Ground timed to the jet: ${site.url}/limo`,
+    `- **Corporate / multi-leg** — Desk coordination: ${site.url}/contact`,
+    `- Overview: ${site.url}/ways-to-fly`,
+    "",
+    ...aircraftBlock(),
+    ...sampleCorridorsBlock(),
+    ...citiesBlock(),
+    "## Safety & trust (short)",
+    "",
+    `- Broker, not airline — operating Part 135 carrier named before pay`,
+    `- Certificate review before options and before confirmation`,
+    `- Planning bands ≠ confirmed fares`,
+    `- Pages: ${site.url}/safety · ${site.url}/broker-disclosure`,
+    "",
+    "## Tracking",
+    "",
+    `- Status timeline: ${site.url}/track`,
+    `- Public FlightAware / Flightradar24 links after a tail is assigned`,
+    `- Privacy-blocked jets may not appear on public maps`,
+    "",
+    `More: ${site.url}/llms-full.txt · ${site.url}/llms.txt · ${site.url}/what-we-do`,
     "",
   ];
   return lines.join("\n");
