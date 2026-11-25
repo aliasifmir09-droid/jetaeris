@@ -30,6 +30,7 @@ export function Header() {
     pathname.startsWith("/about") ||
     pathname.startsWith("/routes/") ||
     pathname.startsWith("/airports/") ||
+    pathname === "/aircraft" ||
     pathname.startsWith("/aircraft/");
   const lightChrome = overDarkHero && !scrolled && !open;
 

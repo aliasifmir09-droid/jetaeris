@@ -840,3 +840,30 @@ img {
   width: 100%;
   height: 100%;
 }
+
+/* —— Aircraft cabin explorer —— */
+@keyframes cabin-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cabin-explorer-photo {
+  animation: cabin-photo-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cabin-explorer-stage {
+  animation: cabin-photo-in 0.55s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cabin-explorer-photo,
+  .cabin-explorer-stage {
+    animation: none;
+  }
+}
