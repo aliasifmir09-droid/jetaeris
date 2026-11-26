@@ -37,7 +37,21 @@ export default function HomePage() {
               <p className="text-[0.68rem] tracking-[0.18em] text-accent uppercase">
                 {label}
               </p>
-              <p className="mt-2 text-sm leading-6 text-ink-soft">{body}</p>
+              <p className="mt-2 text-sm leading-6 text-ink-soft">
+                {label === "Desk" && site.phoneHref ? (
+                  <>
+                    {body} ·{" "}
+                    <a
+                      href={site.phoneHref}
+                      className="text-accent underline underline-offset-2"
+                    >
+                      {site.phoneDisplay}
+                    </a>
+                  </>
+                ) : (
+                  body
+                )}
+              </p>
             </div>
           ))}
         </div>

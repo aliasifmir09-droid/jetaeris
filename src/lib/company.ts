@@ -116,6 +116,10 @@ export const companyFaqs = [
     q: "Where is JetAeris based?",
     a: `${site.address.publicNote}`,
   },
+  {
+    q: "How do I reach JetAeris by phone?",
+    a: `Call the desk at ${site.phoneDisplay} during staffed hours (${site.deskHours}). You can also email ${site.email} anytime—inquiry intake is available 24/7 online.`,
+  },
 ] as const;
 
 export const companyFacts = [
@@ -126,6 +130,11 @@ export const companyFacts = [
   { label: "Role", value: site.role },
   { label: "Primary market", value: "United States private aviation" },
   { label: "Email", value: site.email, href: `mailto:${site.email}` },
+  {
+    label: "Phone",
+    value: site.phoneDisplay,
+    href: site.phoneHref,
+  },
   { label: "Desk hours", value: site.deskHours },
   {
     label: "Bookings",

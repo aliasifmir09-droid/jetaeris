@@ -13,7 +13,7 @@ import {
 } from "@/lib/company";
 import { site } from "@/lib/site";
 
-const aboutDescription = `${site.legalName} is a USA private jet charter broker in Queens, NY. On-demand flights, empty legs, and FBO limo via Part 135 carriers—named before you pay.`;
+const aboutDescription = `${site.legalName} is a USA private jet charter broker in Jackson Heights, NY. On-demand flights, empty legs, and FBO limo via Part 135 carriers—named before you pay.`;
 
 export const metadata: Metadata = {
   title: "About JetAeris | USA Private Jet Charter Broker",
@@ -48,6 +48,7 @@ export default function AboutPage() {
         streetAddress: site.address.line1,
         addressLocality: site.address.city,
         addressRegion: site.address.region,
+        postalCode: site.address.postalCode,
         addressCountry: site.address.country,
       },
       knowsAbout: [
@@ -226,18 +227,6 @@ export default function AboutPage() {
                   </dd>
                 </div>
               ))}
-              <div>
-                <dt className="text-muted">Phone</dt>
-                <dd className="mt-1 text-muted">
-                  {site.phoneDisplay && site.phoneHref ? (
-                    <a href={site.phoneHref} className="text-ink underline">
-                      {site.phoneDisplay}
-                    </a>
-                  ) : (
-                    "Monitored U.S. line publishing when provisioned—email for immediate requests."
-                  )}
-                </dd>
-              </div>
             </dl>
           </aside>
         </div>

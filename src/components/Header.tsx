@@ -67,6 +67,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {site.phoneHref ? (
+            <a
+              href={site.phoneHref}
+              className={`hidden text-[0.72rem] font-semibold tracking-[0.12em] uppercase md:inline-flex ${
+                lightChrome ? "!text-white/90" : "text-[var(--ink-soft)]"
+              }`}
+            >
+              {site.phoneDisplay}
+            </a>
+          ) : null}
           <Link
             href="/quote"
             className={`btn hidden sm:inline-flex ${
@@ -98,6 +108,14 @@ export function Header() {
       {open ? (
         <div className="border-t border-[var(--line)] bg-paper lg:hidden">
           <div className="container flex flex-col gap-1 py-4">
+            {site.phoneHref ? (
+              <a
+                href={site.phoneHref}
+                className="px-2 py-3 text-[0.85rem] font-semibold tracking-[0.1em] text-[var(--ink)] uppercase"
+              >
+                Call {site.phoneDisplay}
+              </a>
+            ) : null}
             {nav.map((item) => (
               <Link
                 key={item.href}

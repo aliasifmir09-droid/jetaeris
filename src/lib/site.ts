@@ -23,9 +23,10 @@ export const site = {
     "USA private jet charter by JetAeris—on-demand flights, empty legs, and FBO limo via Part 135 carriers. Request a quote; bookings open 1 April 2027.",
   description:
     "Jet Aeris Inc (JetAeris) is a USA air charter brokerage arranging on-demand private jet flights, empty legs, and FBO ground transfers through vetted Part 135 direct air carriers. Quotes are open now; confirmed bookings begin 1 April 2027. JetAeris is a quote-and-concierge service—not an instant-booking marketplace.",
-  // Do not use fictional 555 numbers. Leave blank until a real monitored line is provisioned.
-  phoneDisplay: "",
-  phoneHref: "",
+  /** Genuine monitored U.S. desk line (917). */
+  phoneDisplay: "(917) 460-5550",
+  phoneHref: "tel:+19174605550",
+  phoneE164: "+19174605550",
   email: "concierge@jetaeris.com",
   legalEmail: "legal@jetaeris.com",
   privacyEmail: "privacy@jetaeris.com",
@@ -36,17 +37,16 @@ export const site = {
   footerHours:
     "Inquiry intake 24/7 · Typical response under 15 minutes during staffed desk hours",
   address: {
-    line1: "87-81",
-    city: "Queens",
+    line1: "37-68 74th Street",
+    city: "Jackson Heights",
     region: "NY",
-    postalCode: "",
+    postalCode: "11372",
     country: "US",
     /** Short display for compact UI */
-    display: "87-81, Queens, NY",
+    display: "37-68 74th Street, Jackson Heights, NY 11372",
     kind: "Registered office",
-    /** Honest labeling until full street/ZIP are authorized for public use */
     publicNote:
-      "Registered office locality: 87-81, Queens, NY, United States. Full street name, suite, and ZIP are confirmed on contracting documents and available on request for verification. Do not treat this listing as a walk-in customer facility.",
+      "Registered office: 37-68 74th Street, Jackson Heights, NY 11372, United States. This is the company office address—not a walk-in FBO or airport counter.",
   },
   role:
     "Air charter broker / arranging agent — not a direct air carrier unless an itinerary expressly states otherwise.",

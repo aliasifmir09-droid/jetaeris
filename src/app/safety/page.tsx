@@ -79,6 +79,13 @@ export default function SafetyPage() {
                 {site.responsePromise}
               </p>
               <p className="mt-4 text-sm text-white/55">{site.deskHours}</p>
+              {site.phoneHref ? (
+                <p className="mt-3 text-sm text-white/80">
+                  <a href={site.phoneHref} className="underline underline-offset-4">
+                    {site.phoneDisplay}
+                  </a>
+                </p>
+              ) : null}
               <div className="mt-10 flex flex-col gap-3">
                 <Link href="/broker-disclosure" className="btn btn-ghost">
                   Broker disclosure
@@ -86,6 +93,11 @@ export default function SafetyPage() {
                 <Link href="/cancellation-policy" className="btn btn-ghost">
                   Cancellation policy
                 </Link>
+                {site.phoneHref ? (
+                  <a href={site.phoneHref} className="btn btn-ghost">
+                    Call the desk
+                  </a>
+                ) : null}
                 <Link href="/quote" className="btn btn-light">
                   Request a quote
                 </Link>

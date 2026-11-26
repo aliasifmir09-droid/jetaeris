@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     "USA private aviation",
     "Part 135",
     "Jet Aeris Inc",
+    "Jackson Heights NY private jet",
     "Queens NY private jet",
   ],
   openGraph: {
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       streetAddress: site.address.line1,
       addressLocality: site.address.city,
       addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
     contactPoint: [
@@ -126,7 +128,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     ],
   };
 
-  /** LocalBusiness for NAP / local SEO tools — phone omitted until a real line exists. */
+  /** LocalBusiness for NAP / local SEO tools — includes published desk phone. */
   const localBusinessLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -148,6 +150,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       streetAddress: site.address.line1,
       addressLocality: site.address.city,
       addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
     openingHoursSpecification: {

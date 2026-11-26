@@ -32,9 +32,16 @@ export function StickyQuoteBar() {
             Private charter, precisely arranged.
           </p>
         </div>
-        <Link href="/quote" className="btn btn-light">
-          Request a private quote
-        </Link>
+        <div className="flex flex-wrap items-center gap-2">
+          {site.phoneHref ? (
+            <a href={site.phoneHref} className="btn btn-ghost">
+              {site.phoneDisplay}
+            </a>
+          ) : null}
+          <Link href="/quote" className="btn btn-light">
+            Request a private quote
+          </Link>
+        </div>
       </div>
     </div>
   );
