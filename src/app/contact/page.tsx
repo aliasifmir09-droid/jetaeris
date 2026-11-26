@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact us",
-  description: `Contact ${site.legalName} (JetAeris) in Queens, NY for private jet charter, empty legs, and FBO limo coordination.`,
+  description: `Contact ${site.legalName} (JetAeris) at ${site.phoneDisplay} or ${site.email}. Office: ${site.address.display}. Private jet charter, empty legs, and FBO limo.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -38,13 +38,13 @@ export default function ContactPage() {
               <dd className="mt-2 text-[1.05rem] leading-7 text-ink">
                 {site.address.line1}
                 <br />
-                {site.address.city}, {site.address.region}
+                {site.address.city}, {site.address.region}{" "}
+                {site.address.postalCode}
                 <br />
                 United States
               </dd>
               <dd className="mt-2 text-sm leading-6 text-muted">
-                Full street, suite, and ZIP confirmed on contracting documents
-                and available on request for verification.
+                {site.address.publicNote}
               </dd>
             </div>
             <div>

@@ -61,7 +61,8 @@ export default function BrokerDisclosurePage() {
 
       <h2 className="serif pt-4 text-2xl text-ink">Complaints</h2>
       <p>
-        Customer service and complaint intake: {site.email}. Legal notices:{" "}
+        Customer service and complaint intake: {site.email}
+        {site.phoneDisplay ? ` · ${site.phoneDisplay}` : ""}. Legal notices:{" "}
         {site.legalEmail}.
       </p>
 
@@ -71,6 +72,12 @@ export default function BrokerDisclosurePage() {
         <br />
         {site.address.kind}: {site.address.display}
         <br />
+        {site.phoneDisplay ? (
+          <>
+            Phone: {site.phoneDisplay}
+            <br />
+          </>
+        ) : null}
         {site.legalEmail}
       </p>
       <p className="text-sm text-muted">

@@ -126,7 +126,15 @@ export function TripTrackClient() {
           <FlightTrackLinks tail={trip.tail} stage={trip.stage} />
 
           <p className="text-sm leading-6 text-muted">
-            Desk updates: {site.responsePromise} Email{" "}
+            Desk updates: {site.responsePromise} Call{" "}
+            {site.phoneHref ? (
+              <a className="text-accent underline" href={site.phoneHref}>
+                {site.phoneDisplay}
+              </a>
+            ) : (
+              "the desk"
+            )}{" "}
+            or email{" "}
             <a className="text-accent underline" href={`mailto:${site.email}`}>
               {site.email}
             </a>{" "}

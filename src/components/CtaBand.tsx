@@ -26,10 +26,23 @@ export function CtaBand({
         <p className="mt-3 text-xs tracking-[0.12em] text-white/45 uppercase">
           {site.deskHours}
         </p>
+        {site.phoneHref ? (
+          <p className="mt-3 text-sm text-white/70">
+            Call{" "}
+            <a href={site.phoneHref} className="text-white underline underline-offset-4">
+              {site.phoneDisplay}
+            </a>
+          </p>
+        ) : null}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Link href="/quote" className="btn btn-light">
             Request a quote
           </Link>
+          {site.phoneHref ? (
+            <a href={site.phoneHref} className="btn btn-ghost">
+              Call the desk
+            </a>
+          ) : null}
           <Link href="/empty-legs" className="btn btn-ghost">
             Empty legs
           </Link>

@@ -28,8 +28,8 @@ export function Footer() {
             United States
           </p>
           <p className="mt-3 max-w-sm text-xs leading-5 text-white/35">
-            Full street, suite, and ZIP confirmed on contracting documents.
-            Quote-and-concierge brokerage—not instant booking.
+            Quote-and-concierge brokerage—not instant booking. Office address is
+            not a walk-in FBO counter.
           </p>
         </div>
 
@@ -117,6 +117,11 @@ export function Footer() {
             © 2026 {site.legalName}. All rights reserved. · {site.name}
           </p>
           <div className="flex flex-wrap gap-5">
+            {site.phoneHref ? (
+              <a href={site.phoneHref} className="hover:text-white/80">
+                {site.phoneDisplay}
+              </a>
+            ) : null}
             <Link href="/privacy" className="hover:text-white/80">
               Privacy
             </Link>

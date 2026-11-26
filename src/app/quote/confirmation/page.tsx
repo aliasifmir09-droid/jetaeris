@@ -71,6 +71,11 @@ export default function QuoteConfirmationPage() {
           <Link href="/contact" className="btn btn-line">
             Contact the desk
           </Link>
+          {site.phoneHref ? (
+            <a href={site.phoneHref} className="btn btn-line">
+              Call {site.phoneDisplay}
+            </a>
+          ) : null}
           <a href={`mailto:${site.email}`} className="btn btn-line">
             Email {site.email}
           </a>
